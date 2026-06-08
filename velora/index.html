@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Velora — Mode Femme Algérie</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Inter:wght@200;300;400;500;600&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+/* ── Reset & Variables ── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{--bg:#f8f6f3;--surface:#ffffff;--surface-alt:#f0ebe5;--border:#e5ddd6;--text:#2a2522;--text-muted:#8a7e78;--rose:#d4a0a0;--rose-dark:#c48a8a;--gold:#c9a96e;--blush:#f0e4d8;--navy:#2a3a4a;--charcoal:#3a3532;--shadow:0 4px 30px rgba(0,0,0,0.05);--shadow-lg:0 20px 60px rgba(0,0,0,0.07);}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
+::selection{background:var(--rose-dark);color:#fff;}
+::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:var(--surface-alt);}::-webkit-scrollbar-thumb{background:var(--rose);border-radius:3px;}
+
+/* ── Top Bar ── */
+.top-bar{background:var(--charcoal);color:#fff;padding:0.35rem 0;text-align:center;font-size:0.65rem;display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;position:fixed;top:0;left:0;right:0;z-index:101;}
+
+/* ── Header ── */
+header{position:fixed;top:32px;left:0;right:0;z-index:100;padding:0 3rem;height:68px;display:flex;align-items:center;justify-content:space-between;transition:all 0.4s;}
+header.scrolled{background:rgba(248,246,243,0.92);backdrop-filter:blur(20px);box-shadow:var(--shadow);}
+.logo{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:700;color:var(--text);letter-spacing:-0.5px;}
+.logo span{color:var(--rose-dark);font-style:italic;}
+nav{display:flex;align-items:center;gap:2rem;}
+nav a{color:var(--text-muted);text-decoration:none;font-size:0.68rem;text-transform:uppercase;letter-spacing:2px;font-weight:500;transition:color 0.3s;}
+nav a:hover{color:var(--text);}
+.header-actions{display:flex;align-items:center;gap:0.7rem;}
+.header-actions button{background:none;border:none;cursor:pointer;color:var(--text);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all 0.3s;font-size:1rem;position:relative;}
+.header-actions button:hover{background:var(--surface-alt);}
+.cart-badge,.wishlist-badge{position:absolute;top:1px;right:1px;background:var(--rose-dark);color:#fff;font-size:0.45rem;font-weight:600;width:13px;height:13px;border-radius:50%;display:flex;align-items:center;justify-content:center;transform:scale(0);transition:transform 0.3s;}
+.cart-badge.show,.wishlist-badge.show{transform:scale(1);}
+.wishlist-badge{top:-2px;right:-2px;width:15px;height:15px;font-size:0.4rem;}
+.nav-overlay{position:fixed;inset:0;z-index:98;background:rgba(0,0,0,0.3);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity 0.3s ease;}
+.nav-overlay.open{opacity:1;pointer-events:all;}
+.menu-toggle{display:none;flex-direction:column;gap:2px;background:none;border:none;padding:6px;cursor:pointer;}
+.menu-toggle span{display:block;width:20px;height:2px;background:var(--text);border-radius:1px;transition:all 0.3s ease;}
+.menu-toggle.open span:nth-child(1){transform:rotate(45deg) translate(2px,2px);}
+.menu-toggle.open span:nth-child(2){opacity:0;}
+.menu-toggle.open span:nth-child(3){transform:rotate(-45deg) translate(2px,-2px);}
+
+/* ── Hero ── */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:8rem 2rem 4rem;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1600&h=1000&fit=crop') center 40%/cover;filter:brightness(.08) saturate(.6);transform:scale(1.05);animation:heroDrift 20s ease-in-out infinite alternate;}
+@keyframes heroDrift{0%{transform:scale(1.05) translateX(0);}100%{transform:scale(1.15) translateX(-2%);}}
+.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(248,246,243,0) 0%,rgba(248,246,243,.92) 80%);}
+.hero-content{position:relative;z-index:2;max-width:560px;margin:0 auto 0 0;text-align:left;padding-bottom:1rem;}
+.hero-sub{font-family:'Dancing Script',cursive;font-size:1.4rem;color:var(--rose-dark);margin-bottom:.5rem;opacity:0;animation:fadeU .7s ease .3s forwards;}
+.hero h1{font-family:'Playfair Display',serif;font-size:5rem;font-weight:700;line-height:1;margin-bottom:.5rem;color:var(--charcoal);opacity:0;transform:translateY(20px);animation:fadeU .9s ease .5s forwards;}
+.hero h1 .accent{color:var(--rose-dark);font-style:italic;}
+.hero p{font-size:.82rem;color:var(--text-muted);line-height:1.8;max-width:400px;margin:0 0 1.5rem;opacity:0;animation:fadeU .9s ease .7s forwards;}
+@keyframes fadeU{to{opacity:1;transform:translateY(0);}}
+.hero-cta{opacity:0;animation:fadeU .9s ease .85s forwards;display:flex;gap:0.8rem;}
+.btn{padding:.6rem 1.8rem;border-radius:25px;font-size:.72rem;font-weight:500;text-decoration:none;cursor:pointer;transition:all .3s;border:none;font-family:'Inter',sans-serif;display:inline-flex;align-items:center;gap:.5rem;}
+.btn-primary{background:var(--charcoal);color:#fff;}
+.btn-primary:hover{background:var(--rose-dark);transform:translateY(-2px);}
+.btn-secondary{background:transparent;color:var(--charcoal);border:1px solid var(--border);}
+.btn-secondary:hover{border-color:var(--rose);}
+
+/* ── Section Animations ── */
+.section-fade{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.section-fade.visible{opacity:1;transform:translateY(0);}
+
+/* ── Collection Section ── */
+.collection-section{padding:4rem 2rem;max-width:1200px;margin:0 auto;}
+.collection-header{text-align:center;margin-bottom:2.5rem;}
+.collection-header .sub{font-family:'Dancing Script',cursive;font-size:1.3rem;color:var(--rose-dark);}
+.collection-header h2{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:700;}
+.filter-links{display:flex;justify-content:center;gap:1.2rem;flex-wrap:wrap;margin:1rem 0;align-items:center;}
+.filter-links a{color:var(--text-muted);text-decoration:none;font-size:0.7rem;text-transform:uppercase;letter-spacing:2px;font-weight:500;cursor:pointer;border-bottom:1px solid transparent;padding-bottom:3px;}
+.filter-links a.active,.filter-links a:hover{color:var(--text);border-bottom-color:var(--rose);}
+.filter-links .sort-select{padding:0.35rem 0.7rem;border:1px solid var(--border);border-radius:20px;background:var(--surface);font-family:'Inter',sans-serif;font-size:0.65rem;color:var(--text);cursor:pointer;outline:none;transition:border-color 0.3s;}
+.filter-links .sort-select:hover,.filter-links .sort-select:focus{border-color:var(--rose-dark);}
+
+/* ── Lookbook (Product Grid) ── */
+.lookbook{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;}
+.lookbook-item{position:relative;border-radius:14px;overflow:hidden;cursor:pointer;background:var(--surface);transition:all 0.5s;opacity:0;transform:translateY(30px);animation:lbFade 0.7s ease forwards;}
+@keyframes lbFade{to{opacity:1;transform:translateY(0);}}
+.lookbook-item:hover{box-shadow:var(--shadow-lg);transform:translateY(-4px);}
+.lookbook-item .lb-img-wrap{width:100%;height:100%;position:absolute;inset:0;overflow:hidden;}
+.lookbook-item .lb-img{width:100%;height:100%;background-size:cover;background-position:center;transition:transform 0.7s;}
+.lookbook-item:hover .lb-img{transform:scale(1.08);}
+.lookbook-item .lb-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,0.4) 0%,transparent 50%);opacity:0;transition:opacity 0.5s;}
+.lookbook-item:hover .lb-overlay{opacity:1;}
+.lookbook-item .lb-info{position:absolute;bottom:0;left:0;right:0;padding:1.2rem 1rem 1rem;transform:translateY(10px);transition:all 0.4s;}
+.lookbook-item:hover .lb-info{transform:translateY(0);}
+.lookbook-item .lb-info .lb-cat{font-size:0.45rem;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.7);}
+.lookbook-item .lb-info h3{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:600;color:#fff;}
+.lookbook-item .lb-info .lb-price{font-size:1rem;font-weight:600;color:var(--gold);}
+
+/* ── ♥ Wishlist Heart ── */
+.wishlist-heart{position:absolute;top:10px;right:10px;z-index:5;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.85);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.85rem;transition:all 0.3s;color:var(--text-muted);box-shadow:0 2px 10px rgba(0,0,0,0.08);backdrop-filter:blur(4px);}
+.wishlist-heart:hover{transform:scale(1.15);background:#fff;box-shadow:0 4px 15px rgba(0,0,0,0.12);}
+.wishlist-heart.active{color:#e05050;background:rgba(255,255,255,0.95);}
+.wishlist-heart.active i{animation:heartPop .35s ease;}
+@keyframes heartPop{0%{transform:scale(1)}50%{transform:scale(1.4)}100%{transform:scale(1)}}
+
+/* ── Skeleton Loading ── */
+.skeleton-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;}
+.skeleton-card{border-radius:14px;overflow:hidden;background:var(--surface);height:280px;position:relative;}
+.skeleton-card .sk-shimmer{position:absolute;inset:0;background:linear-gradient(90deg,var(--surface) 0%,var(--surface-alt) 40%,var(--surface) 80%);background-size:200% 100%;animation:shimmer 1.5s ease-in-out infinite;}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.skeleton-card .sk-block{position:absolute;left:1rem;right:1rem;height:12px;border-radius:6px;background:var(--surface-alt);opacity:0.5;}
+.skeleton-card .sk-block.sk-title{bottom:2.8rem;width:60%;}
+.skeleton-card .sk-block.sk-price{bottom:1.3rem;width:40%;}
+
+/* ── Quiz Section ── */
+.quiz-section{padding:3rem 2rem;background:var(--surface-alt);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.quiz-section h3{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:600;text-align:center;}
+.quiz-styles{display:flex;justify-content:center;gap:0.6rem;flex-wrap:wrap;margin-bottom:1rem;}
+.quiz-style-btn{padding:0.4rem 1.2rem;border-radius:25px;border:1px solid var(--border);background:var(--surface);cursor:pointer;font-size:0.72rem;font-family:'Inter',sans-serif;color:var(--text-muted);transition:all 0.3s;}
+.quiz-style-btn.active,.quiz-style-btn:hover{border-color:var(--rose-dark);color:var(--rose-dark);background:var(--blush);}
+.quiz-result{max-width:600px;margin:0 auto;display:none;}
+.quiz-result.open{display:block;}
+
+/* ── Complete Look Section ── */
+.completelook-section{padding:3rem 2rem;max-width:1100px;margin:0 auto;}
+.completelook-section h3{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:600;text-align:center;margin-bottom:2rem;}
+.cl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;}
+.cl-card{border-radius:16px;overflow:hidden;background:var(--surface);border:1px solid var(--border);transition:all 0.4s;cursor:pointer;}
+.cl-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);}
+.cl-card .cl-img{height:180px;background-size:cover;background-position:center;transition:transform 0.6s;}
+.cl-card:hover .cl-img{transform:scale(1.05);}
+.cl-card .cl-body{padding:0.8rem 1rem;}
+.cl-card .cl-body .cl-tag{font-size:0.5rem;text-transform:uppercase;letter-spacing:2px;color:var(--rose-dark);}
+.cl-card .cl-body h4{font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:600;margin:0.15rem 0;}
+.cl-card .cl-body p{font-size:0.65rem;color:var(--text-muted);}
+
+/* ── Avis Section ── */
+.avis-section{padding:3rem 2rem;background:var(--surface-alt);border-top:1px solid var(--border);}
+.avis-section h3{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:600;text-align:center;}
+.avis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;max-width:1000px;margin:0 auto;}
+.avis-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.2rem;transition:all 0.3s;}
+.avis-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px);}
+.avis-card .av-stars{font-size:0.65rem;color:var(--gold);letter-spacing:1px;}
+.avis-card .av-text{font-size:0.72rem;line-height:1.7;margin:0.4rem 0;font-style:italic;}
+.avis-card .av-author{font-size:0.65rem;color:var(--rose-dark);font-weight:600;}
+
+/* ── Order Section ── */
+.order-section{padding:3rem 2rem;max-width:650px;margin:0 auto;}
+.of-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;}
+.of-group{display:flex;flex-direction:column;}
+.of-group label{font-size:0.6rem;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:0.2rem;}
+.of-group input,.of-group select,.of-group textarea{padding:0.5rem 0.7rem;border:1px solid var(--border);border-radius:10px;background:var(--surface-alt);font-family:'Inter',sans-serif;font-size:0.78rem;outline:none;color:var(--text);}
+.of-group input:focus,.of-group select:focus,.of-group textarea:focus{border-color:var(--rose-dark);}
+
+/* ── Footer ── */
+footer{padding:2rem;text-align:center;border-top:1px solid var(--border);}
+footer .logo{font-size:1.2rem;margin-bottom:0.2rem;justify-content:center;display:flex;}
+
+/* ── Toast ── */
+.toast{position:fixed;bottom:2rem;right:2rem;z-index:400;background:var(--surface);border:1px solid var(--rose);border-radius:10px;padding:0.6rem 1rem;box-shadow:var(--shadow-lg);transform:translateY(120px);opacity:0;transition:all 0.4s;display:flex;align-items:center;gap:0.5rem;font-size:0.75rem;}
+.toast.show{transform:translateY(0);opacity:1;}
+
+/* ── Cart ── */
+.cart-overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.3);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity 0.3s;}
+.cart-overlay.open{opacity:1;pointer-events:all;}
+.cart-sidebar{position:fixed;top:0;right:-420px;width:400px;max-width:100vw;height:100vh;z-index:201;background:var(--surface);border-left:1px solid var(--border);transition:right 0.4s;display:flex;flex-direction:column;}
+.cart-sidebar.open{right:0;}
+
+/* ── Empty Cart ── */
+.empty-cart{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem 1.5rem;text-align:center;height:100%;}
+.empty-cart .empty-cart-icon{font-size:3rem;margin-bottom:0.5rem;animation:floatIcon 3s ease-in-out infinite;}
+@keyframes floatIcon{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.empty-cart h3{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:600;color:var(--text);margin-bottom:0.3rem;}
+.empty-cart p{font-size:0.72rem;color:var(--text-muted);margin-bottom:1rem;max-width:240px;line-height:1.6;}
+.empty-cart .btn{padding:0.5rem 1.2rem;font-size:0.68rem;}
+
+/* ── Transition Overlay ── */
+.transition-overlay{position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:0;background:radial-gradient(circle at 50% 50%,var(--rose-dark),var(--rose),transparent 70%);transform-origin:center;will-change:transform,opacity;}
+.transition-overlay.active{opacity:1;pointer-events:all;animation:roseBloom .7s ease forwards;}
+@keyframes roseBloom{0%{opacity:0;transform:scale(.3);}35%{opacity:.8;transform:scale(1.5);}60%{opacity:.8;}100%{opacity:0;transform:scale(2);}}
+
+/* ── Quick View Modal ── */
+.qv-overlay{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,0.5);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.35s;padding:1rem;}
+.qv-overlay.open{opacity:1;pointer-events:all;}
+.qv-modal{background:var(--surface);border-radius:20px;max-width:780px;width:100%;max-height:85vh;overflow-y:auto;position:relative;padding:1.5rem;transform:scale(0.9) translateY(20px);transition:transform 0.35s ease;}
+.qv-overlay.open .qv-modal{transform:scale(1) translateY(0);}
+.qv-close{position:absolute;top:0.8rem;right:0.8rem;z-index:10;background:var(--surface);border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:0.95rem;display:flex;align-items:center;justify-content:center;color:var(--text-muted);box-shadow:0 2px 10px rgba(0,0,0,0.06);transition:all 0.3s;}
+.qv-close:hover{color:var(--text);transform:rotate(90deg);}
+.qv-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+.qv-image-wrap{overflow:hidden;border-radius:12px;min-height:320px;cursor:crosshair;}
+.qv-image{width:100%;height:100%;min-height:320px;background-size:cover;background-position:center;transition:transform 0.5s;}
+.qv-image-wrap:hover .qv-image{transform:scale(1.25);}
+.qv-details .qv-cat{font-size:0.5rem;text-transform:uppercase;letter-spacing:3px;color:var(--rose-dark);font-weight:600;}
+.qv-details .qv-name{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:600;margin:0.3rem 0 0.15rem;}
+.qv-details .qv-price{font-size:1.3rem;font-weight:700;color:var(--rose-dark);margin-bottom:0.2rem;}
+.qv-details .qv-stars{font-size:0.65rem;color:var(--gold);letter-spacing:2px;margin-bottom:0.5rem;}
+.qv-details .qv-desc{font-size:0.72rem;color:var(--text-muted);line-height:1.7;margin-bottom:0.5rem;}
+.qv-details .qv-meta{display:flex;gap:1rem;font-size:0.65rem;color:var(--text-muted);margin-bottom:0.8rem;}
+.qv-details .qv-section{margin-bottom:0.7rem;}
+.qv-details .qv-section label{display:block;font-size:0.55rem;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);font-weight:600;margin-bottom:0.3rem;}
+.qv-sizes{display:flex;gap:0.4rem;flex-wrap:wrap;}
+.qv-size-btn{padding:0.35rem 0.7rem;border-radius:20px;border:1px solid var(--border);background:var(--surface);font-family:'Inter',sans-serif;font-size:0.65rem;cursor:pointer;color:var(--text-muted);transition:all 0.25s;}
+.qv-size-btn:hover{border-color:var(--rose);color:var(--text);}
+.qv-size-btn.selected{background:var(--charcoal);color:#fff;border-color:var(--charcoal);}
+.qv-qty{display:flex;align-items:center;gap:0.5rem;}
+.qv-qty button{width:28px;height:28px;border-radius:50%;border:1px solid var(--border);background:var(--surface);cursor:pointer;font-size:0.9rem;display:flex;align-items:center;justify-content:center;color:var(--text);transition:all 0.25s;}
+.qv-qty button:hover{background:var(--surface-alt);}
+.qv-qty span{font-size:0.9rem;font-weight:600;min-width:20px;text-align:center;}
+.qv-actions{display:flex;gap:0.5rem;margin-top:0.5rem;}
+.qv-actions .btn{flex:1;padding:0.55rem 1rem;font-size:0.7rem;justify-content:center;}
+.qv-wish-btn{width:40px;height:40px;border-radius:50%;border:1px solid var(--border);background:var(--surface);cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:all 0.3s;color:var(--text-muted);flex-shrink:0;}
+.qv-wish-btn:hover{color:#e05050;border-color:#e05050;transform:scale(1.1);}
+.qv-wish-btn.active{color:#e05050;border-color:#e05050;background:rgba(224,80,80,0.05);}
+
+/* ── Buy Now Overlay ── */
+.bn-overlay{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,0.5);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.35s;padding:1rem;}
+.bn-overlay.open{opacity:1;pointer-events:all;}
+.bn-modal{background:var(--surface);border-radius:20px;max-width:680px;width:100%;max-height:85vh;overflow-y:auto;position:relative;padding:1.5rem;transform:scale(0.9) translateY(20px);transition:transform 0.35s ease;}
+.bn-overlay.open .bn-modal{transform:scale(1) translateY(0);}
+.bn-close{position:absolute;top:0.8rem;right:0.8rem;z-index:10;background:var(--surface);border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:0.95rem;display:flex;align-items:center;justify-content:center;color:var(--text-muted);box-shadow:0 2px 10px rgba(0,0,0,0.06);transition:all 0.3s;}
+.bn-close:hover{color:var(--text);transform:rotate(90deg);}
+
+/* ── Responsive ── */
+@media(max-width:968px){.hero h1{font-size:3rem;}.lookbook{grid-template-columns:repeat(2,1fr);}.qv-grid{grid-template-columns:1fr;}.qv-image-wrap{min-height:220px;}.qv-image{min-height:220px;}}
+@media(max-width:768px){
+.top-bar{font-size:0.55rem;gap:0.5rem;padding:0.3rem 0.5rem;}
+header{padding:0 1.2rem;height:60px;top:28px;}
+.logo{font-size:1.3rem;}
+nav{position:fixed;top:88px;left:0;right:0;z-index:99;background:var(--bg);padding:1.5rem;border-bottom:1px solid var(--border);flex-direction:column;gap:1rem;opacity:0;transform:translateY(-12px);pointer-events:none;transition:opacity 0.35s,transform 0.35s;}
+nav.open{opacity:1;transform:translateY(0);pointer-events:all;}
+.menu-toggle{display:flex;}
+.hero h1{font-size:2.2rem;}
+.lookbook{grid-template-columns:1fr 1fr;gap:0.6rem;}
+.collection-section{padding:2rem 1rem;}
+.collection-header h2{font-size:2rem;}
+.cl-grid{grid-template-columns:1fr 1fr;gap:0.8rem;}
+.of-grid{grid-template-columns:1fr;}
+.cart-sidebar{width:100vw;right:-100vw;}
+.qv-modal{padding:1rem;margin:0.5rem;}
+}
+@media(max-width:480px){
+.top-bar{font-size:0.5rem;gap:0.3rem;}
+.top-bar span{padding:0 0.2rem;}
+.hero h1{font-size:1.8rem;}
+.hero{padding:6rem 1rem 3rem;}
+.collection-section{padding:1.5rem 0.8rem;}
+.collection-header h2{font-size:1.6rem;}
+.filter-links{gap:0.6rem;}
+.filter-links a{font-size:0.6rem;letter-spacing:1px;}
+.quiz-section{padding:2rem 0.8rem;}
+.completelook-section{padding:2rem 0.8rem;}
+.order-section{padding:2rem 0.8rem;}
+.avis-section{padding:2rem 0.8rem;}
+footer{padding:1.5rem 0.8rem;}
+.toast{bottom:1rem;right:1rem;left:1rem;font-size:0.7rem;padding:0.5rem 0.8rem;}
+.skeleton-grid{grid-template-columns:1fr 1fr;gap:0.6rem;}
+}
+@media(max-width:375px){
+.skeleton-grid{grid-template-columns:1fr;}
+}
+</style>
+<script src="buynow.js"></script>
+</head>
+<body>
+<div class="top-bar"><span> Livraison Algérie</span><span>🚚 Gratuite dès 50,000 د.ج</span><span>💳 Paiement à la livraison</span></div>
+
+<header id="header">
+<div class="logo">Velora<span>.</span></div>
+<nav id="nav"><a href="#collection" onclick="closeNav()">Collection</a><a href="#quiz" onclick="closeNav()">Style Quiz</a><a href="#looks" onclick="closeNav()">Looks</a><a href="#avis" onclick="closeNav()">Avis</a></nav>
+<div class="header-actions">
+<a href="admin.html" style="font-size:0.6rem;color:var(--text-muted);text-decoration:none;opacity:0.3;">⚙️</a>
+<button onclick="toggleCart()" aria-label="Panier">🛍️<span class="cart-badge" id="cartBadge">0</span></button>
+<button onclick="showWishlist()" aria-label="Favoris" style="font-size:0.9rem;">♥<span class="wishlist-badge" id="wishlistBadge">0</span></button>
+<button class="menu-toggle" id="menuToggle" onclick="toggleNav()"><span></span><span></span><span></span></button>
+</div>
+</header>
+<div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+
+<!-- ── Hero ── -->
+<section class="hero">
+<div class="hero-content">
+<div class="hero-sub">Curated for you</div>
+<h1>L'<span class="accent">Élégance</span> à l'Algérienne</h1>
+<p>Des pièces raffinées pour la femme moderne, livrées chez vous dans toute l'Algérie.</p>
+<div class="hero-cta"><a href="#collection" class="btn btn-primary">Collection</a><a href="#quiz" class="btn btn-secondary">Style Quiz</a></div>
+</div>
+</section>
+
+<!-- ── Collection ── -->
+<section class="collection-section section-fade" id="collection">
+<div class="collection-header"><div class="sub">Curated for you</div><h2>La Collection</h2></div>
+<div class="filter-links">
+<a class="active" onclick="setFilter('all',this)">Tout</a><a onclick="setFilter('dresses',this)">Robes</a><a onclick="setFilter('tops',this)">Hauts</a><a onclick="setFilter('bottoms',this)">Bas</a><a onclick="setFilter('outerwear',this)">Manteaux</a><a onclick="setFilter('accessories',this)">Accessoires</a>
+<select class="sort-select" onchange="sortProducts(this.value)" aria-label="Trier par prix">
+<option value="default">Par défaut</option>
+<option value="low-high">Prix ↑</option>
+<option value="high-low">Prix ↓</option>
+</select>
+</div>
+<!-- Skeleton Loading -->
+<div class="skeleton-grid" id="skeletonGrid">
+<div class="skeleton-card"><div class="sk-shimmer"></div><div class="sk-block sk-title"></div><div class="sk-block sk-price"></div></div>
+<div class="skeleton-card"><div class="sk-shimmer"></div><div class="sk-block sk-title"></div><div class="sk-block sk-price"></div></div>
+<div class="skeleton-card"><div class="sk-shimmer"></div><div class="sk-block sk-title"></div><div class="sk-block sk-price"></div></div>
+<div class="skeleton-card"><div class="sk-shimmer"></div><div class="sk-block sk-title"></div><div class="sk-block sk-price"></div></div>
+<div class="skeleton-card"><div class="sk-shimmer"></div><div class="sk-block sk-title"></div><div class="sk-block sk-price"></div></div>
+<div class="skeleton-card"><div class="sk-shimmer"></div><div class="sk-block sk-title"></div><div class="sk-block sk-price"></div></div>
+</div>
+<div class="lookbook" id="productGrid"></div>
+</section>
+
+<!-- ── Quiz ── -->
+<section class="quiz-section section-fade" id="quiz">
+<h3>💫 Style <span style="color:var(--rose-dark);">Quiz</span></h3>
+<p style="text-align:center;color:var(--text-muted);font-size:0.75rem;margin-bottom:1rem;">Choisissez votre style pour des recommandations</p>
+<div class="quiz-styles">
+<button class="quiz-style-btn" onclick="runQuiz('minimal',this)">✨ Minimal</button>
+<button class="quiz-style-btn" onclick="runQuiz('elegant',this)">🌸 Élégant</button>
+<button class="quiz-style-btn" onclick="runQuiz('bold',this)">🔥 Bold</button>
+<button class="quiz-style-btn" onclick="runQuiz('casual',this)">☀️ Casual</button>
+<button class="quiz-style-btn" onclick="runQuiz('evening',this)">🌙 Evening</button>
+</div>
+<div class="quiz-result" id="quizResult"></div>
+</section>
+
+<!-- ── Complete Look ── -->
+<section class="completelook-section section-fade" id="looks">
+<h3>✨ Complétez le Look</h3>
+<div class="cl-grid">
+<div class="cl-card"><div class="cl-img" style="background-image:url('https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600&h=400&fit=crop')"></div><div class="cl-body"><div class="cl-tag">✦ Work Look</div><h4>Élégance Pro</h4><p>Tailleur, chemisier en soie, escarpins.</p></div></div>
+<div class="cl-card"><div class="cl-img" style="background-image:url('https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=600&h=400&fit=crop')"></div><div class="cl-body"><div class="cl-tag">✦ Soirée Chic</div><h4>Evening Glam</h4><p>Robe longue, pochette, bijoux.</p></div></div>
+<div class="cl-card"><div class="cl-img" style="background-image:url('https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=600&h=400&fit=crop')"></div><div class="cl-body"><div class="cl-tag">✦ Summer Look</div><h4>Été Méditerranéen</h4><p>Robe légère, chapeau, sandales.</p></div></div>
+<div class="cl-card"><div class="cl-img" style="background-image:url('https://images.unsplash.com/photo-1593030761757-71fae45fa0e7?w=600&h=400&fit=crop')"></div><div class="cl-body"><div class="cl-tag">✦ Wedding</div><h4>Invitée Parfaite</h4><p>Robe de cérémonie, sac chic.</p></div></div>
+</div>
+</section>
+
+<!-- ── Avis ── -->
+<section class="avis-section section-fade" id="avis">
+<h3>💬 <span style="color:var(--rose-dark);">Avis</span> Client·es</h3>
+<p style="text-align:center;color:var(--text-muted);font-size:0.75rem;margin-bottom:1rem;">Ce que nos client·es disent de Velora</p>
+<div class="avis-grid">
+<div class="avis-card"><div class="av-stars">★★★★★</div><div class="av-text">"La robe est magnifique, encore plus belle en vrai. Tissu de qualité, livraison rapide à Alger."</div><div class="av-author">Sarah K.</div></div>
+<div class="avis-card"><div class="av-stars">★★★★★</div><div class="av-text">"Le sac en cuir est absolument sublime. Qualité exceptionnelle, digne des grandes marques."</div><div class="av-author">Nadia B.</div></div>
+<div class="avis-card"><div class="av-stars">★★★★★</div><div class="av-text">"Première commande chez Velora et je suis conquise ! Le pull en cachemire est doux comme un nuage."</div><div class="av-author">Meriem A.</div></div>
+</div>
+</section>
+
+<!-- ── Commande ── -->
+<section class="order-section section-fade" id="commande">
+<h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:600;text-align:center;">📝 Commande <span style="color:var(--rose-dark);">sur mesure</span></h3>
+<p style="text-align:center;color:var(--text-muted);font-size:0.72rem;margin-bottom:1rem;">Remplissez ce bon de commande</p>
+<div class="of-grid">
+<div class="of-group"><label>Nom complet</label><input type="text" id="ofName" placeholder="Votre prénom et nom"></div>
+<div class="of-group"><label>Téléphone</label><input type="tel" id="ofPhone" placeholder="05XX XX XX XX"></div>
+<div class="of-group"><label>Wilaya</label><select id="ofWilaya"><option>Alger</option><option>Oran</option><option>Constantine</option><option>Annaba</option><option>Sétif</option><option>Autre</option></select></div>
+<div class="of-group"><label>Mode de paiement</label><select id="ofPayment"><option value="cash">À la livraison</option><option value="ccp">CCP</option><option value="baridi">BaridiMob</option></select></div>
+<div class="of-group" style="grid-column:1/-1;"><label>Adresse</label><textarea id="ofAddress" rows="2" placeholder="Rue, numéro, cité..."></textarea></div>
+</div>
+<button style="display:block;width:100%;max-width:650px;margin:1rem auto 0;padding:0.65rem;background:var(--charcoal);color:#fff;border:none;border-radius:25px;cursor:pointer;font-weight:600;font-size:0.85rem;font-family:'Inter',sans-serif;" onclick="submitOrder()">✅ Confirmer la commande</button>
+</section>
+
+<footer><div class="logo">Velora<span>.</span></div><p style="color:var(--text-muted);font-size:0.72rem;">Mode femme — Alger, Algérie © 2026</p></footer>
+
+<!-- ── Cart Overlay & Sidebar ── -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+<div style="padding:1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
+<h2 style="font-family:'Playfair Display',serif;font-size:1rem;">🛍️ Mon Sac</h2>
+<button onclick="toggleCart()" style="background:none;border:none;color:var(--text);font-size:1.2rem;cursor:pointer;">✕</button>
+</div>
+<div id="cartItems" style="flex:1;overflow-y:auto;padding:0.5rem 1.5rem;"></div>
+</div>
+
+<!-- ── Quick View Modal ── -->
+<div class="qv-overlay" id="quickViewOverlay" onclick="if(event.target===this)closeQuickView()">
+<div class="qv-modal" id="quickViewModal"></div>
+</div>
+
+<!-- ── Buy Now Modal ── -->
+<div class="bn-overlay" id="buynowOverlay" onclick="if(event.target===this)document.getElementById('buynowOverlay').classList.remove('open')">
+<div class="bn-modal" id="buynowModal"></div>
+</div>
+
+<!-- ── Toast ── -->
+<div class="toast" id="toast"><span id="toastMsg"></span></div>
+
+<!-- ── Transition Overlay ── -->
+<div class="transition-overlay" id="transitionOverlay" aria-hidden="true"></div>
+
+<script>
+/* ── Product Data ── */
+const products=[
+{id:1,name:'Robe Fleurie Été',cat:'dresses',price:42000,stock:15,img:'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600&h=800&fit=crop',stars:5,desc:'Robe légère imprimée fleurie. Parfaite pour les journées ensoleillées.',materiau:'Soie',fit:'Coupe droite'},
+{id:2,name:'Robe de Soirée',cat:'dresses',price:95000,stock:8,img:'https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=600&h=800&fit=crop',stars:4,desc:'Robe longue en satin pour les occasions spéciales.',materiau:'Satin',fit:'Coupe près du corps'},
+{id:3,name:'Pull Cachemire',cat:'tops',price:59000,stock:22,img:'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=600&h=700&fit=crop',stars:5,desc:'Pull en pur cachemire, doux comme un nuage.',materiau:'Cachemire',fit:'Coupe classique'},
+{id:4,name:'Chemisier en Soie',cat:'tops',price:36000,stock:18,img:'https://images.unsplash.com/photo-1598554747436-c9293d6a70b4?w=600&h=700&fit=crop',stars:4,desc:'Chemisier en soie naturelle, coupe fluide et élégante.',materiau:'Soie',fit:'Coupe fluide'},
+{id:5,name:'Pantalon Tailleur',cat:'bottoms',price:45000,stock:12,img:'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=600&h=800&fit=crop',stars:5,desc:'Pantalon tailleur à pinces, coupe droite intemporelle.',materiau:'Laine',fit:'Coupe droite'},
+{id:6,name:'Jean Taille Haute',cat:'bottoms',price:32000,stock:25,img:'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=600&h=800&fit=crop',stars:4,desc:'Jean taille haute en denim stretch confortable.',materiau:'Denim',fit:'Taille haute'},
+{id:7,name:'Manteau en Laine',cat:'outerwear',price:125000,stock:5,img:'https://images.unsplash.com/photo-1544022613-e87ca75a784a?w=600&h=800&fit=crop',stars:5,desc:'Manteau en laine vierge, coupe structurée.',materiau:'Laine',fit:'Coupe structurée'},
+{id:8,name:'Veste en Cuir',cat:'outerwear',price:155000,stock:4,img:'https://images.unsplash.com/photo-1520975954732-35dd22299614?w=600&h=800&fit=crop',stars:5,desc:'Veste en cuir véritable, intemporelle.',materiau:'Cuir',fit:'Coupe ajustée'},
+{id:9,name:'Écharpe Designer',cat:'accessories',price:22500,stock:30,img:'https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=600&h=600&fit=crop',stars:4,desc:'Écharpe en soie et cachemire, finition dorée.',materiau:'Soie/Cachemire',fit:'—'},
+{id:10,name:'Sac à Main Cuir',cat:'accessories',price:95000,stock:10,img:'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600&h=600&fit=crop',stars:5,desc:'Sac en cuir pleine fleur, élégance discrète.',materiau:'Cuir',fit:'—'},
+];
+let cart=JSON.parse(localStorage.getItem('vl_cart')||'[]');let filter='all';
+function fmtDZD(n){return Math.round(n).toLocaleString('fr-DZ')+' د.ج';}
+
+/* ── Skeleton → Products ── */
+function renderProducts(){
+  const grid=document.getElementById('productGrid');
+  const skel=document.getElementById('skeletonGrid');
+  var f;
+  if(filter==='wishlist'){
+    var wl=JSON.parse(localStorage.getItem('vl_wishlist')||'[]');
+    f=products.filter(function(p){return wl.indexOf(p.id)>-1;});
+  }else if(filter==='all'){
+    f=products;
+  }else{
+    f=products.filter(function(p){return p.cat===filter;});
+  }
+  if(skel)skel.style.display='none';
+  grid.style.display='grid';
+  grid.innerHTML=f.map(function(p){
+    var inWl=typeof isInWishlist==='function'?isInWishlist(p.id):false;
+    var h= p.cat==='accessories'?200 : p.cat==='outerwear'?320 : 280;
+    return '<div class="lookbook-item" style="height:'+h+'px">'+
+      '<button class="wishlist-heart'+(inWl?' active':'')+'" onclick="event.stopPropagation();toggleWishlist('+p.id+');this.classList.toggle(\\'active\\');var i=this.querySelector(\\'i\\');if(i){i.style.animation=\\'none\\';setTimeout(function(){i.style.animation=\\'\\'},10);}" aria-label="Ajouter aux favoris"><i class="'+(inWl?'fas':'far')+' fa-heart"></i></button>'+
+      '<div class="lb-img-wrap" onclick="quickView('+p.id+')"><div class="lb-img" style="background-image:url('+p.img+')"></div></div>'+
+      '<div class="lb-overlay" onclick="quickView('+p.id+')"></div>'+
+      '<div class="lb-info">'+
+        '<div class="lb-cat">'+p.cat+'</div>'+
+        '<h3>'+p.name+'</h3>'+
+        '<div class="lb-price">'+fmtDZD(p.price)+'</div>'+
+        '<div style="display:flex;gap:0.3rem;margin-top:0.3rem;">'+
+          '<button class="btn btn-primary" style="padding:0.2rem 0.6rem;font-size:0.5rem;border-radius:15px;" onclick="event.stopPropagation();addToCart('+p.id+')">Acheter</button>'+
+          '<button class="btn btn-secondary" style="padding:0.2rem 0.6rem;font-size:0.5rem;border-radius:15px;" onclick="event.stopPropagation();quickView('+p.id+')">Aperçu</button>'+
+        '</div>'+
+      '</div></div>';
+  }).join('');
+}
+function setFilter(cat,el){filter=cat;document.querySelectorAll('.filter-links a').forEach(a=>a.classList.remove('active'));el.classList.add('active');renderProducts();}
+
+/* ── Wishlist View ── */
+var wishlistFilterActive=false;
+function showWishlist(){
+  wishlistFilterActive=!wishlistFilterActive;
+  var wl=JSON.parse(localStorage.getItem('vl_wishlist')||'[]');
+  if(wishlistFilterActive&&wl.length>0){
+    filter='wishlist';
+    document.querySelectorAll('.filter-links a').forEach(function(a){a.classList.remove('active');});
+    renderProducts();
+    showToast('♥','Affichage de vos favoris');
+  }else{
+    wishlistFilterActive=false;
+    filter='all';
+    document.querySelectorAll('.filter-links a').forEach(function(a){a.classList.remove('active');});
+    document.querySelector('.filter-links a:first-child')?.classList.add('active');
+    renderProducts();
+    if(wl.length===0)showToast('♡','Aucun favori pour le moment');
+  }
+  document.getElementById('collection').scrollIntoView({behavior:'smooth'});
+}
+
+/* ── Cart ── */
+function addToCart(id){
+  var p=products.find(function(x){return x.id===id;});if(!p)return;
+  var ex=cart.find(function(x){return x.id===id;});
+  if(ex)ex.qty++;else cart.push(Object.assign({},p,{qty:1}));
+  updateCart();showToast('✅',p.name+' ajouté !');
+}
+function updateCart(){
+  localStorage.setItem('vl_cart',JSON.stringify(cart));
+  var badge=document.getElementById('cartBadge');
+  var t=cart.reduce(function(s,i){return s+i.qty;},0);
+  badge.textContent=t;badge.classList.toggle('show',t>0);
+  var ci=document.getElementById('cartItems');
+  if(!cart.length){
+    ci.innerHTML=typeof getEmptyCartHTML==='function'?getEmptyCartHTML():'<div style="text-align:center;padding:2rem;color:var(--text-muted);font-size:0.8rem;">Votre sac est vide</div>';
+    return;
+  }
+  var total=cart.reduce(function(s,i){return s+i.price*i.qty;},0);
+  ci.innerHTML=cart.map(function(i){
+    return '<div style="display:flex;gap:0.8rem;padding:0.6rem 0;border-bottom:1px solid var(--border);align-items:center;">'+
+      '<div style="width:48px;height:48px;border-radius:10px;overflow:hidden;flex-shrink:0;"><img src="'+i.img+'" alt="'+i.name+'" style="width:100%;height:100%;object-fit:cover;"></div>'+
+      '<div style="flex:1;min-width:0;"><h4 style="font-size:0.75rem;font-weight:600;">'+i.name+'</h4>'+
+      '<span style="color:var(--rose-dark);font-weight:500;font-size:0.7rem;">'+fmtDZD(i.price)+'</span>'+
+      '<div style="display:flex;align-items:center;gap:0.3rem;margin-top:0.15rem;">'+
+        '<button onclick="changeCartQty('+i.id+',-1)" style="background:none;border:1px solid var(--border);border-radius:50%;width:20px;height:20px;font-size:0.5rem;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text);">−</button>'+
+        '<span style="font-size:0.7rem;font-weight:600;">'+i.qty+'</span>'+
+        '<button onclick="changeCartQty('+i.id+',1)" style="background:none;border:1px solid var(--border);border-radius:50%;width:20px;height:20px;font-size:0.5rem;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text);">+</button>'+
+      '</div></div>'+
+      '<div style="text-align:right;flex-shrink:0;"><div style="font-size:0.72rem;font-weight:600;">'+fmtDZD(i.price*i.qty)+'</div><button onclick="removeFromCart('+i.id+')" style="background:none;border:none;color:var(--text-muted);font-size:0.65rem;cursor:pointer;margin-top:0.2rem;">✕</button></div></div>';
+  }).join('')+
+  '<div style="display:flex;justify-content:space-between;padding:0.6rem 0;font-size:0.8rem;font-weight:700;"><span>Total</span><span style="color:var(--rose-dark);">'+fmtDZD(total)+'</span></div>'+
+  '<button class="btn btn-primary" style="width:100%;padding:0.5rem;font-size:0.7rem;justify-content:center;" onclick="toggleCart();document.getElementById(\\'commande\\').scrollIntoView({behavior:\\'smooth\\'})">Commander</button>';
+}
+function changeCartQty(id,delta){
+  var item=cart.find(function(x){return x.id===id;});
+  if(!item)return;
+  item.qty+=delta;
+  if(item.qty<=0){cart=cart.filter(function(x){return x.id!==id;});}
+  updateCart();
+}
+function removeFromCart(id){cart=cart.filter(function(x){return x.id!==id;});updateCart();}
+function toggleCart(){document.getElementById('cartOverlay').classList.toggle('open');document.getElementById('cartSidebar').classList.toggle('open');}
+
+/* ── Navigation ── */
+function toggleNav(){document.getElementById('nav').classList.toggle('open');document.getElementById('navOverlay').classList.toggle('open');document.getElementById('menuToggle').classList.toggle('open');}
+function closeNav(){document.getElementById('nav').classList.remove('open');document.getElementById('navOverlay').classList.remove('open');document.getElementById('menuToggle').classList.remove('open');}
+function showToast(i,m){var t=document.getElementById('toast');document.getElementById('toastMsg').textContent=i+' '+m;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2500);}
+
+/* ── Style Quiz ── */
+function runQuiz(style,btn){
+  document.querySelectorAll('.quiz-style-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');
+  var ids={minimal:[4,5,9],elegant:[2,7,10],bold:[8,2,6],casual:[1,6,3],evening:[2,7,10]}[style]||[1,4,9];
+  var items=ids.map(function(id){return products.find(function(p){return p.id===id;});}).filter(Boolean);
+  var el=document.getElementById('quizResult');
+  el.innerHTML='<h4 style="font-size:0.8rem;font-weight:600;margin-bottom:0.5rem;">✨ Tenue recommandée</h4>'+
+    items.map(function(p){
+      return '<div style="display:flex;align-items:center;gap:0.8rem;padding:0.5rem 0;border-bottom:1px solid var(--border);">'+
+        '<img src="'+p.img+'" alt="'+p.name+'" style="width:50px;height:50px;border-radius:10px;object-fit:cover;">'+
+        '<div style="flex:1;"><h4 style="font-size:0.8rem;font-weight:600;">'+p.name+'</h4>'+
+        '<span style="font-size:0.65rem;color:var(--text-muted);">'+fmtDZD(p.price)+'</span></div>'+
+        '<button class="btn btn-primary" style="padding:0.3rem 0.8rem;font-size:0.65rem;" onclick="addToCart('+p.id+')">Ajouter</button></div>';
+    }).join('');
+  el.classList.add('open');
+}
+
+/* ── Submit Order ── */
+function submitOrder(){
+  var n=document.getElementById('ofName')?.value?.trim();
+  var p=document.getElementById('ofPhone')?.value?.trim();
+  if(!n||!p){showToast('⚠️','Remplissez les champs obligatoires');return;}
+  showToast('✨','Commande confirmée ! Réf: VL-'+Math.floor(1000+Math.random()*9000));
+}
+
+/* ── Section Fade In (Scroll Observer) ── */
+(function(){
+  var observer=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+      }
+    });
+  },{threshold:0.1});
+  document.querySelectorAll('.section-fade').forEach(function(section){
+    observer.observe(section);
+  });
+})();
+
+/* ── Skeleton → Products Transition ── */
+setTimeout(function(){
+  var skel=document.getElementById('skeletonGrid');
+  if(skel)skel.style.display='none';
+  renderProducts();
+  updateCart();
+  if(typeof updateWishlistUI==='function')updateWishlistUI();
+},400);
+
+/* ── Events ── */
+window.addEventListener('scroll',function(){document.getElementById('header').classList.toggle('scrolled',window.scrollY>60);});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeNav();['cartSidebar','cartOverlay','quickViewOverlay'].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.remove('open');});}});
+
+/* ── Nav Smooth Scroll ── */
+document.querySelectorAll('nav a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    e.preventDefault();var href=this.getAttribute('href');
+    if(href&&href.length>1){
+      var overlay=document.getElementById('transitionOverlay');overlay.classList.add('active');closeNav();
+      setTimeout(function(){var target=document.getElementById(href.substring(1));if(target)target.scrollIntoView({behavior:'smooth'});},200);
+      setTimeout(function(){overlay.classList.remove('active');},700);
+    }
+  });
+});
+
+/* ── Init Cart & Wishlist ── */
+updateCart();
+if(typeof updateWishlistUI==='function')updateWishlistUI();
+</script>
+</body>
+</html>

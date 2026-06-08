@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>NOMAD — Wander Further | Travel Magazine</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,500;1,700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{--bg:#0f120f;--surface:#161c16;--surface2:#1e251e;--border:rgba(255,255,255,.04);--text:#edf0ea;--text-muted:#6a7a6a;--sage:#a0b89a;--teal:#3a8e7a;--teal-light:#5aa89a;--sky:#5b9bd5;--sands:#d4ba8a;--sunset:#c47a4a;--gold:#c9a96e;--shadow:0 20px 60px rgba(0,0,0,.5);}
+[data-theme="light"]{--bg:#f0f5ee;--surface:#ffffff;--surface2:#e8efe5;--border:rgba(0,0,0,.05);--text:#1a1e18;--text-muted:#6a7a6a;--sage:#8aa88a;--teal:#3a8e7a;--teal-light:#5aa89a;--sky:#4a8bc5;--sands:#c4aa7a;--sunset:#b46a3a;--gold:#b09a5e;--shadow:0 8px 32px rgba(0,0,0,.05);}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.7;transition:background .5s,color .5s;-webkit-font-smoothing:antialiased;}
+::selection{background:var(--teal);color:#fff;}
+::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:var(--surface);}::-webkit-scrollbar-thumb{background:var(--teal);border-radius:2px;}
+/* ── Ambient ── */
+.ambient{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;}
+.ambient .glow{position:absolute;top:20%;left:40%;width:600px;height:600px;background:radial-gradient(circle,rgba(58,142,122,.03),transparent 70%);filter:blur(80px);animation:ambient 15s ease-in-out infinite alternate;}
+@keyframes ambient{0%{transform:translate(0,0);opacity:.5;}100%{transform:translate(30px,-20px);opacity:1;}}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 2rem;height:70px;display:flex;align-items:center;justify-content:center;gap:2.5rem;transition:all .5s;}
+nav.scrolled{background:rgba(15,18,15,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);height:60px;}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;text-decoration:none;color:var(--text);letter-spacing:-.5px;position:absolute;left:2rem;}
+.nav-logo span{color:var(--teal);font-style:italic;}
+.nav-center{display:flex;gap:0;list-style:none;}
+.nav-center a{color:var(--text-muted);text-decoration:none;padding:.3rem .9rem;font-size:.48rem;text-transform:uppercase;letter-spacing:3.5px;transition:all .3s;position:relative;font-weight:500;}
+.nav-center a:hover{color:var(--teal);}
+.nav-center a::after{content:'';position:absolute;bottom:2px;left:50%;width:0;height:1px;background:var(--teal);transition:all .35s;transform:translateX(-50%);}
+.nav-center a:hover::after{width:50%;}
+.nav-right{position:absolute;right:2rem;display:flex;gap:.6rem;align-items:center;}
+.nav-right .btn-plan{color:var(--teal);text-decoration:none;font-size:.48rem;text-transform:uppercase;letter-spacing:2.5px;border:1px solid rgba(58,142,122,.25);padding:.3rem 1rem;border-radius:2px;transition:all .3s;font-weight:500;}
+.nav-right .btn-plan:hover{background:var(--teal);color:var(--bg);}
+.nav-right .theme-btn{background:none;border:none;color:var(--teal);font-size:1rem;cursor:pointer;padding:.2rem;line-height:1;opacity:.7;transition:opacity .3s;}
+.nav-right .theme-btn:hover{opacity:1;}
+.mobile-toggle{display:none;background:none;border:none;color:var(--text);font-size:1.3rem;cursor:pointer;}
+
+/* ── Hero ── */
+.hero{height:100vh;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:flex-end;}
+.hero-slides{position:absolute;inset:0;}
+.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 2s ease;}
+.hero-slide.active{opacity:1;}
+.hero-slide img{width:100%;height:100%;object-fit:cover;filter:brightness(.3) saturate(.85);transform:scale(1);animation:kenB 15s ease-in-out forwards;}
+@keyframes kenB{0%{transform:scale(1);}100%{transform:scale(1.12);}}
+.hero-vignette{position:absolute;inset:0;background:linear-gradient(270deg,rgba(15,18,15,.85) 0%,rgba(15,18,15,.1) 45%,rgba(15,18,15,.5) 100%);}
+.hero-content{position:relative;z-index:2;padding:4rem 5rem;max-width:650px;text-align:right;}
+.hero-marker{display:flex;align-items:center;gap:.5rem;justify-content:flex-end;font-size:.38rem;color:var(--teal);text-transform:uppercase;letter-spacing:5px;margin-bottom:.8rem;opacity:0;animation:fR .8s ease .3s forwards;font-weight:500;}
+.hero-marker::after{content:'';width:40px;height:1px;background:var(--teal);}
+.hero h1{font-family:'Playfair Display',serif;font-size:5.5rem;font-weight:700;line-height:.95;letter-spacing:-2.5px;margin-bottom:.3rem;opacity:0;transform:translateY(20px);animation:fU .9s ease .5s forwards;}
+.hero h1 .accent{color:var(--teal);font-style:italic;}
+.hero .sub{font-size:.7rem;color:var(--text-muted);letter-spacing:10px;opacity:0;animation:fU .9s ease .6s forwards;text-transform:uppercase;}
+.hero p{color:var(--text-muted);font-size:.78rem;line-height:1.9;margin-bottom:2rem;max-width:450px;margin-left:auto;opacity:0;animation:fU .9s ease .7s forwards;}
+@keyframes fU{to{opacity:1;transform:translateY(0);}}
+@keyframes fR{to{opacity:1;transform:translateX(0);}}
+.hero-cta{opacity:0;animation:fU .9s ease .85s forwards;display:flex;gap:.8rem;justify-content:flex-end;flex-wrap:wrap;}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.55rem 1.8rem;font-size:.62rem;font-weight:500;text-decoration:none;border:none;cursor:pointer;font-family:'Inter',sans-serif;transition:all .4s cubic-bezier(.22,1,.36,1);text-transform:uppercase;letter-spacing:2.5px;border-radius:2px;}
+.btn-primary{background:var(--teal);color:var(--bg);}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 15px 35px rgba(58,142,122,.25);}
+.btn-ghost{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,.12);}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal);}
+.hero-nav{position:absolute;bottom:2.5rem;right:2rem;z-index:2;display:flex;gap:.6rem;}
+.hero-nav .hn-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.15);cursor:pointer;transition:all .3s;}
+.hero-nav .hn-dot.active{background:var(--teal);box-shadow:0 0 12px var(--teal);}
+
+/* ── Sections ── */
+section{padding:5rem 2rem;position:relative;margin:0 auto;}
+.section-bleed{max-width:100%;padding:0;}
+.section-marker{display:flex;align-items:center;gap:.6rem;font-size:.38rem;color:var(--teal);text-transform:uppercase;letter-spacing:4px;margin-bottom:.4rem;font-weight:500;}
+.section-marker::after{content:'';width:25px;height:1px;background:var(--teal);}
+.section-marker.center{justify-content:center;}
+.section-marker.center::before{content:'';width:25px;height:1px;background:var(--teal);}
+.section-header{max-width:600px;margin:0 auto 2.5rem;text-align:center;}
+.section-header h2{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:700;letter-spacing:-1.5px;margin-bottom:.2rem;}
+.section-header h2 .accent{color:var(--teal);font-style:italic;}
+.section-header p{color:var(--text-muted);font-size:.72rem;}
+
+/* ── Reveals ── */
+.fu{opacity:0;transform:translateY(35px);transition:all 1s cubic-bezier(.22,1,.36,1);}
+.fu.visible{opacity:1;transform:translateY(0);}
+.fs{opacity:0;transform:scale(.92);transition:all 1s cubic-bezier(.22,1,.36,1);}
+.fs.visible{opacity:1;transform:scale(1);}
+.cd>*{opacity:0;transform:translateY(25px);filter:blur(3px);transition:all .7s cubic-bezier(.22,1,.36,1);}
+.cd.visible>*{opacity:1;transform:translateY(0);filter:blur(0);}
+.cd.visible>*:nth-child(1){transition-delay:.05s;}
+.cd.visible>*:nth-child(2){transition-delay:.12s;}
+.cd.visible>*:nth-child(3){transition-delay:.19s;}
+.cd.visible>*:nth-child(4){transition-delay:.26s;}
+.cd.visible>*:nth-child(5){transition-delay:.33s;}
+.cd.visible>*:nth-child(6){transition-delay:.4s;}
+
+/* ── Stats ── */
+.stats-section{background:var(--surface2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);max-width:100%;padding:3.5rem 2rem;}
+.stats-inner{display:flex;justify-content:center;gap:4rem;flex-wrap:wrap;max-width:800px;margin:0 auto;}
+.stat-item{text-align:center;}
+.stat-item .si-v{font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:700;color:var(--teal);line-height:1;}
+.stat-item .si-l{font-size:.48rem;text-transform:uppercase;letter-spacing:3px;color:var(--text-muted);margin-top:.1rem;}
+
+/* ── Destinations ── */
+.destinations-section{max-width:100%;padding:5rem 2rem;}
+.dest-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1200px;margin:0 auto;}
+.dest-card{position:relative;border-radius:14px;overflow:hidden;cursor:pointer;background:var(--surface2);border:1px solid var(--border);transition:all .5s;}
+.dest-card:hover{transform:translateY(-12px) scale(1.01);box-shadow:0 35px 80px rgba(0,0,0,.4);}
+.dest-card:nth-child(2){margin-top:2.5rem;}
+.dest-card:nth-child(4){margin-top:-1.5rem;}
+.dest-card:nth-child(5){margin-top:2.5rem;}
+.dest-card img{width:100%;height:280px;object-fit:cover;transition:transform .8s;}
+.dest-card:hover img{transform:scale(1.1);}
+.dest-card .dc-info{position:absolute;bottom:0;left:0;right:0;padding:1.5rem;background:linear-gradient(0deg,rgba(15,18,15,.9) 0%,transparent 60%);}
+.dest-card .dc-info .dc-loc{font-size:.38rem;text-transform:uppercase;letter-spacing:3px;color:var(--teal);font-weight:500;}
+.dest-card .dc-info h3{font-family:'Playfair Display',serif;font-size:1rem;font-weight:600;color:#fff;margin:.05rem 0;}
+.dest-card .dc-info .dc-price{font-size:.62rem;font-weight:600;color:var(--gold);}
+.dest-card .dc-badge{position:absolute;top:.8rem;left:.8rem;padding:.1rem .5rem;font-size:.38rem;font-weight:600;text-transform:uppercase;backdrop-filter:blur(8px);border-radius:2px;letter-spacing:1px;}
+.dc-badge.adv{background:rgba(196,122,74,.2);color:var(--sunset);}
+.dc-badge.rel{background:rgba(58,142,122,.2);color:var(--teal);}
+.dc-badge.cul{background:rgba(201,169,110,.2);color:var(--gold);}
+.dest-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem;justify-content:center;}
+.dest-tab{padding:.25rem 1.2rem;border:none;background:transparent;color:var(--text-muted);cursor:pointer;font-size:.48rem;font-family:'Inter',sans-serif;text-transform:uppercase;letter-spacing:3px;transition:all .3s;position:relative;font-weight:500;}
+.dest-tab::after{content:'';position:absolute;bottom:-2px;left:50%;width:0;height:1px;background:var(--teal);transition:all .3s;transform:translateX(-50%);}
+.dest-tab.active::after,.dest-tab:hover::after{width:60%;}
+.dest-tab.active,.dest-tab:hover{color:var(--teal);}
+@media(max-width:768px){.dest-grid{grid-template-columns:1fr;gap:1rem;}.dest-card:nth-child(2),.dest-card:nth-child(4),.dest-card:nth-child(5){margin-top:0;}}
+
+/* ── Experiences ── */
+.exp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem;max-width:1000px;margin:0 auto;}
+.exp-card{display:flex;align-items:center;gap:1rem;padding:1.2rem;background:var(--surface);border:1px solid var(--border);border-radius:10px;transition:all .4s;cursor:pointer;}
+.exp-card:hover{transform:translateX(8px);border-color:rgba(58,142,122,.25);}
+.exp-card .ec-icon{font-size:2rem;flex-shrink:0;}
+.exp-card .ec-info h4{font-size:.78rem;font-weight:600;margin-bottom:.05rem;}
+.exp-card .ec-info p{font-size:.6rem;color:var(--text-muted);line-height:1.5;}
+
+/* ── Stories ── */
+.story-block{display:grid;grid-template-columns:1fr 1fr;min-height:50vh;border-bottom:1px solid var(--border);}
+.story-block:last-child{border-bottom:none;}
+.story-block .sb-img{background-size:cover;background-position:center;min-height:400px;}
+.story-block .sb-content{display:flex;flex-direction:column;justify-content:center;padding:3rem;}
+.story-block .sb-content .sb-tag{font-size:.38rem;color:var(--teal);text-transform:uppercase;letter-spacing:2.5px;font-weight:500;}
+.story-block .sb-content h3{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:600;margin:.3rem 0;letter-spacing:-.5px;}
+.story-block .sb-content p{font-size:.65rem;color:var(--text-muted);line-height:1.8;}
+.story-block .sb-content .sb-read{display:inline-flex;align-items:center;gap:.3rem;color:var(--teal);font-size:.48rem;text-transform:uppercase;letter-spacing:1.5px;text-decoration:none;margin-top:.5rem;font-weight:500;}
+.story-block:nth-child(even){direction:rtl;}.story-block:nth-child(even) .sb-content{direction:ltr;}
+@media(max-width:768px){.story-block{grid-template-columns:1fr;}.story-block:nth-child(even){direction:ltr;}.story-block .sb-img{min-height:250px;}.story-block .sb-content{padding:1.5rem;}}
+
+/* ── Gallery ── */
+.gallery-overlap{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;max-width:1200px;margin:0 auto;}
+.gallery-overlap .gi{border-radius:8px;overflow:hidden;cursor:pointer;position:relative;height:180px;border:1px solid var(--border);}
+.gallery-overlap .gi img{width:100%;height:100%;object-fit:cover;transition:transform .7s;}
+.gallery-overlap .gi:hover img{transform:scale(1.08);}
+.gallery-overlap .gi:nth-child(1){grid-column:span 2;grid-row:span 2;height:auto;}
+.gallery-overlap .gi:nth-child(4){grid-column:span 2;}
+.gallery-overlap .gi .gi-l{position:absolute;bottom:.6rem;left:.6rem;font-size:.48rem;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.6);opacity:0;transition:opacity .3s;letter-spacing:1.5px;font-weight:500;}
+.gallery-overlap .gi:hover .gi-l{opacity:1;}
+@media(max-width:768px){.gallery-overlap{grid-template-columns:repeat(2,1fr);}.gallery-overlap .gi:nth-child(1){grid-column:span 2;grid-row:span 1;height:180px;}}
+
+/* ── Planner ── */
+.planner-section{max-width:1000px;margin:0 auto;}
+.planner-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:2rem;}
+.planner-form{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:1.5rem;}
+.planner-form h4{font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:1rem;text-align:center;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-bottom:.7rem;}
+.form-group{display:flex;flex-direction:column;}
+.form-group label{font-size:.42rem;text-transform:uppercase;letter-spacing:2.5px;color:var(--text-muted);margin-bottom:.12rem;font-weight:500;}
+.form-group input,.form-group select,.form-group textarea{padding:.45rem .7rem;background:var(--surface);border:1px solid var(--border);color:var(--text);border-radius:6px;font-family:'Inter',sans-serif;font-size:.65rem;outline:none;transition:border-color .3s;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--teal);}
+.form-group textarea{resize:vertical;min-height:55px;}
+.form-submit{width:100%;padding:.5rem;background:var(--teal);color:var(--bg);border:none;border-radius:6px;font-weight:600;font-size:.7rem;cursor:pointer;font-family:'Inter',sans-serif;margin-top:.5rem;transition:all .3s;}
+.form-submit:hover{box-shadow:0 10px 30px rgba(58,142,122,.2);transform:translateY(-2px);}
+.planner-info{padding-top:.5rem;}
+.planner-info h4{font-family:'Playfair Display',serif;font-size:1.2rem;}
+.planner-info p{font-size:.65rem;color:var(--text-muted);line-height:1.8;margin:.5rem 0;}
+.pi-list{display:flex;flex-direction:column;gap:.3rem;}
+.pi-list div{display:flex;align-items:center;gap:.5rem;font-size:.62rem;color:var(--text-muted);}
+.pi-list div span:first-child{color:var(--teal);}
+@media(max-width:768px){.planner-grid{grid-template-columns:1fr;gap:1.5rem;}.form-row{grid-template-columns:1fr;}}
+
+/* ── Footer ── */
+footer{background:var(--surface);border-top:1px solid var(--border);padding:3rem 2rem;max-width:100%;}
+.ft-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:2rem;}
+ft-inner .fb-logo{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;}
+.ft-inner .fb-logo span{color:var(--teal);font-style:italic;}
+.ft-inner p{font-size:.62rem;color:var(--text-muted);line-height:1.7;}
+.ft-col h4{font-size:.48rem;text-transform:uppercase;letter-spacing:3px;color:var(--teal);margin-bottom:.5rem;font-weight:500;}
+.ft-col a{display:block;color:var(--text-muted);text-decoration:none;font-size:.62rem;padding:.15rem 0;transition:color .3s;}
+.ft-col a:hover{color:var(--teal);}
+.nl-form{display:flex;gap:.3rem;}
+.nl-form input{flex:1;padding:.4rem .6rem;background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:4px;font-size:.62rem;font-family:'Inter',sans-serif;outline:none;}
+.nl-form input:focus{border-color:var(--teal);}
+.nl-form button{padding:.4rem .8rem;background:var(--teal);color:var(--bg);border:none;border-radius:4px;cursor:pointer;font-weight:600;font-size:.58rem;font-family:'Inter',sans-serif;}
+.ft-bottom{max-width:1100px;margin:2rem auto 0;padding-top:1.5rem;border-top:1px solid var(--border);text-align:center;font-size:.58rem;color:var(--text-muted);}
+.ft-social{display:flex;gap:.6rem;margin-top:.6rem;}
+.ft-social a{width:28px;height:28px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-muted);text-decoration:none;font-size:.65rem;transition:all .3s;}
+.ft-social a:hover{background:var(--teal);color:var(--bg);}
+@media(max-width:768px){.ft-inner{grid-template-columns:1fr;gap:1.5rem;}}
+
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;z-index:5000;background:var(--surface);border:1px solid var(--teal);border-radius:8px;padding:.6rem 1rem;box-shadow:0 10px 40px rgba(0,0,0,.4);transform:translateY(120px);opacity:0;transition:all .45s cubic-bezier(.34,1.56,.64,1);display:flex;align-items:center;gap:.5rem;font-size:.62rem;}
+.toast.show{transform:translateY(0);opacity:1;}
+.transition-overlay{position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:0;background:radial-gradient(circle at 50% 50%,var(--teal),#1a3a32);will-change:transform,opacity;}
+.transition-overlay.active{opacity:1;pointer-events:all;animation:tealDissolve .7s ease forwards;}
+@keyframes tealDissolve{0%{opacity:0;transform:scale(.8);}35%{opacity:1;transform:scale(1);}65%{opacity:1;}100%{opacity:0;transform:scale(1.1);}}
+
+.modal-overlay{position:fixed;inset:0;z-index:3000;background:rgba(0,0,0,.85);backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .35s;padding:1rem;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:2rem;max-width:480px;width:100%;max-height:80vh;overflow-y:auto;transform:scale(.92);transition:transform .35s;}
+.modal-overlay.open .modal{transform:scale(1);}
+
+@media(max-width:768px){
+nav{height:60px;justify-content:space-between;}.nav-logo{position:static;}.nav-center{display:none;position:fixed;top:60px;left:0;right:0;background:rgba(15,18,15,.96);flex-direction:column;padding:1rem 2rem;border-bottom:1px solid var(--border);}
+.nav-center.open{display:flex;}.nav-center a{padding:.4rem 0;font-size:.65rem;}
+.mobile-toggle{display:flex;}.nav-right{position:static;}
+section{padding:3rem 1.2rem;}
+.hero h1{font-size:3rem;}.hero-content{padding:2rem;text-align:center;}
+.hero .sub{letter-spacing:4px;}
+.hero-marker{justify-content:center;}.hero-marker::after{display:none;}
+.hero-cta{justify-content:center;}
+.section-header h2{font-size:2rem;}
+.stats-inner{gap:2rem;}
+.stat-item .si-v{font-size:2.5rem;}
+}
+@media(max-width:480px){
+.hero h1{font-size:2rem;}
+.hero-cta{flex-direction:column;align-items:center;}
+.hero-cta .btn{width:100%;justify-content:center;}
+.section-header h2{font-size:1.5rem;}
+}
+</style>
+</head>
+<body>
+
+<div class="ambient"><div class="glow"></div></div>
+
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">Nomad<span>.</span></a>
+  <div class="nav-center" id="navCenter">
+    <a href="#destinations">Destinations</a>
+    <a href="#experiences">Experiences</a>
+    <a href="#stories">Stories</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#planner">Plan</a>
+  </div>
+  <div class="nav-right">
+    <a href="#planner" class="btn-plan">🌍 Plan Trip</a>
+    <button class="theme-btn" onclick="toggleTheme()">🌙</button>
+    <button class="mobile-toggle" onclick="document.getElementById('navCenter').classList.toggle('open')">☰</button>
+  </div>
+</nav>
+
+<section class="hero" id="hero">
+  <div class="hero-slides" id="heroSlides">
+    <div class="hero-slide active"><img src="https://images.unsplash.com/photo-1488085061387-422e29b40080?w=1800&h=1100&fit=crop" alt=""></div>
+    <div class="hero-slide"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1800&h=1100&fit=crop" alt=""></div>
+    <div class="hero-slide"><img src="https://images.unsplash.com/photo-1500835556837-99ac94a94552?w=1800&h=1100&fit=crop" alt=""></div>
+    <div class="hero-slide"><img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1800&h=1100&fit=crop" alt=""></div>
+  </div>
+  <div class="hero-vignette"></div>
+  <div class="hero-content">
+    <div class="hero-marker">Curated travel since 2024</div>
+    <div class="sub">WANDER FURTHER</div>
+    <h1>Discover the <span class="accent">World</span></h1>
+    <p>Curated travel experiences for the modern explorer. Hidden gems, iconic landmarks — journeys that transform the way you see the world.</p>
+    <div class="hero-cta">
+      <a href="#destinations" class="btn btn-primary">🌍 Explore</a>
+      <a href="#planner" class="btn btn-ghost">✈️ Plan Trip</a>
+    </div>
+  </div>
+  <div class="hero-nav" id="heroNav">
+    <div class="hn-dot active"></div><div class="hn-dot"></div><div class="hn-dot"></div><div class="hn-dot"></div>
+  </div>
+</section>
+
+<section class="stats-section fu" style="padding:3.5rem 2rem;">
+  <div class="stats-inner">
+    <div class="stat-item"><div class="si-v counter" data-target="50">0</div><div class="si-l">Countries</div></div>
+    <div class="stat-item"><div class="si-v counter" data-target="200">0</div><div class="si-l">Experiences</div></div>
+    <div class="stat-item"><div class="si-v counter" data-target="12000">0</div><div class="si-l">Travelers</div></div>
+    <div class="stat-item"><div class="si-v">4.9</div><div class="si-l">★ Rating</div></div>
+  </div>
+</section>
+
+<section class="fs" id="destinations" style="max-width:100%;padding:5rem 2rem;">
+  <div class="section-header">
+    <div class="section-marker center">Discover</div>
+    <h2>Where to <span class="accent">Wander</span></h2>
+    <p>Handpicked destinations that promise unforgettable experiences.</p>
+  </div>
+  <div class="dest-tabs">
+    <button class="dest-tab active" onclick="filterDests('all',this)">All</button>
+    <button class="dest-tab" onclick="filterDests('asia',this)">Asia</button>
+    <button class="dest-tab" onclick="filterDests('europe',this)">Europe</button>
+    <button class="dest-tab" onclick="filterDests('americas',this)">Americas</button>
+    <button class="dest-tab" onclick="filterDests('africa',this)">Africa</button>
+  </div>
+  <div class="dest-grid cd" id="destGrid"></div>
+</section>
+
+<section class="section-bleed fu" id="experiences" style="padding:0;">
+  <div style="padding:5rem 2rem;max-width:1100px;margin:0 auto;">
+    <div class="section-header">
+      <div class="section-marker center">Experiences</div>
+      <h2>Unique <span class="accent">Experiences</span></h2>
+      <p>Go beyond sightseeing. Immerse yourself in local culture.</p>
+    </div>
+    <div class="exp-grid cd">
+      <div class="exp-card"><span class="ec-icon">🍜</span><div class="ec-info"><h4>Cooking Classes</h4><p>Learn from grandmothers in Tuscany, Bangkok, Marrakech</p></div></div>
+      <div class="exp-card"><span class="ec-icon">🏔️</span><div class="ec-info"><h4>Guided Treks</h4><p>Patagonia, Himalayas, Andes — epic journeys await</p></div></div>
+      <div class="exp-card"><span class="ec-icon">🎨</span><div class="ec-info"><h4>Art & Culture</h4><p>Private museum tours and artisan workshops</p></div></div>
+      <div class="exp-card"><span class="ec-icon">🌊</span><div class="ec-info"><h4>Ocean Adventures</h4><p>Snorkeling, diving, sailing in pristine waters</p></div></div>
+      <div class="exp-card"><span class="ec-icon">🐘</span><div class="ec-info"><h4>Wildlife Safaris</h4><p>Ethical encounters across Africa, Asia, Americas</p></div></div>
+      <div class="exp-card"><span class="ec-icon">🏕️</span><div class="ec-info"><h4>Camping & Glamping</h4><p>Under the stars in the world's most beautiful landscapes</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section-bleed" id="stories" style="padding:0;">
+  <div style="padding:5rem 2rem 1rem;max-width:1200px;margin:0 auto;">
+    <div class="section-header">
+      <div class="section-marker center">Stories</div>
+      <h2>Travel <span class="accent">Diaries</span></h2>
+      <p>Real stories from real travelers. Adventures that inspire.</p>
+    </div>
+  </div>
+  <div class="story-block">
+    <div class="sb-img" style="background-image:url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=900&h=700&fit=crop')"></div>
+    <div class="sb-content"><div class="sb-tag">Asia ★ Japan</div><h3>Chasing Cherry Blossoms in Kyoto</h3><p>A magical journey through Japan's ancient capital during sakura season, with hidden temples, traditional tea ceremonies, and transcendental beauty around every corner.</p><span class="sb-read">Read the full story →</span></div>
+  </div>
+  <div class="story-block">
+    <div class="sb-img" style="background-image:url('https://images.unsplash.com/photo-1540638349513-d4e6f0ca6c5a?w=900&h=700&fit=crop')"></div>
+    <div class="sb-content"><div class="sb-tag">Adventure ★ Chile</div><h3>Patagonia: Where the Earth Ends</h3><p>Trekking through Torres del Paine, witnessing glaciers calve into turquoise lakes, and camping under the pristine southern stars.</p><span class="sb-read">Read the full story →</span></div>
+  </div>
+  <div class="story-block">
+    <div class="sb-img" style="background-image:url('https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=900&h=700&fit=crop')"></div>
+    <div class="sb-content"><div class="sb-tag">Islands ★ Thailand</div><h3>Hidden Beaches of the Andaman Sea</h3><p>Discovering secret coves and deserted islands off the coast of Thailand — the ultimate tropical escape. Crystal waters, limestone cliffs, and pure serenity.</p><span class="sb-read">Read the full story →</span></div>
+  </div>
+</section>
+
+<section class="section-bleed fu" id="gallery" style="padding:0;">
+  <div style="padding:5rem 2rem;max-width:1200px;margin:0 auto;">
+    <div class="section-marker">Gallery</div>
+    <div class="section-header" style="margin-bottom:1.5rem;"><h2>Moments <span class="accent">Captured</span></h2></div>
+    <div class="gallery-overlap cd">
+      <div class="gi"><img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=700&h=500&fit=crop" alt="" loading="lazy"><span class="gi-l">Paris, France</span></div>
+      <div class="gi"><img src="https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?w=500&h=400&fit=crop" alt="" loading="lazy"><span class="gi-l">Bali, Indonesia</span></div>
+      <div class="gi"><img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=500&h=400&fit=crop" alt="" loading="lazy"><span class="gi-l">Dubai, UAE</span></div>
+      <div class="gi"><img src="https://images.unsplash.com/photo-1504214208698-ea1916a2195a?w=700&h=300&fit=crop" alt="" loading="lazy"><span class="gi-l">Grand Canyon, USA</span></div>
+      <div class="gi"><img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=500&h=400&fit=crop" alt="" loading="lazy"><span class="gi-l">Santorini, Greece</span></div>
+      <div class="gi"><img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=500&h=400&fit=crop" alt="" loading="lazy"><span class="gi-l">Serengeti, Tanzania</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="planner-section fs" id="planner">
+  <div class="section-header"><div class="section-marker center">Plan</div>
+  <h2>Plan Your <span class="accent">Journey</span></h2>
+  <p>Tell us your dream and we'll craft the perfect itinerary.</p></div>
+  <div class="planner-grid">
+    <div class="planner-form">
+      <h4>📋 Trip Request</h4>
+      <div class="form-row">
+        <div class="form-group"><label>Name</label><input type="text" id="plName" placeholder="Your name"></div>
+        <div class="form-group"><label>Email</label><input type="email" id="plEmail" placeholder="your@email.com"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Destination</label><select id="plDest"><option>Bali, Indonesia</option><option>Kyoto, Japan</option><option>Tuscany, Italy</option><option>Patagonia, Chile</option><option>Serengeti, Tanzania</option><option>Maldives</option><option>Custom</option></select></div>
+        <div class="form-group"><label>Duration</label><select id="plDuration"><option>7 Days</option><option>10 Days</option><option>14 Days</option><option>21 Days</option><option>30+ Days</option></select></div>
+      </div>
+      <div class="form-group"><label>Interests</label><textarea id="plNotes" rows="2" placeholder="Adventure, culture, food, relaxation..."></textarea></div>
+      <button class="form-submit" onclick="submitPlan()">🌍 Request My Trip</button>
+    </div>
+    <div class="planner-info">
+      <h4>Why Nomad<span style="color:var(--teal);font-style:italic;">.</span></h4>
+      <p>Every journey is crafted from scratch by our team of local experts. We create experiences that reflect your unique travel style.</p>
+      <div class="pi-list">
+        <div><span>🌍</span><span>Local guides & authentic experiences</span></div>
+        <div><span>🎯</span><span>Fully customizable itineraries</span></div>
+        <div><span>🤝</span><span>24/7 support throughout your trip</span></div>
+        <div><span>💰</span><span>Best price guarantee</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft-inner">
+    <div><div class="fb-logo" style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;">Nomad<span style="color:var(--teal);font-style:italic;">.</span></div><p style="margin-top:.5rem;">Curated travel for the modern explorer. Discover the world, one journey at a time.</p><div class="ft-social"><a href="#">📷</a><a href="#">𝕏</a><a href="#">▶</a></div></div>
+    <div class="ft-col"><h4>Destinations</h4><a href="#" onclick="filterDests('asia',document.querySelector('.dest-tab'))">Asia</a><a href="#" onclick="filterDests('europe',document.querySelector('.dest-tab'))">Europe</a><a href="#" onclick="filterDests('americas',document.querySelector('.dest-tab'))">Americas</a><a href="#" onclick="filterDests('africa',document.querySelector('.dest-tab'))">Africa</a></div>
+    <div class="ft-col"><h4>Company</h4><a href="#stories">Stories</a><a href="#gallery">Gallery</a><a href="#planner">Plan Trip</a><a href="#">About Us</a></div>
+    <div><h4 style="font-size:.48rem;text-transform:uppercase;letter-spacing:3px;color:var(--teal);margin-bottom:.5rem;font-weight:500;">Wanderlust</h4><p style="font-size:.6rem;color:var(--text-muted);margin-bottom:.5rem;">Get travel inspiration and exclusive offers.</p><div class="nl-form"><input type="email" placeholder="Email" id="nlEmail"><button onclick="subNL()">→</button></div></div>
+  </div>
+  <div class="ft-bottom"><p>© 2026 Nomad Travel — Curated journeys for the modern explorer. All rights reserved.</p></div>
+</footer>
+
+<div class="modal-overlay" id="destModal" onclick="if(event.target===this)this.classList.remove('open')"><div class="modal" id="destModalContent"></div></div>
+<div class="toast" id="toast"><span id="toastMsg"></span></div>
+<div class="transition-overlay" id="transitionOverlay" aria-hidden="true"></div>
+
+<script>
+const destinations=[
+  {name:'Tokyo',loc:'Japan',region:'asia',price:'182,000 د.ج',img:'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=700&h=500&fit=crop',badge:'cul'},
+  {name:'Bali',loc:'Indonesia',region:'asia',price:'125,000 د.ج',img:'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=700&h=500&fit=crop',badge:'rel'},
+  {name:'Tuscany',loc:'Italy',region:'europe',price:'224,000 د.ج',img:'https://images.unsplash.com/photo-1523531294919-4bcd7c65e216?w=700&h=500&fit=crop',badge:'cul'},
+  {name:'Patagonia',loc:'Chile/Argentina',region:'americas',price:'322,000 د.ج',img:'https://images.unsplash.com/photo-1540638349513-d4e6f0ca6c5a?w=700&h=500&fit=crop',badge:'adv'},
+  {name:'Serengeti',loc:'Tanzania',region:'africa',price:'406,000 د.ج',img:'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=700&h=500&fit=crop',badge:'adv'},
+  {name:'Santorini',loc:'Greece',region:'europe',price:'168,000 د.ج',img:'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=700&h=500&fit=crop',badge:'rel'},
+  {name:'Kyoto',loc:'Japan',region:'asia',price:'210,000 د.ج',img:'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=700&h=500&fit=crop',badge:'cul'},
+  {name:'Machu Picchu',loc:'Peru',region:'americas',price:'266,000 د.ج',img:'https://images.unsplash.com/photo-1587595431973-160d0d94add1?w=700&h=500&fit=crop',badge:'adv'},
+  {name:'Maldives',loc:'Maldives',region:'asia',price:'238,000 د.ج',img:'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=700&h=500&fit=crop',badge:'rel'},
+];
+let cf='all';
+function renderDests(){const g=document.getElementById('destGrid');const f=cf==='all'?destinations:destinations.filter(d=>d.region===cf);g.innerHTML=f.map((d,i)=>'<div class="dest-card" style="animation-delay:'+(i*0.08)+'s" onclick="openDest(\''+d.name.replace(/'/g,"\\'")+'\',\''+d.loc.replace(/'/g,"\\'")+'\',\''+d.price+'\',\''+d.img+'\',\''+d.badge+'\')"><img src="'+d.img+'" alt="'+d.name+'" loading="lazy"><span class="dc-badge '+d.badge+'">'+(d.badge==='adv'?'Adventure':d.badge==='rel'?'Relax':'Culture')+'</span><div class="dc-info"><div class="dc-loc">📍 '+d.loc+'</div><h3>'+d.name+'</h3><div class="dc-price">'+d.price+'</div></div></div>').join('');g.classList.remove('visible');setTimeout(()=>g.classList.add('visible'),20);}
+renderDests();
+function filterDests(r,btn){cf=r;document.querySelectorAll('.dest-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');renderDests();}
+function openDest(n,l,p,i,b){document.getElementById('destModalContent').innerHTML='<button style="float:right;background:none;border:none;color:var(--text-muted);font-size:1rem;cursor:pointer" onclick="document.getElementById(\'destModal\').classList.remove(\'open\')">✕</button><div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem"><div style="background:url('+i+') center/cover;border-radius:8px;min-height:200px"></div><div><div style="font-size:.38rem;text-transform:uppercase;letter-spacing:3px;color:var(--teal);font-weight:500">📍 '+l+'</div><h3 style="font-family:\'Playfair Display\',serif;font-size:1.1rem;font-weight:600;margin:.3rem 0">'+n+'</h3><div style="font-size:1.3rem;font-weight:700;color:var(--teal)">'+p+'</div><button class="btn btn-primary btn-sm" style="margin-top:.5rem;font-size:.52rem;padding:.25rem 1rem" onclick="showToast(\'✈️\',\'Inquiry sent!\');document.getElementById(\'destModal\').classList.remove(\'open\')">✈️ Inquire</button></div></div>';document.getElementById('destModal').classList.add('open');}
+
+let si=0;const sl=document.querySelectorAll('.hero-slide');const hd=document.querySelectorAll('.hn-dot');setInterval(()=>{sl[si].classList.remove('active');hd[si].classList.remove('active');si=(si+1)%sl.length;sl[si].classList.add('active');hd[si].classList.add('active');},6000);
+
+function submitPlan(){const n=document.getElementById('plName').value.trim();const e=document.getElementById('plEmail').value.trim();if(!n||!e){showToast('⚠️','Please fill in name and email');return;}showToast('🌍','Trip request submitted! Ref: NMD-'+Math.floor(1000+Math.random()*9000));document.getElementById('plName').value='';document.getElementById('plEmail').value='';document.getElementById('plNotes').value='';}
+function subNL(){const e=document.getElementById('nlEmail').value.trim();if(!e||!e.includes('@')){showToast('⚠️','Invalid email');return;}showToast('📰','Welcome to Nomad!');document.getElementById('nlEmail').value='';}
+function showToast(i,m){const t=document.getElementById('toast');document.getElementById('toastMsg').textContent=i+' '+m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
+
+document.querySelectorAll('.counter').forEach(el=>{const target=parseInt(el.dataset.target);let started=false;new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting&&!started){started=true;const d=2500,s=performance.now();(function u(){const t=Math.min(1,(performance.now()-s)/d);el.textContent=Math.round(target*(1-Math.pow(1-t,3)));if(t<1)requestAnimationFrame(u);})();}});},{threshold:.5}).observe(el);});
+window.addEventListener('scroll',()=>{const n=document.getElementById('navbar');n.classList.toggle('scrolled',window.scrollY>60);if(window.scrollY>60)document.getElementById('navCenter').classList.remove('open');});
+document.querySelectorAll('.fu,.fs,.cd').forEach(el=>{new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.1}).observe(el);});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('destModal').classList.remove('open');});
+
+function toggleTheme(){const h=document.documentElement;const b=document.querySelector('.theme-btn');if(h.getAttribute('data-theme')==='light'){h.removeAttribute('data-theme');b.textContent='🌙';localStorage.setItem('nomad_theme','dark');}else{h.setAttribute('data-theme','light');b.textContent='☀️';localStorage.setItem('nomad_theme','light');}}
+(function(){if(localStorage.getItem('nomad_theme')==='light'){document.documentElement.setAttribute('data-theme','light');document.querySelector('.theme-btn').textContent='☀️';}})();
+
+function navigateToSection(e,id){if(e){e.preventDefault();e.stopPropagation();}const overlay=document.getElementById('transitionOverlay');overlay.classList.add('active');document.getElementById('navCenter').classList.remove('open');setTimeout(()=>{document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});},200);setTimeout(()=>overlay.classList.remove('active'),700);}
+document.querySelectorAll('.nav-center a[href^="#"], .btn-plan').forEach(a=>{a.addEventListener('click',function(e){const href=this.getAttribute('href');if(href&&href.length>1){navigateToSection(e,href.substring(1));}});});
+</script>
+</body>
+</html>

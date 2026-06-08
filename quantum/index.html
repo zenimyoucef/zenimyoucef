@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Quantum — Premium Technology Algérie 🇩🇿</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{--bg:#f2f2f5;--surface:#ffffff;--surface-alt:#e8e8ee;--border:rgba(0,0,0,0.06);--text:#1a1a1e;--text-muted:#7a7a82;--accent:#0071e3;--accent2:#5856d6;--accent3:#40e0d0;--green:#2d8a4e;--shadow:0 8px 32px rgba(0,0,0,0.04);--shadow-lg:0 20px 60px rgba(0,0,0,0.06);--transition:0.4s cubic-bezier(0.22,1,0.36,1);}
+[data-theme="dark"]{--bg:#0a0a0d;--surface:#141416;--surface-alt:#1c1c20;--border:rgba(255,255,255,0.06);--text:#f0f0f2;--text-muted:#6a6a72;--accent:#2997ff;--accent2:#7a7aff;--accent3:#40e0d0;--shadow:0 8px 32px rgba(0,0,0,0.4);--shadow-lg:0 20px 60px rgba(0,0,0,0.5);}
+html{scroll-behavior:smooth;scroll-padding-top:90px;}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:background 0.4s,color 0.4s;-webkit-font-smoothing:antialiased;}
+*:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px;}
+::selection{background:var(--accent);color:#fff;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--surface-alt);}::-webkit-scrollbar-thumb{background:var(--text-muted);border-radius:2px;}
+
+.ambient{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;}
+.ambient .orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.08;animation:orbDrift 18s ease-in-out infinite alternate;}
+.ambient .orb:nth-child(1){width:500px;height:500px;background:var(--accent);top:-15%;left:-10%;}
+.ambient .orb:nth-child(2){width:400px;height:400px;background:var(--accent2);bottom:-20%;right:-10%;animation-delay:-6s;}
+.ambient .orb:nth-child(3){width:350px;height:350px;background:var(--accent3);top:50%;left:60%;animation-delay:-12s;}
+@keyframes orbDrift{0%{transform:translate(0,0) scale(1);}100%{transform:translate(40px,-30px) scale(1.2);}}
+
+.top-bar{background:var(--accent);color:#fff;padding:0.35rem 0;text-align:center;font-size:0.65rem;display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;position:fixed;top:0;left:0;right:0;z-index:101;font-weight:500;}
+header{position:fixed;top:32px;left:0;right:0;z-index:100;padding:0 2.5rem;height:52px;display:flex;align-items:center;justify-content:space-between;background:rgba(242,242,245,0.6);backdrop-filter:blur(40px) saturate(1.4);border-bottom:1px solid var(--border);transition:var(--transition);}
+[data-theme="dark"] header{background:rgba(10,10,13,0.6);}
+.logo{font-size:1.1rem;font-weight:700;letter-spacing:-0.5px;display:flex;align-items:center;gap:0.3rem;}
+.logo .q{color:var(--accent);font-size:1.4rem;}
+nav{display:flex;align-items:center;gap:2rem;}
+nav a{color:var(--text-muted);text-decoration:none;font-size:0.65rem;font-weight:500;padding:.25rem .7rem;text-transform:uppercase;letter-spacing:1.5px;transition:color 0.3s;position:relative;}
+nav a::after{content:'';position:absolute;bottom:0;left:50%;width:0;height:1px;background:var(--accent);transition:width .3s;transform:translateX(-50%);}
+nav a:hover{color:var(--text);}
+nav a:hover::after{width:60%;}
+.header-right{display:flex;align-items:center;gap:0.3rem;}
+.header-right button{background:none;border:none;cursor:pointer;color:var(--text);width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all 0.3s;font-size:1rem;position:relative;}
+.header-right button:hover{background:var(--surface-alt);}
+.cart-badge{position:absolute;top:0;right:0;background:var(--accent);color:#fff;font-size:0.5rem;font-weight:600;width:14px;height:14px;border-radius:50%;display:flex;align-items:center;justify-content:center;transform:scale(0);transition:transform 0.3s;}
+.cart-badge.show{transform:scale(1);}
+.nav-overlay{position:fixed;inset:0;z-index:98;background:rgba(0,0,0,0.3);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity 0.3s ease;}
+.nav-overlay.open{opacity:1;pointer-events:all;}
+.menu-toggle{display:none;flex-direction:column;gap:2px;background:none;border:none;padding:6px;cursor:pointer;}
+.menu-toggle span{display:block;width:20px;height:2px;background:var(--text);border-radius:1px;transition:all 0.3s ease;}
+.menu-toggle.open span:nth-child(1){transform:rotate(45deg) translate(2px,2px);}
+.menu-toggle.open span:nth-child(2){opacity:0;}
+.menu-toggle.open span:nth-child(3){transform:rotate(-45deg) translate(2px,-2px);}
+
+.hero{min-height:100vh;padding-top:84px;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=1400&h=900&fit=crop') center 30%/cover;filter:brightness(.15) saturate(.8);}
+[data-theme="dark"] .hero-bg{filter:brightness(.1) saturate(.7);}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,var(--bg) 0%,transparent 40%,var(--bg) 100%);}
+.hero-inner{position:relative;z-index:2;padding:2rem;max-width:750px;}
+.badge{display:inline-flex;align-items:center;gap:.3rem;padding:.2rem .7rem;background:var(--accent);color:#fff;font-size:.5rem;font-weight:600;border-radius:4px;text-transform:uppercase;letter-spacing:1px;margin-bottom:1rem;opacity:0;animation:fadeU .6s ease .3s forwards;}
+@keyframes fadeU{to{opacity:1;transform:translateY(0);}}
+.hero h1{font-size:3.5rem;font-weight:800;letter-spacing:-2px;line-height:1;margin-bottom:.5rem;opacity:0;transform:translateY(25px);animation:fadeU .8s ease .5s forwards;}
+.hero h1 .grad{background:linear-gradient(135deg,var(--accent),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero p{color:var(--text-muted);font-size:.85rem;line-height:1.7;max-width:480px;margin:0 auto 1.2rem;opacity:0;animation:fadeU .8s ease .7s forwards;}
+
+.btn{padding:.55rem 1.5rem;font-size:.75rem;font-weight:600;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;font-family:inherit;transition:all .3s;border-radius:10px;}
+.btn-accent{background:var(--accent);color:#fff;box-shadow:0 4px 20px rgba(0,113,227,.2);}
+.btn-accent:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,113,227,.3);}
+.btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border);}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
+
+.features-section{padding:4rem 2rem;max-width:1100px;margin:0 auto;}
+.fs-title{font-size:0.65rem;text-transform:uppercase;letter-spacing:2px;color:var(--accent);font-weight:600;margin-bottom:.2rem;text-align:center;}
+.features-section h2{font-size:2rem;font-weight:700;letter-spacing:-1px;text-align:center;margin-bottom:2rem;}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+.feature-card{background:rgba(255,255,255,0.5);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:16px;padding:1.5rem;transition:var(--transition);}
+[data-theme="dark"] .feature-card{background:rgba(20,20,22,0.5);}
+.feature-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);}
+.feature-card .fc-icon{font-size:2rem;display:block;margin-bottom:0.8rem;}
+.feature-card h3{font-size:0.9rem;font-weight:600;margin-bottom:0.2rem;}
+.feature-card p{font-size:0.72rem;color:var(--text-muted);line-height:1.6;}
+
+.products-section{padding:4rem 2rem;max-width:1200px;margin:0 auto;}
+.ps-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2rem;flex-wrap:wrap;gap:1rem;}
+.ps-header h2{font-size:2.2rem;font-weight:700;letter-spacing:-1px;}
+.ps-tabs{display:flex;gap:0.3rem;background:var(--surface-alt);padding:0.3rem;border-radius:10px;}
+.ps-tabs button{padding:0.4rem 1rem;background:transparent;border:none;color:var(--text-muted);font-size:0.72rem;font-weight:500;cursor:pointer;border-radius:8px;transition:all 0.3s;font-family:inherit;}
+.ps-tabs button.active{background:var(--surface);color:var(--text);box-shadow:var(--shadow);}
+
+.product-showcase{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1rem;}
+.product-card{background:rgba(255,255,255,0.5);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-radius:18px;overflow:hidden;border:1px solid var(--border);transition:var(--transition);display:flex;flex-direction:column;opacity:0;transform:translateY(20px);animation:cardUp 0.5s ease forwards;}
+[data-theme="dark"] .product-card{background:rgba(20,20,22,0.5);}
+@keyframes cardUp{to{opacity:1;transform:translateY(0);}}
+.product-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:rgba(0,113,227,0.15);}
+.product-card .pc-img{height:180px;background-size:cover;background-position:center;position:relative;}
+.product-card .pc-tag{position:absolute;top:10px;left:10px;padding:0.15rem 0.6rem;border-radius:5px;font-size:0.55rem;font-weight:600;}
+.product-card .pc-tag.new{background:var(--accent);color:#fff;}
+.product-card .pc-tag.best{background:var(--accent2);color:#fff;}
+.product-card .pc-body{padding:1rem 1.2rem 1.2rem;flex:1;display:flex;flex-direction:column;}
+.product-card .pc-body .pc-cat{font-size:0.55rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);font-weight:600;}
+.product-card .pc-body h3{font-size:0.95rem;font-weight:600;margin:0.15rem 0;}
+.product-card .pc-body .pc-price{font-size:1.1rem;font-weight:700;color:var(--accent);margin:0.1rem 0;}
+.product-card .pc-body .pc-specs{display:flex;gap:0.3rem;flex-wrap:wrap;margin-bottom:0.4rem;}
+.product-card .pc-body .pc-specs span{font-size:0.55rem;padding:0.12rem 0.45rem;border-radius:3px;background:var(--surface-alt);color:var(--text-muted);}
+.product-card .pc-body .pc-actions{display:flex;gap:0.4rem;margin-top:auto;}
+.product-card .pc-body .pc-actions button{flex:1;padding:0.45rem;font-size:0.72rem;border-radius:8px;cursor:pointer;font-weight:600;font-family:inherit;transition:all 0.3s;}
+.product-card .pc-body .pc-actions .pc-detail{background:transparent;color:var(--text-muted);border:1px solid var(--border);}
+.product-card .pc-body .pc-actions .pc-buy{background:var(--accent);color:#fff;border:none;}
+
+.reviews-section{padding:3rem 2rem;background:rgba(255,255,255,0.3);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+[data-theme="dark"] .reviews-section{background:rgba(20,20,22,0.3);}
+.rv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem;max-width:1000px;margin:0 auto;}
+.rv-card{background:var(--surface-alt);border:1px solid var(--border);border-radius:14px;padding:1.2rem;transition:all 0.3s;}
+.rv-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px);}
+.rv-card .rvc-stars{font-size:0.65rem;color:#f59e0b;letter-spacing:1px;margin-bottom:0.3rem;}
+.rv-card .rvc-text{font-size:0.72rem;color:var(--text);line-height:1.6;margin-bottom:0.5rem;font-style:italic;}
+.rv-card .rvc-author{font-weight:600;font-size:0.7rem;color:var(--text-muted);}
+
+.quiz-section{padding:3rem 2rem;max-width:800px;margin:0 auto;}
+.quiz-section h3{font-size:1.1rem;font-weight:700;margin-bottom:0.2rem;text-align:center;}
+.quiz-section .quiz-sub{color:var(--text-muted);font-size:0.75rem;margin-bottom:1.2rem;text-align:center;}
+.quiz-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.8rem;}
+.quiz-card{background:var(--surface-alt);border:1px solid var(--border);border-radius:12px;padding:1rem;text-align:center;cursor:pointer;transition:all 0.3s;}
+.quiz-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--accent);}
+.quiz-card .qc-icon{font-size:1.5rem;margin-bottom:0.3rem;}
+.quiz-card h4{font-size:0.8rem;font-weight:600;margin-bottom:0.15rem;}
+.quiz-card p{font-size:0.65rem;color:var(--text-muted);}
+.quiz-result{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.8rem;margin-top:1rem;display:none;}
+.quiz-result.open{display:grid;}
+.quiz-product{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:0.8rem;display:flex;align-items:center;gap:0.8rem;}
+.quiz-product img{width:50px;height:50px;border-radius:8px;object-fit:cover;}
+.quiz-product .qp-info h4{font-size:0.75rem;font-weight:600;}
+.quiz-product .qp-info span{font-size:0.6rem;color:var(--text-muted);}
+
+.inst-section{padding:2.5rem 2rem;text-align:center;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--surface-alt);}
+.inst-calc{display:flex;gap:0.5rem;align-items:center;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;}
+.inst-calc input{padding:0.5rem 0.8rem;border:1px solid var(--border);border-radius:10px;background:var(--surface);font-family:inherit;font-size:0.85rem;outline:none;color:var(--text);width:200px;}
+.inst-calc button{padding:0.5rem 1.2rem;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;font-weight:600;font-size:0.8rem;font-family:inherit;}
+.inst-results{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1rem;}
+.inst-option{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:0.8rem 1.2rem;text-align:center;min-width:140px;}
+.inst-option .io-number{font-size:1.3rem;font-weight:800;color:var(--accent);}
+
+.aftersales-section{padding:3rem 2rem;background:rgba(255,255,255,0.3);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--border);}
+[data-theme="dark"] .aftersales-section{background:rgba(20,20,22,0.3);}
+.as-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;max-width:900px;margin:0 auto;}
+.as-card{background:var(--surface-alt);border:1px solid var(--border);border-radius:14px;padding:1.2rem;display:flex;align-items:center;gap:1rem;}
+
+footer{padding:2rem;text-align:center;border-top:1px solid var(--border);}
+footer .logo{justify-content:center;margin-bottom:0.2rem;font-size:1rem;}
+footer p{color:var(--text-muted);font-size:0.72rem;}
+
+.toast{position:fixed;bottom:2rem;right:2rem;z-index:400;background:var(--surface);border:1px solid var(--accent);border-radius:12px;padding:0.7rem 1rem;box-shadow:var(--shadow-lg);backdrop-filter:blur(20px);transform:translateY(120px);opacity:0;transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;}
+.toast.show{transform:translateY(0);opacity:1;}
+
+.cart-overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.3);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity 0.3s;}
+.cart-overlay.open{opacity:1;pointer-events:all;}
+.cart-sidebar{position:fixed;top:0;right:-420px;width:400px;max-width:100vw;height:100vh;z-index:201;background:var(--surface);border-left:1px solid var(--border);transition:right 0.4s cubic-bezier(0.22,1,0.36,1);display:flex;flex-direction:column;}
+.cart-sidebar.open{right:0;}
+
+.modal-overlay{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,0.5);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.3s;padding:1rem;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:2rem;max-width:500px;width:100%;max-height:85vh;overflow-y:auto;transform:scale(0.9);transition:transform 0.3s;}
+.modal-overlay.open .modal{transform:scale(1);}
+
+.transition-overlay{position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:0;background:var(--accent);backdrop-filter:blur(0px);will-change:opacity,backdrop-filter;}
+.transition-overlay.active{opacity:1;pointer-events:all;animation:glassBlur .6s ease forwards;}
+@keyframes glassBlur{0%{opacity:0;backdrop-filter:blur(0px);}30%{opacity:.65;backdrop-filter:blur(12px);}65%{opacity:.65;backdrop-filter:blur(12px);}100%{opacity:0;backdrop-filter:blur(0px);}}
+
+@media(max-width:968px){.hero h1{font-size:2.8rem;}.features-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:768px){
+.top-bar{font-size:0.55rem;gap:0.8rem;}
+header{padding:0 1.2rem;height:50px;}
+nav{position:fixed;top:82px;left:0;right:0;z-index:99;background:var(--surface);padding:1.5rem;border-bottom:1px solid var(--border);flex-direction:column;gap:1rem;opacity:0;transform:translateY(-12px);pointer-events:none;transition:opacity 0.35s,transform 0.35s;}
+nav.open{opacity:1;transform:translateY(0);pointer-events:all;}
+.menu-toggle{display:flex;}
+.hero h1{font-size:2rem;}
+.features-section{padding:2.5rem 1.5rem;}
+.features-grid{grid-template-columns:1fr;}
+.products-section{padding:2rem 1.2rem;}
+.ps-header h2{font-size:1.5rem;}
+.product-showcase{grid-template-columns:1fr;}
+.cart-sidebar{width:100vw;}
+}
+@media(max-width:480px){.hero h1{font-size:1.5rem;}}
+</style>
+<script src="buynow.js"></script>
+</head>
+<body>
+<div class="ambient"><div class="orb"></div><div class="orb"></div><div class="orb"></div></div>
+
+<div class="top-bar"><span>🇩🇿 Quantum Algérie</span><span>🚚 Livraison <strong>gratuite</strong> dès 100,000 د.ج</span><span>🔒 Paiement sécurisé</span></div>
+
+<header id="header">
+<div class="logo"><span class="q">Q</span>uantum</div>
+<nav id="nav"><a href="#products">Produits</a><a href="#quiz">Quiz</a><a href="#reviews">Avis</a><a href="#aftersales">SAV</a></nav>
+<div class="header-right">
+<button onclick="toggleNav()" id="menuToggle" aria-label="Menu">☰</button>
+<button onclick="toggleTheme()" id="themeBtn" aria-label="Thème">🌙</button>
+<a href="admin.html" style="font-size:0.6rem;opacity:0.3;">⚙️</a>
+<button onclick="toggleCart()" aria-label="Panier">🛒<span class="cart-badge" id="cartBadge">0</span></button>
+</div>
+</header>
+<div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+
+<section class="hero">
+<div class="hero-bg"></div>
+<div class="hero-inner">
+<span class="badge">✦ Flagship 2026</span>
+<h1>La Technologie<br><span class="grad">Repensée.</span></h1>
+<p>Découvrez le meilleur de l'innovation. Performances de pointe, design élégant — livré chez vous en Algérie.</p>
+<div style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeU .8s ease .9s forwards;">
+<a href="#products" class="btn btn-accent">Voir les Produits</a>
+<a href="#quiz" class="btn btn-ghost">Quiz →</a>
+</div>
+</div>
+</section>
+
+<div class="trust-bar" style="display:flex;justify-content:center;gap:2rem;padding:1.2rem 2rem;flex-wrap:wrap;background:var(--surface-alt);font-size:0.7rem;color:var(--text-muted);border-bottom:1px solid var(--border);">
+<span>🔒 Paiement 100% sécurisé</span><span>🔧 Garantie 1-2 ans</span><span>💰 3x/6x sans intérêts</span><span>⭐ 4.9/5 (+12,000 avis)</span>
+</div>
+
+<section class="features-section">
+<div class="fs-title">Pourquoi Quantum ?</div>
+<h2>L'Excellence Tech</h2>
+<div class="features-grid">
+<div class="feature-card"><span class="fc-icon">🚀</span><h3>Performances Pro</h3><p>Processeurs nouvelle génération. Jusqu'à 3x plus rapide.</p></div>
+<div class="feature-card"><span class="fc-icon">🔋</span><h3>Autonomie 24h</h3><p>Jusqu'à 24h d'autonomie sur une seule charge.</p></div>
+<div class="feature-card"><span class="fc-icon">🎨</span><h3>Écran ProMotion 120Hz</h3><p>Taux de rafraîchissement 120Hz. Couleurs éclatantes.</p></div>
+</div>
+</section>
+
+<section class="products-section" id="products">
+<div class="ps-header">
+<div><div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:2px;color:var(--accent);font-weight:600;">Notre Gamme</div><h2>Choisissez Votre Puissance</h2></div>
+<div class="ps-tabs">
+<button class="active" onclick="setTab('all',this)">Tout</button>
+<button onclick="setTab('laptops',this)">PC Portables</button>
+<button onclick="setTab('phones',this)">Téléphones</button>
+<button onclick="setTab('audio',this)">Audio</button>
+</div>
+</div>
+<div class="product-showcase" id="productGrid"></div>
+</section>
+
+<section class="inst-section">
+<h3 style="margin-bottom:0.5rem;">💰 Calculateur de Mensualités</h3>
+<p style="color:var(--text-muted);font-size:0.72rem;margin-bottom:1rem;">Simulez vos mensualités en 3x, 6x ou 12x sans frais</p>
+<div class="inst-calc">
+<input type="number" id="instAmount" placeholder="Montant (د.ج)" value="495000">
+<button onclick="calcInstallments()">Calculer</button>
+</div>
+<div class="inst-results" id="instResults"></div>
+</section>
+
+<section class="quiz-section" id="quiz">
+<h3>🎯 <span style="color:var(--accent);">QUIZ</span> — Trouvez votre appareil</h3>
+<p class="quiz-sub">Choisissez votre budget pour des recommandations</p>
+<div class="quiz-grid">
+<div class="quiz-card" onclick="setQuizBudget('low')"><span class="qc-icon">💵</span><h4>~100k-200k</h4><p>Budget d'entrée de gamme</p></div>
+<div class="quiz-card" onclick="setQuizBudget('mid')"><span class="qc-icon">💰</span><h4>~200k-350k</h4><p>Budget milieu de gamme</p></div>
+<div class="quiz-card" onclick="setQuizBudget('high')"><span class="qc-icon">💎</span><h4>~350k-500k+</h4><p>Budget premium</p></div>
+</div>
+<div class="quiz-result" id="quizResult"></div>
+</section>
+
+<section class="reviews-section" id="reviews">
+<h3 style="text-align:center;font-size:1.1rem;font-weight:700;">⭐ <span style="color:var(--accent);">AVIS</span> CLIENTS</h3>
+<p style="text-align:center;color:var(--text-muted);font-size:0.75rem;margin-bottom:1.2rem;">Ce que nos clients disent de Quantum</p>
+<div class="rv-grid" id="rvGrid"></div>
+</section>
+
+<section class="aftersales-section" id="aftersales">
+<h3 style="text-align:center;font-size:1.1rem;font-weight:700;">🔧 <span style="color:var(--accent);">Service</span> Après-Vente</h3>
+<p style="text-align:center;color:var(--text-muted);font-size:0.75rem;margin-bottom:1.2rem;">Garantie, réparations, livraison</p>
+<div class="as-grid">
+<div class="as-card"><div style="font-size:1.8rem;">🔧</div><div><h4 style="font-size:0.85rem;font-weight:600;">Garantie</h4><p style="font-size:0.68rem;color:var(--text-muted);">1 à 2 ans selon produit. Extension 3 ans.</p></div></div>
+<div class="as-card"><div style="font-size:1.8rem;">🛠️</div><div><h4 style="font-size:0.85rem;font-weight:600;">Réparation</h4><p style="font-size:0.68rem;color:var(--text-muted);">Centre SAV Alger. Réparation sous 48h.</p></div></div>
+<div class="as-card"><div style="font-size:1.8rem;">🚚</div><div><h4 style="font-size:0.85rem;font-weight:600;">Retour Gratuit</h4><p style="font-size:0.68rem;color:var(--text-muted);">Retour sous 14 jours. Échange immédiat.</p></div></div>
+<div class="as-card"><div style="font-size:1.8rem;">📞</div><div><h4 style="font-size:0.85rem;font-weight:600;">Support</h4><p style="font-size:0.68rem;color:var(--text-muted);">+213 555 45 67 89 • Lun-Sam 9h-19h</p></div></div>
+</div>
+</section>
+
+<footer><div class="logo"><span class="q">Q</span>uantum Algérie</div><p>Premium technology — livré dans toute l'Algérie 🇩🇿 © 2026</p></footer>
+
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+<div style="padding:1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;"><h2 style="font-size:0.9rem;font-weight:700;">🛒 Panier</h2><button onclick="toggleCart()" style="background:none;border:none;font-size:1.2rem;cursor:pointer;color:var(--text);">✕</button></div>
+<div class="cart-items" style="flex:1;overflow-y:auto;padding:0.5rem 1.5rem;" id="cartItems"></div>
+</div>
+
+<div class="modal-overlay" id="checkoutModal"><div class="modal"><button style="float:right;background:none;border:none;font-size:1.2rem;cursor:pointer;color:var(--text-muted);" onclick="this.parentElement.parentElement.classList.remove('open')">✕</button><div id="modalContent"></div></div></div>
+
+<div class="toast" id="toast"><span id="toastMsg"></span></div>
+<div class="transition-overlay" id="transitionOverlay" aria-hidden="true"></div>
+
+<script>
+const products=[
+{id:1,name:'QuantumBook Pro 16"',tab:'laptops',price:495000,img:'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&h=400&fit=crop',specs:['M4 Pro','24GB','512GB'],tag:'new'},
+{id:2,name:'QuantumBook Air 13"',tab:'laptops',price:365000,img:'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=600&h=400&fit=crop',specs:['M4','16GB','256GB'],tag:null},
+{id:3,name:'QuantumPhone 15 Pro',tab:'phones',price:225000,img:'https://images.unsplash.com/photo-1511707171634-5f897ff02bb9?w=600&h=400&fit=crop',specs:['6.7" OLED','256GB','48MP'],tag:'best'},
+{id:4,name:'QuantumPhone 15',tab:'phones',price:165000,img:'https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=400&fit=crop',specs:['6.1" OLED','128GB','Dual Camera'],tag:null},
+{id:5,name:'QuantumPods Pro',tab:'audio',price:52000,img:'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=400&fit=crop',specs:['ANC','Spatial Audio','IPX4'],tag:'new'},
+{id:6,name:'QuantumPods Max',tab:'audio',price:115000,img:'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=600&h=400&fit=crop',specs:['Over-ear','Hi-Res','ANC'],tag:null},
+];
+let cart=JSON.parse(localStorage.getItem('qn_cart')||'[]');let tab='all';
+function fmtDZD(n){return Math.round(n).toLocaleString('fr-DZ')+' د.ج';}
+function setTab(t,btn){tab=t;document.querySelectorAll('.ps-tabs button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderProducts();}
+function renderProducts(){const grid=document.getElementById('productGrid');const f=tab==='all'?products:products.filter(p=>p.tab===tab);
+grid.innerHTML=f.map((p,i)=>'<div class="product-card" style="animation-delay:'+(i*0.08)+'s"><div class="pc-img" style="background-image:url('+p.img+')">'+(p.tag?'<span class="pc-tag '+(p.tag==='new'?'new':'best')+'">'+(p.tag==='new'?'NOUVEAU':'BEST SELLER')+'</span>':'')+'</div><div class="pc-body"><div class="pc-cat">'+p.tab+'</div><h3>'+p.name+'</h3><div class="pc-price">'+fmtDZD(p.price)+'</div><div class="pc-specs">'+p.specs.map(s=>'<span>'+s+'</span>').join('')+'</div><div class="pc-actions"><button class="pc-detail" onclick="openDetail('+p.id+')">Détails</button><button class="pc-buy" onclick="addToCart('+p.id+')">Acheter</button></div></div></div>').join('');}
+function openDetail(id){const p=products.find(x=>x.id===id);if(!p)return;document.getElementById('modalContent').innerHTML='<h2 style="font-size:1rem;margin-bottom:0.3rem;">'+p.name+'</h2><div style="font-size:1.3rem;font-weight:700;color:var(--accent);margin:0.3rem 0;">'+fmtDZD(p.price)+'</div><p style="font-size:0.72rem;color:var(--text-muted);line-height:1.6;">Spécifications: '+p.specs.join(', ')+'</p><button class="btn btn-accent" style="width:100%;margin-top:0.5rem;" onclick="addToCart('+p.id+');document.getElementById(\'checkoutModal\').classList.remove(\'open\')">Ajouter au Panier</button>';document.getElementById('checkoutModal').classList.add('open');}
+function addToCart(id){const p=products.find(x=>x.id===id);if(!p)return;const ex=cart.find(x=>x.id===id);if(ex)ex.qty++;else cart.push({...p,qty:1});updateCart();showToast('✅',p.name+' ajouté !');}
+function updateCart(){localStorage.setItem('qn_cart',JSON.stringify(cart));const badge=document.getElementById('cartBadge');const t=cart.reduce((s,i)=>s+i.qty,0);badge.textContent=t;badge.classList.toggle('show',t>0);const ci=document.getElementById('cartItems');if(!cart.length){ci.innerHTML='<div style="text-align:center;padding:2rem;color:var(--text-muted);font-size:0.8rem;">Votre panier est vide</div>';return;}ci.innerHTML=cart.map(i=>'<div style="display:flex;gap:0.8rem;padding:0.6rem 0;border-bottom:1px solid var(--border);align-items:center;"><div style="flex:1;"><h4 style="font-size:0.75rem;font-weight:600;">'+i.name+'</h4><span style="color:var(--accent);font-weight:600;font-size:0.72rem;">'+fmtDZD(i.price)+'</span></div><button onclick="removeFromCart('+i.id+')" style="background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:0.8rem;">✕</button></div>').join('');}
+function removeFromCart(id){cart=cart.filter(x=>x.id!==id);updateCart();}
+function toggleCart(){document.getElementById('cartOverlay').classList.toggle('open');document.getElementById('cartSidebar').classList.toggle('open');}
+function toggleNav(){document.getElementById('nav').classList.toggle('open');document.getElementById('navOverlay').classList.toggle('open');document.getElementById('menuToggle').classList.toggle('open');}
+function showToast(i,m){const t=document.getElementById('toast');document.getElementById('toastMsg').textContent=i+' '+m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
+function toggleTheme(){const h=document.documentElement;const b=document.getElementById('themeBtn');if(h.getAttribute('data-theme')==='dark'){h.removeAttribute('data-theme');b.textContent='🌙';localStorage.setItem('qn_theme','light');}else{h.setAttribute('data-theme','dark');b.textContent='☀️';localStorage.setItem('qn_theme','dark');}}
+if(localStorage.getItem('qn_theme')==='dark'){document.documentElement.setAttribute('data-theme','dark');document.getElementById('themeBtn').textContent='☀️';}
+function calcInstallments(){const a=Number(document.getElementById('instAmount').value);if(!a||a<10000)return;document.getElementById('instResults').innerHTML='<div class="inst-option"><div class="io-number">'+fmtDZD(Math.round(a/3))+'</div><div class="io-label">3x</div></div><div class="inst-option"><div class="io-number">'+fmtDZD(Math.round(a/6))+'</div><div class="io-label">6x</div></div><div class="inst-option"><div class="io-number">'+fmtDZD(Math.round(a/12))+'</div><div class="io-label">12x</div></div>';}
+setTimeout(calcInstallments,100);
+const reviewData=[{name:'Amir K.',text:'Incroyable performance ! Le M4 Pro est ultra-rapide. Livraison Alger en 24h.',stars:5},{name:'Sofia M.',text:'Parfait pour le travail et les études. Léger, beau, batterie de folie.',stars:5},{name:'Yanis B.',text:'Meilleur téléphone que j\'ai jamais eu. Appareil photo incroyable.',stars:5},{name:'Lina H.',text:'La réduction de bruit est hallucinante. Confortables toute la journée.',stars:5}];
+function renderReviews(){document.getElementById('rvGrid').innerHTML=reviewData.map(r=>'<div class="rv-card"><div class="rvc-stars">'+'★'.repeat(r.stars)+'☆'.repeat(5-r.stars)+'</div><div class="rvc-text">"'+r.text+'"</div><div class="rvc-author">— '+r.name+'</div></div>').join('');}
+let quizBudget='';
+function setQuizBudget(b){quizBudget=b;const ids=b==='low'?[2,4]:b==='mid'?[2,1]:[1,3];const items=ids.map(id=>products.find(p=>p.id===id)).filter(Boolean);const el=document.getElementById('quizResult');el.innerHTML=items.map(p=>'<div class="quiz-product"><img src="'+p.img+'" alt="'+p.name+'"><div class="qp-info"><h4>'+p.name+'</h4><span>'+fmtDZD(p.price)+'</span></div></div>').join('');el.classList.add('open');}
+renderProducts();renderReviews();updateCart();
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){['cartSidebar','cartOverlay','checkoutModal','nav'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('open');});document.getElementById('navOverlay').classList.remove('open');document.getElementById('menuToggle').classList.remove('open');}});
+document.querySelectorAll('nav a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){e.preventDefault();const href=this.getAttribute('href');if(href&&href.length>1){const overlay=document.getElementById('transitionOverlay');overlay.classList.add('active');document.getElementById('nav').classList.remove('open');document.getElementById('navOverlay').classList.remove('open');document.getElementById('menuToggle').classList.remove('open');setTimeout(()=>document.getElementById(href.substring(1))?.scrollIntoView({behavior:'smooth'}),200);setTimeout(()=>overlay.classList.remove('active'),600);}});});
+</script>
+</body>
+</html>

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Bistro Lumière — Cuisine d'Exception | Paris</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,500;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{--bg:#0d0808;--surface:#1a1010;--surface2:#2a1818;--border:rgba(212,168,75,.08);--text:#f0e8e0;--text-muted:#8a7a6a;--gold:#d4a84b;--gold-light:#e8c84b;--cream:#f5efe0;--burgundy:#3a0a0a;--burgundy-light:#5a1a1a;--wine:#6a1a2a;--shadow:0 20px 60px rgba(0,0,0,.5);--hero-overlay:linear-gradient(135deg,rgba(13,8,8,.9) 0%,rgba(13,8,8,.2) 40%,rgba(13,8,8,.7) 100%);--nav-bg:rgba(13,8,8,.85);}
+[data-theme="light"]{--bg:#f5f0eb;--surface:#ffffff;--surface2:#ede5dd;--border:rgba(58,10,10,.08);--text:#2a2018;--text-muted:#8a7a6a;--gold:#b8963a;--gold-light:#d4a84b;--cream:#2a2018;--burgundy:#5a1a1a;--burgundy-light:#8a2a3a;--wine:#8a2a3a;--shadow:0 8px 32px rgba(0,0,0,.06);--hero-overlay:linear-gradient(135deg,rgba(245,240,235,.92) 0%,rgba(245,240,235,.15) 40%,rgba(245,240,235,.7) 100%);--nav-bg:rgba(245,240,235,.92);}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.7;transition:background .5s,color .5s;-webkit-font-smoothing:antialiased;}
+::selection{background:var(--gold);color:var(--bg);}
+::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:var(--surface);}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px;}
+/* ── Icon Styles ── */
+i.fas,i.far,i.fab{display:inline-flex;align-items:center;justify-content:center;vertical-align:-.1em;}
+.btn i.fas{font-size:.85em;margin-right:.35em;}
+.btn-ghost i.fas,.btn-primary i.fas{font-size:.82em;}
+.nav-actions i.fas,.btn-reserve i.fas{margin-right:.35em;}
+.wc-icon i.fas{font-size:2rem;}
+.wc-icon{display:block;margin-bottom:.3rem;}
+.ri-details i.fas{width:1.1em;text-align:center;color:var(--gold);font-size:1rem;}
+.footer-social a i.fas{font-size:.7rem;}
+.hero-badge i.fas{color:var(--gold);font-size:.65rem;margin:0 .1em;}
+.hero-year i.fas{color:var(--gold);font-size:.65rem;vertical-align:middle;margin:0 .15em;}
+.theme-btn i.fas{font-size:1rem;}
+.tc-stars i.fas{color:var(--gold);font-size:.85rem;letter-spacing:2px;}
+.mi-tags i.fas{color:var(--gold);font-size:.65em;margin-left:2px;}
+.chef-title i.fas{color:var(--gold);font-size:.65rem;}
+.chef-stat .cs-val i.fas{font-size:1.5rem;vertical-align:middle;color:var(--gold);}
+.form-submit i.fas,.reservation-form h4 i.fas{margin-right:.3em;}
+.footer-bottom i.fas{color:var(--gold);font-size:.55rem;vertical-align:middle;margin:0 .2em;}
+section h2 i.fas{color:var(--gold);font-size:.75em;vertical-align:middle;}
+/* ── Ambient Background ── */
+.ambient{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;}
+.ambient .glow-1{position:absolute;top:15%;left:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(212,168,75,.04),transparent 70%);filter:blur(80px);animation:ambientDrift 12s ease-in-out infinite alternate;}
+.ambient .glow-2{position:absolute;bottom:20%;right:-10%;width:400px;height:400px;background:radial-gradient(circle,rgba(106,26,42,.06),transparent 70%);filter:blur(60px);animation:ambientDrift 15s ease-in-out infinite alternate-reverse;}
+@keyframes ambientDrift{0%{transform:translate(0,0) scale(1);}100%{transform:translate(30px,-20px) scale(1.15);}}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 3rem;height:72px;display:flex;align-items:center;justify-content:space-between;transition:all .5s;}
+nav.scrolled{background:var(--nav-bg);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);height:62px;}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--cream);text-decoration:none;letter-spacing:-.5px;transition:opacity .3s;}
+.nav-logo span{color:var(--gold);}
+.nav-links{display:flex;gap:0;list-style:none;align-items:center;}
+.nav-links a{color:var(--text-muted);text-decoration:none;padding:.35rem .9rem;font-size:.5rem;text-transform:uppercase;letter-spacing:3.5px;transition:all .3s;position:relative;font-weight:500;}
+.nav-links a::after{content:'';position:absolute;bottom:2px;left:50%;width:0;height:1px;background:var(--gold);transition:all .35s;transform:translateX(-50%);}
+.nav-links a:hover{color:var(--gold);}
+.nav-links a:hover::after{width:60%;}
+.nav-actions{display:flex;gap:.6rem;align-items:center;}
+.btn-reserve{color:var(--gold);text-decoration:none;font-size:.48rem;text-transform:uppercase;letter-spacing:2.5px;border:1px solid rgba(212,168,75,.25);padding:.3rem 1.2rem;border-radius:2px;transition:all .3s;font-weight:500;}
+.btn-reserve:hover{background:var(--gold);color:var(--bg);border-color:var(--gold);}
+.theme-btn{background:none;border:none;color:var(--gold);font-size:1rem;cursor:pointer;padding:.2rem;transition:all .3s;line-height:1;opacity:.7;}
+.theme-btn:hover{opacity:1;}
+.mobile-toggle{display:none;background:none;border:none;color:var(--text);font-size:1.3rem;cursor:pointer;}
+
+/* ── Hero ── */
+.hero{height:100vh;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.hero-img{position:absolute;inset:-8%;background:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&h=1200&fit=crop') center/cover;filter:brightness(.35) saturate(.9) sepia(.1);animation:heroZoom 25s ease-in-out infinite alternate;will-change:transform;}
+@keyframes heroZoom{0%{transform:scale(1) translateX(0);}100%{transform:scale(1.15) translateX(-2%);}}
+.hero-overlay{position:absolute;inset:0;background:var(--hero-overlay);}
+.hero-ornament{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;border:1px solid rgba(212,168,75,.06);border-radius:50%;pointer-events:none;animation:ornamentPulse 8s ease-in-out infinite;}
+@keyframes ornamentPulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.3;}50%{transform:translate(-50%,-50%) scale(1.2);opacity:.05;}}
+.hero-content{position:relative;z-index:2;text-align:center;padding:2rem;max-width:780px;}
+.hero-badge{display:flex;align-items:center;justify-content:center;gap:.6rem;font-size:.38rem;color:var(--gold);text-transform:uppercase;letter-spacing:6px;margin-bottom:1.2rem;opacity:0;transform:translateY(-10px);animation:fadeD .7s ease .4s forwards;}
+.hero-badge::before,.hero-badge::after{content:'';width:50px;height:1px;background:var(--gold);}
+@keyframes fadeD{to{opacity:1;transform:translateY(0);}}
+.hero-year{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--text-muted);margin-bottom:.3rem;opacity:0;animation:fadeU 1s ease .5s forwards;}
+.hero h1{font-family:'Playfair Display',serif;font-size:6rem;font-weight:700;line-height:.95;letter-spacing:-3px;margin-bottom:.5rem;opacity:0;transform:translateY(30px);animation:fadeU 1s cubic-bezier(.22,1,.36,1) .6s forwards;}
+.hero h1 .accent{color:var(--gold);font-style:italic;}
+.hero .sub{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-style:italic;color:var(--text-muted);margin-bottom:1rem;opacity:0;animation:fadeU 1s ease .8s forwards;}
+@keyframes fadeU{to{opacity:1;transform:translateY(0);}}
+.hero-desc{color:var(--text-muted);font-size:.8rem;line-height:1.9;max-width:520px;margin:0 auto 1.5rem;opacity:0;animation:fadeU 1s ease .9s forwards;}
+.hero-cta{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeU 1s ease 1s forwards;}
+.btn{display:inline-flex;align-items:center;gap:.6rem;padding:.6rem 2rem;font-size:.65rem;font-weight:500;text-decoration:none;border:none;cursor:pointer;font-family:'Inter',sans-serif;transition:all .4s cubic-bezier(.22,1,.36,1);text-transform:uppercase;letter-spacing:3px;border-radius:2px;}
+.btn-primary{background:var(--gold);color:var(--bg);}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 20px 50px rgba(212,168,75,.2);}
+.btn-ghost{background:transparent;color:var(--cream);border:1px solid rgba(255,255,255,.12);}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
+.hero-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:.3rem;color:var(--text-muted);font-size:.4rem;letter-spacing:3px;animation:bounce 2.5s infinite;opacity:0;animation:fadeU .6s ease 1.4s forwards;}
+.hero-scroll .arrow{width:1px;height:35px;background:linear-gradient(0deg,transparent,var(--gold));}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(8px);}}
+
+/* ── Sections ── */
+section{padding:6rem 2rem;position:relative;margin:0 auto;}
+.section-bleed{max-width:100%;padding:6rem 0;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.section-bleed>div{max-width:1200px;margin:0 auto;padding:0 2rem;}
+.section-marker{display:flex;align-items:center;gap:.6rem;font-size:.36rem;color:var(--gold);text-transform:uppercase;letter-spacing:5px;margin-bottom:.5rem;font-weight:500;}
+.section-marker::after{content:'';width:30px;height:1px;background:var(--gold);}
+.section-marker.center{justify-content:center;}
+.section-marker.center::before{content:'';width:30px;height:1px;background:var(--gold);}
+.section-marker.center::after{content:'';width:30px;height:1px;background:var(--gold);}
+section h2{font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:700;letter-spacing:-1.5px;margin-bottom:.3rem;line-height:1.05;}
+section h2 .accent{color:var(--gold);font-style:italic;}
+section .section-desc{color:var(--text-muted);font-size:.72rem;margin-bottom:2rem;line-height:1.7;}
+
+/* ── Reveals ── */
+.r-up{opacity:0;transform:translateY(40px);transition:all 1s cubic-bezier(.22,1,.36,1);}
+.r-up.visible{opacity:1;transform:translateY(0);}
+.r-scale{opacity:0;transform:scale(.88);transition:all 1s cubic-bezier(.22,1,.36,1);}
+.r-scale.visible{opacity:1;transform:scale(1);}
+.cd>*{opacity:0;transform:translateY(25px);filter:blur(4px);transition:all .6s cubic-bezier(.22,1,.36,1);}
+.cd.visible>*{opacity:1;transform:translateY(0);filter:blur(0);}
+.cd.visible>*:nth-child(1){transition-delay:.05s;}
+.cd.visible>*:nth-child(2){transition-delay:.12s;}
+.cd.visible>*:nth-child(3){transition-delay:.19s;}
+.cd.visible>*:nth-child(4){transition-delay:.26s;}
+.cd.visible>*:nth-child(5){transition-delay:.33s;}
+
+/* ── Menu ── */
+.menu-section{max-width:1000px;}
+.menu-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem;justify-content:center;}
+.menu-tab{padding:.25rem 1.5rem;border:none;background:transparent;color:var(--text-muted);cursor:pointer;font-size:.5rem;font-family:'Inter',sans-serif;text-transform:uppercase;letter-spacing:3.5px;transition:all .3s;position:relative;font-weight:500;}
+.menu-tab::after{content:'';position:absolute;bottom:-2px;left:50%;width:0;height:1px;background:var(--gold);transition:all .3s;transform:translateX(-50%);}
+.menu-tab.active::after,.menu-tab:hover::after{width:60%;}
+.menu-tab.active,.menu-tab:hover{color:var(--gold);}
+.menu-timeline{position:relative;padding-left:2.5rem;}
+.menu-timeline::before{content:'';position:absolute;left:12px;top:0;bottom:0;width:1px;background:var(--border);}
+.menu-item{position:relative;padding:1.3rem 0 1.3rem 2rem;border-bottom:1px solid var(--border);cursor:pointer;transition:all .3s;}
+.menu-item:last-child{border-bottom:none;}
+.menu-item::before{content:'';position:absolute;left:-4px;top:1.5rem;width:12px;height:12px;border-radius:50%;background:var(--surface2);border:1.5px solid var(--gold);transition:all .3s;}
+.menu-item:hover::before{background:var(--gold);box-shadow:0 0 20px rgba(212,168,75,.3);}
+.menu-item .mi-top{display:flex;justify-content:space-between;align-items:baseline;gap:.5rem;}
+.menu-item .mi-top h4{font-family:'Playfair Display',serif;font-size:1rem;font-weight:600;letter-spacing:-.3px;}
+.menu-item .mi-top .mi-price{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--gold);white-space:nowrap;}
+.menu-item .mi-desc{font-size:.65rem;color:var(--text-muted);margin-top:.1rem;line-height:1.7;}
+.menu-item .mi-tags{display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.3rem;}
+.menu-item .mi-tags span{padding:.06rem .5rem;border-radius:12px;font-size:.4rem;background:rgba(212,168,75,.06);border:1px solid rgba(212,168,75,.12);color:var(--gold);}
+.menu-grid{display:none;}
+.menu-grid.active{display:block;}
+
+/* ── Signatures ── */
+.sig-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem;}
+.sig-card{position:relative;border-radius:16px;overflow:hidden;cursor:pointer;border:1px solid var(--border);transition:all .6s;background:var(--surface);}
+.sig-card:hover{transform:translateY(-12px) scale(1.01);box-shadow:0 35px 80px rgba(0,0,0,.4);}
+.sig-card img{width:100%;height:420px;object-fit:cover;transition:transform .8s;}
+.sig-card:hover img{transform:scale(1.08);}
+.sig-card .sc-info{position:absolute;bottom:0;left:0;right:0;padding:2.5rem 1.5rem 1.2rem;background:linear-gradient(0deg,rgba(13,8,8,.95) 0%,transparent 60%);}
+.sig-card .sc-info h4{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:600;color:#fff;}
+.sig-card .sc-info p{font-size:.58rem;color:rgba(255,255,255,.6);margin-top:.05rem;letter-spacing:.5px;}
+.sig-card:nth-child(2){margin-top:2.5rem;}
+@media(max-width:768px){.sig-grid{grid-template-columns:1fr;}.sig-card img{height:300px;}.sig-card:nth-child(2){margin-top:0;}}
+
+/* ── Chef Banner ── */
+.chef-banner{position:relative;height:90vh;overflow:hidden;display:flex;align-items:center;}
+.chef-banner img{position:absolute;inset:-5%;width:110%;height:110%;object-fit:cover;filter:brightness(.3) sepia(.15);transform:scale(1);transition:transform 10s;}
+.chef-banner:hover img{transform:scale(1.08);}
+.chef-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(13,8,8,.88) 0%,rgba(13,8,8,.1) 45%,rgba(13,8,8,.5) 100%);}
+.chef-content{position:relative;z-index:2;padding:6rem;max-width:600px;}
+.chef-title{color:var(--gold);font-size:.45rem;text-transform:uppercase;letter-spacing:4px;margin-bottom:.4rem;font-weight:500;}
+.chef-content h3{font-family:'Playfair Display',serif;font-size:3rem;font-weight:700;line-height:1.1;margin-bottom:.4rem;}
+.chef-content p{color:rgba(255,255,255,.65);font-size:.78rem;line-height:2;margin-bottom:1rem;}
+.chef-stats{display:flex;gap:3rem;}
+.chef-stat .cs-val{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;color:var(--gold);line-height:1;}
+.chef-stat .cs-label{font-size:.42rem;text-transform:uppercase;letter-spacing:2.5px;color:rgba(255,255,255,.4);}
+@media(max-width:768px){.chef-banner{height:70vh;}.chef-content{padding:2rem;}.chef-content h3{font-size:1.8rem;}}
+
+/* ── Testimonials ── */
+.testimonials-section{max-width:650px;text-align:center;}
+.testimonial-card{padding:2.5rem 1.5rem;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.tc-stars{color:var(--gold);font-size:.85rem;margin-bottom:.5rem;letter-spacing:2px;}
+.tc-quote{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-style:italic;line-height:1.8;margin-bottom:.6rem;}
+.tc-author{font-weight:600;font-size:.82rem;}
+.tc-role{font-size:.48rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:2.5px;margin-top:.05rem;}
+.testimonial-nav{display:flex;justify-content:center;gap:.8rem;margin-top:1.5rem;align-items:center;}
+.testimonial-nav button{width:36px;height:36px;border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;font-size:.7rem;transition:all .3s;display:flex;align-items:center;justify-content:center;border-radius:50%;}
+.testimonial-nav button:hover{background:var(--gold);color:var(--bg);border-color:var(--gold);}
+.testimonial-dots{display:flex;gap:.4rem;}
+.testimonial-dots .dot{width:6px;height:6px;border-radius:50%;background:var(--border);cursor:pointer;transition:all .3s;}
+.testimonial-dots .dot.active{background:var(--gold);width:10px;height:10px;}
+
+/* ── Gallery Strip ── */
+.gallery-strip{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:0;}
+.gallery-strip::-webkit-scrollbar{height:3px;}
+.gallery-strip::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px;}
+.gallery-strip figure{flex:0 0 60vw;height:65vh;position:relative;scroll-snap-align:start;overflow:hidden;}
+.gallery-strip figure:nth-child(odd){flex:0 0 45vw;}
+.gallery-strip figure img{width:100%;height:100%;object-fit:cover;transition:transform .7s;}
+.gallery-strip figure:hover img{transform:scale(1.06);}
+.gallery-strip figure figcaption{position:absolute;bottom:2rem;left:2rem;font-size:.48rem;color:#fff;text-transform:uppercase;letter-spacing:4px;opacity:0;transition:opacity .3s;text-shadow:0 2px 10px rgba(0,0,0,.5);font-weight:500;}
+.gallery-strip figure:hover figcaption{opacity:1;}
+@media(max-width:768px){.gallery-strip figure{flex:0 0 80vw;height:40vh;}}
+
+/* ── Reservation ── */
+.reservation-section{max-width:900px;}
+.reservation-layout{display:grid;grid-template-columns:1.2fr 1fr;gap:2rem;}
+.reservation-info p{font-size:.75rem;color:var(--text-muted);line-height:1.9;margin-bottom:1rem;}
+.ri-details{display:flex;flex-direction:column;gap:.5rem;}
+.ri-details div{display:flex;align-items:center;gap:.6rem;font-size:.68rem;color:var(--text-muted);}
+.ri-details div span:first-child{color:var(--gold);font-weight:500;min-width:75px;}
+.reservation-form{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:1.5rem;}
+.reservation-form h4{font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:1rem;text-align:center;letter-spacing:-.3px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-bottom:.7rem;}
+.form-group{display:flex;flex-direction:column;}
+.form-group label{font-size:.42rem;text-transform:uppercase;letter-spacing:2.5px;color:var(--text-muted);margin-bottom:.12rem;font-weight:500;}
+.form-group input,.form-group select,.form-group textarea{padding:.45rem .7rem;background:var(--surface);border:1px solid var(--border);color:var(--text);border-radius:6px;font-family:'Inter',sans-serif;font-size:.68rem;outline:none;transition:border-color .3s;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--gold);}
+.form-group textarea{resize:vertical;min-height:60px;}
+.form-submit{width:100%;padding:.5rem;background:var(--gold);color:var(--bg);border:none;border-radius:6px;font-weight:600;font-size:.72rem;cursor:pointer;font-family:'Inter',sans-serif;margin-top:.5rem;transition:all .3s;}
+.form-submit:hover{box-shadow:0 10px 30px rgba(212,168,75,.2);transform:translateY(-2px);}
+@media(max-width:768px){.reservation-layout{grid-template-columns:1fr;gap:1.5rem;}.form-row{grid-template-columns:1fr;}}
+
+/* ── Footer ── */
+footer{background:var(--surface);border-top:1px solid var(--border);padding:4rem 2rem 2rem;max-width:100%;}
+.footer-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:2.5rem;}
+.footer-brand .fb-logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--text);}
+.footer-brand .fb-logo span{color:var(--gold);}
+.footer-brand p{font-size:.68rem;color:var(--text-muted);line-height:1.8;margin-top:.3rem;}
+.footer-col h4{font-size:.5rem;text-transform:uppercase;letter-spacing:3px;color:var(--gold);margin-bottom:.6rem;font-weight:500;}
+.footer-col a{display:block;color:var(--text-muted);text-decoration:none;font-size:.68rem;padding:.15rem 0;transition:color .3s;}
+.footer-col a:hover{color:var(--gold);}
+.nl-form{display:flex;gap:.3rem;}
+.nl-form input{flex:1;padding:.4rem .6rem;background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:4px;font-size:.65rem;font-family:'Inter',sans-serif;outline:none;}
+.nl-form input:focus{border-color:var(--gold);}
+.nl-form button{padding:.4rem .8rem;background:var(--gold);color:var(--bg);border:none;border-radius:4px;cursor:pointer;font-weight:600;font-size:.6rem;font-family:'Inter',sans-serif;}
+.footer-bottom{max-width:1100px;margin:2rem auto 0;padding-top:1.5rem;border-top:1px solid var(--border);text-align:center;font-size:.62rem;color:var(--text-muted);}
+.footer-social{display:flex;gap:.6rem;margin-top:.6rem;}
+.footer-social a{width:30px;height:30px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-muted);text-decoration:none;font-size:.7rem;transition:all .3s;}
+.footer-social a:hover{background:var(--gold);color:var(--bg);border-color:var(--gold);}
+@media(max-width:768px){.footer-inner{grid-template-columns:1fr;gap:1.5rem;}}
+
+.toast{position:fixed;bottom:2rem;right:2rem;z-index:5000;background:var(--surface);border:1px solid var(--gold);border-radius:8px;padding:.6rem 1rem;box-shadow:var(--shadow);transform:translateY(120px);opacity:0;transition:all .45s cubic-bezier(.34,1.56,.64,1);display:flex;align-items:center;gap:.5rem;font-size:.68rem;}
+.toast.show{transform:translateY(0);opacity:1;}
+.transition-overlay{position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:0;background:linear-gradient(135deg,var(--gold),var(--burgundy));will-change:transform,opacity;}
+.transition-overlay.active{opacity:1;pointer-events:all;animation:curtainReveal .7s ease forwards;}
+@keyframes curtainReveal{0%{opacity:0;transform:scaleY(0);transform-origin:center bottom;}35%{opacity:1;transform:scaleY(1);}65%{opacity:1;}100%{opacity:0;transform:scaleY(1);}}
+
+.modal-overlay{position:fixed;inset:0;z-index:3000;background:rgba(0,0,0,.88);backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .35s;padding:1rem;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:2rem;max-width:520px;width:100%;max-height:85vh;overflow-y:auto;transform:scale(.92);transition:transform .35s;}
+.modal-overlay.open .modal{transform:scale(1);}
+
+/* ── Wine Pairing ── */
+.wine-section{background:linear-gradient(0deg,var(--surface),transparent);border-top:1px solid var(--border);}
+.wine-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;max-width:900px;margin:0 auto;}
+.wine-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;text-align:center;transition:all .4s;cursor:pointer;position:relative;overflow:hidden;}
+.wine-card:hover{transform:translateY(-6px);border-color:rgba(212,168,75,.2);box-shadow:0 20px 50px rgba(0,0,0,.3);}
+.wine-card .wc-icon{font-size:2rem;margin-bottom:.3rem;display:block;}
+.wine-card h4{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:600;margin-bottom:.1rem;}
+.wine-card .wc-region{font-size:.5rem;color:var(--gold);text-transform:uppercase;letter-spacing:2px;margin-bottom:.2rem;}
+.wine-card p{font-size:.62rem;color:var(--text-muted);line-height:1.5;margin-bottom:.3rem;}
+.wine-card .wc-price{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--gold);}
+
+@media(max-width:768px){
+nav{padding:0 1.2rem;height:62px;border-bottom:1px solid var(--border);}
+.nav-links{display:none;position:fixed;top:62px;left:0;right:0;background:var(--nav-bg);flex-direction:column;padding:1rem 2rem;border-bottom:1px solid var(--border);}
+.nav-links.open{display:flex;}.nav-links a{padding:.5rem 0;font-size:.65rem;}
+.mobile-toggle{display:flex;}
+section{padding:3.5rem 1.2rem;}
+.hero h1{font-size:3rem;}.hero .sub{font-size:1.2rem;}
+.section-bleed{padding:3.5rem 0;}
+h2{font-size:1.8rem!important;}
+.chef-content h3{font-size:1.8rem;}
+.chef-stats{gap:1.5rem;}
+}
+@media(max-width:480px){
+.hero h1{font-size:2rem;}
+.hero-badge::before,.hero-badge::after{width:20px;}
+.hero-cta{flex-direction:column;align-items:center;}
+.hero-cta .btn{width:100%;justify-content:center;}
+section h2{font-size:1.5rem!important;}
+}
+</style>
+</head>
+<body>
+
+<div class="ambient"><div class="glow-1"></div><div class="glow-2"></div></div>
+
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">Bistro<span>.</span></a>
+  <div class="nav-links" id="navLinks">
+    <a href="#menu">Menu</a>
+    <a href="#signatures">Signatures</a>
+    <a href="#chef">Chef</a>
+    <a href="#wine">Vins</a>
+    <a href="#gallery">Galerie</a>
+    <a href="#reservation">Réserver</a>
+  </div>
+  <div class="nav-actions">
+    <a href="#reservation" class="btn-reserve"><i class="fas fa-calendar"></i> Réserver</a>
+    <button class="theme-btn" onclick="toggleTheme()" aria-label="Theme"><i class="fas fa-moon"></i></button>
+    <button class="mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu"><i class="fas fa-bars"></i></button>
+  </div>
+</nav>
+
+<section class="hero" id="hero">
+  <div class="hero-img"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-ornament"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Bienvenue au Bistro Lumière</div>
+    <div class="hero-year">Depuis 2020 <i class="fas fa-star"></i> Paris 8ᵉ</div>
+    <h1>Bistro <span class="accent">Lumière</span></h1>
+    <p class="hero-desc">Une expérience gastronomique d'exception au cœur de Paris. Cuisine française raffinée, vins d'exception, art de la table.</p>
+    <div class="hero-cta">
+      <a href="#menu" class="btn btn-primary"><i class="fas fa-utensils"></i> Découvrir</a>
+      <a href="#reservation" class="btn btn-ghost"><i class="fas fa-calendar"></i> Réserver</a>
+    </div>
+  </div>
+  <div class="hero-scroll"><span>DÉCOUVRIR</span><div class="arrow"></div></div>
+</section>
+
+<section class="menu-section r-up" id="menu" style="max-width:1000px;">
+  <div class="section-marker">Carte</div>
+  <h2>Notre <span class="accent">Menu</span></h2>
+  <p class="section-desc">Une cuisine française réinventée par le Chef Moreau — produits du marché, traditions revisitées.</p>
+  <div class="menu-tabs">
+    <button class="menu-tab active" onclick="switchMenu('entrees',this)">Entrées</button>
+    <button class="menu-tab" onclick="switchMenu('plats',this)">Plats</button>
+    <button class="menu-tab" onclick="switchMenu('desserts',this)">Desserts</button>
+    <button class="menu-tab" onclick="switchMenu('vins',this)">Vins</button>
+  </div>
+  <div class="menu-timeline menu-grid active" id="menu-entrees"></div>
+  <div class="menu-timeline menu-grid" id="menu-plats"></div>
+  <div class="menu-timeline menu-grid" id="menu-desserts"></div>
+  <div class="menu-timeline menu-grid" id="menu-vins"></div>
+</section>
+
+<section class="section-bleed r-scale" id="signatures">
+  <div><div class="section-marker">Signatures</div>
+  <h2>Les <span class="accent">Incontournables</span></h2>
+  <p class="section-desc">Les plats emblématiques qui ont fait la réputation de la maison.</p>
+  <div class="sig-grid">
+    <div class="sig-card"><img src="https://images.unsplash.com/photo-1558030006-450675393462?w=600&h=700&fit=crop" alt="Filet de Bœuf" loading="lazy"><div class="sc-info"><h4>Filet de Bœuf Rossini</h4><p>Foie gras poêlé • Sauce truffée • Pommes purée</p></div></div>
+    <div class="sig-card"><img src="https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=600&h=700&fit=crop" alt="Homard Bleu" loading="lazy"><div class="sc-info"><h4>Homard Bleu Rôti</h4><p>Beurre d'algues • Risotto aux asperges vertes</p></div></div>
+    <div class="sig-card"><img src="https://images.unsplash.com/photo-1541783245831-57d6fb0926d3?w=600&h=700&fit=crop" alt="Soufflé" loading="lazy"><div class="sc-info"><h4>Soufflé Grand Marnier</h4><p>Vanille de Madagascar • 20 minutes d'attente</p></div></div>
+  </div></div>
+</section>
+
+<section class="chef-banner" id="chef" style="max-width:100%;padding:0;">
+  <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=1400&h=900&fit=crop" alt="Chef Antoine Moreau">
+  <div class="chef-overlay"></div>
+  <div class="chef-content">
+    <div class="chef-title">Chef Exécutif <i class="fas fa-star"></i> Meilleur Ouvrier de France 2018</div>
+    <h3>Antoine <span style="color:var(--gold);font-style:italic;">Moreau</span></h3>
+    <p>Formé aux côtés des plus grands noms de la gastronomie française, le Chef Moreau apporte une vision moderne de la cuisine traditionnelle. Ancien Chef du <em>Restaurant des Étoiles</em> — <strong>2 Étoiles MICHELIN</strong>.</p>
+    <div class="chef-stats">
+      <div class="chef-stat"><div class="cs-val">18</div><div class="cs-label">Années d'expérience</div></div>
+      <div class="chef-stat"><div class="cs-val">2<i class="fas fa-star"></i></div><div class="cs-label">MICHELIN</div></div>
+      <div class="chef-stat"><div class="cs-val">50+</div><div class="cs-label">Recettes Signatures</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="wine-section r-up" id="wine" style="max-width:100%;">
+  <div style="max-width:1000px;margin:0 auto;padding:0 2rem;">
+    <div class="section-marker">Cave</div>
+    <h2>Sélection de <span class="accent">Vins</span></h2>
+    <p class="section-desc">Une carte des vins soigneusement constituée par notre sommelier.</p>
+    <div class="wine-grid cd">
+      <div class="wine-card"><span class="wc-icon"><i class="fas fa-wine-glass"></i></span><h4>Château Margaux 2015</h4><div class="wc-region">Bordeaux <i class="fas fa-star"></i> Grand Cru Classé</div><p>Nez puissant de cassis et d'épices. Tanins soyeux, finale persistante.</p><div class="wc-price">27,000 د.ج</div></div>
+      <div class="wine-card"><span class="wc-icon"><i class="fas fa-glass-cheers"></i></span><h4>Krug Grande Cuvée</h4><div class="wc-region">Champagne <i class="fas fa-star"></i> Assemblage d'exception</div><p>Bulles fines et élégantes. Arômes de fruits blancs, brioche et miel.</p><div class="wc-price">33,000 د.ج</div></div>
+      <div class="wine-card"><span class="wc-icon"><i class="fas fa-wine-glass"></i></span><h4>Domaine de la Romanée-Conti</h4><div class="wc-region">Bourgogne <i class="fas fa-star"></i> Grand Cru</div><p>La quintessence du Pinot Noir. Complexité aromatique inégalée.</p><div class="wc-price">68,000 د.ج</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials-section r-scale" style="max-width:650px;">
+  <div class="section-marker center">Témoignages</div>
+  <h2 style="text-align:center;">Ce qu'ils <span class="accent">disent</span></h2>
+  <div class="testimonial-card">
+    <div class="tc-stars" id="tcStars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+    <div class="tc-quote" id="tcQuote">"Un voyage culinaire inoubliable."</div>
+    <div class="tc-author" id="tcAuthor">Sophie L.</div>
+    <div class="tc-role" id="tcRole">Critique gastronomique — Le Monde</div>
+  </div>
+  <div class="testimonial-nav">
+    <button onclick="prevTest()"><i class="fas fa-arrow-left"></i></button>
+    <div class="testimonial-dots" id="testDots"></div>
+    <button onclick="nextTest()"><i class="fas fa-arrow-right"></i></button>
+  </div>
+</section>
+
+<section class="section-bleed" id="gallery" style="padding:0;">
+  <div style="padding:5rem 2rem 1.5rem;max-width:1200px;margin:0 auto;">
+    <div class="section-marker">Galerie</div>
+    <h2>L'Art de la <span class="accent">Table</span></h2>
+  </div>
+  <div class="gallery-strip">
+    <figure><img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&h=600&fit=crop" alt="" loading="lazy"><figcaption>Gastronomie</figcaption></figure>
+    <figure><img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=800&h=600&fit=crop" alt="" loading="lazy"><figcaption>Cuisine</figcaption></figure>
+    <figure><img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?w=800&h=600&fit=crop" alt="" loading="lazy"><figcaption>Dessert</figcaption></figure>
+    <figure><img src="https://images.unsplash.com/photo-1514326640560-7d063ef2aed5?w=800&h=600&fit=crop" alt="" loading="lazy"><figcaption>Cave</figcaption></figure>
+    <figure><img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=800&h=600&fit=crop" alt="" loading="lazy"><figcaption>Création</figcaption></figure>
+  </div>
+</section>
+
+<section class="reservation-section r-up" id="reservation">
+  <div class="section-marker">Réservation</div>
+  <h2>Réservez Votre <span class="accent">Table</span></h2>
+  <div class="reservation-layout">
+    <div class="reservation-info">
+      <p>Ouvert du mardi au dimanche. Réservation recommandée pour les dîners du week-end et les grandes occasions.</p>
+      <div class="ri-details">
+        <div><span><i class="fas fa-location-dot"></i></span><span>24 Rue de la Gastronomie, 75008 Paris</span></div>
+        <div><span><i class="fas fa-phone"></i></span><span>+33 1 42 58 67 33</span></div>
+        <div><span><i class="fas fa-clock"></i></span><span>Mar-Sam: 12h-14h30 • 19h-22h30</span></div>
+        <div><span><i class="fas fa-clock"></i></span><span>Dim: 12h-15h (brunch)</span></div>
+      </div>
+    </div>
+    <div class="reservation-form">
+      <h4><i class="fas fa-pen"></i> Réservation</h4>
+      <div class="form-row">
+        <div class="form-group"><label>Nom</label><input type="text" id="resName" placeholder="Votre nom"></div>
+        <div class="form-group"><label>Téléphone</label><input type="tel" id="resPhone" placeholder="+33 XX XX XX XX"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Date</label><input type="date" id="resDate"></div>
+        <div class="form-group"><label>Heure</label><select id="resTime"><option>12h00</option><option>12h30</option><option>13h00</option><option>13h30</option><option>19h00</option><option>19h30</option><option>20h00</option><option>20h30</option><option>21h00</option></select></div>
+      </div>
+      <div class="form-group"><label>Notes (allergies, occasions)</label><textarea id="resNotes" rows="2"></textarea></div>
+      <button class="form-submit" onclick="submitRes()"><i class="fas fa-circle-check"></i> Confirmer la Réservation</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand"><div class="fb-logo">Bistro<span>.</span></div><p>Cuisine française d'exception au cœur de Paris. Une expérience gastronomique depuis 2020.</p><div class="footer-social"><a href="#"><i class="fas fa-camera"></i></a><a href="#"><i class="fas fa-thumbs-up"></i></a><a href="#"><i class="fas fa-trophy"></i></a></div></div>
+    <div class="footer-col"><h4>Menu</h4><a href="#" onclick="switchMenu('entrees',document.querySelector('.menu-tab'))">Entrées</a><a href="#" onclick="switchMenu('plats',document.querySelectorAll('.menu-tab')[1])">Plats</a><a href="#" onclick="switchMenu('desserts',document.querySelectorAll('.menu-tab')[2])">Desserts</a><a href="#" onclick="switchMenu('vins',document.querySelectorAll('.menu-tab')[3])">Vins</a></div>
+    <div class="footer-col"><h4>Infos</h4><a href="#chef">Notre Chef</a><a href="#wine">Carte des Vins</a><a href="#gallery">Galerie</a><a href="#reservation">Réserver</a></div>
+    <div><h4 class="footer-col" style="border:none;padding:0;margin-bottom:.6rem;">Newsletter</h4><p style="font-size:.62rem;color:var(--text-muted);margin-bottom:.5rem;">Offres exclusives, menus saisonniers.</p><div class="nl-form"><input type="email" placeholder="Votre email" id="nlEmail"><button onclick="subNL()"><i class="fas fa-arrow-right"></i></button></div></div>
+  </div>
+  <div class="footer-bottom"><p>© 2026 Bistro Lumière <i class="fas fa-star"></i> Tous droits réservés. <i class="fas fa-star"></i> Une expérience gastronomique parisienne.</p></div>
+</footer>
+
+<div class="toast" id="toast"><span id="toastMsg"></span></div>
+<div class="modal-overlay" id="dishModal" onclick="if(event.target===this)this.classList.remove('open')"><div class="modal" id="dishModalContent"></div></div>
+<div class="transition-overlay" id="transitionOverlay" aria-hidden="true"></div>
+
+<script>
+const menu={entrees:[{name:'Foie Gras Maison',desc:'Foie gras de canard mi-cuit, chutney de figues et pain brioché toasté',price:'4,000 د.ج',tags:['Signature <i class=\"fas fa-star\"></i>']},{name:'Soupe à l\'Oignon',desc:'Soupe traditionnelle gratinée au Comté, oignons caramélisés',price:'2,500 د.ج',tags:['Classique']},{name:'Tartare de Thon',desc:'Thon rouge mariné aux agrumes, avocat, sésame torréfié',price:'3,500 د.ج',tags:['Poisson']},{name:'Escargots de Bourgogne',desc:'12 escargots au beurre persillé, pain de campagne',price:'3,500 د.ج',tags:['Classique']}],plats:[{name:'Filet de Bœuf Rossini',desc:'Filet de bœuf grillé, foie gras poêlé, sauce truffée',price:'7,000 د.ج',tags:['Signature <i class=\"fas fa-star\"></i>']},{name:'Homard Bleu Rôti',desc:'Demi-homard rôti au beurre d\'algues, risotto crémeux',price:'8,500 د.ج',tags:['Chef <i class=\"fas fa-star\"></i>']},{name:'Magret de Canard',desc:'Magret rôti, sauce aux cerises, écrasé de pommes de terre',price:'5,500 د.ج',tags:['Classique']},{name:'Risotto aux Cèpes',desc:'Risotto crémeux, cèpes frais, parmesan vieilli',price:'5,000 د.ج',tags:['Végétarien']}],desserts:[{name:'Soufflé Grand Marnier',desc:'Soufflé chaud à la liqueur d\'orange, glace vanille Madagascar',price:'2,500 د.ج',tags:['Signature <i class=\"fas fa-star\"></i>']},{name:'Tarte Tatin',desc:'Pommes caramélisées, crème fraîche épaisse, caramel beurre salé',price:'2,000 د.ج',tags:['Classique']},{name:'Crème Brûlée à la Truffe',desc:'Crème brûlée infusée à la truffe noire, caramel cassant',price:'2,500 د.ج',tags:['Signature <i class=\"fas fa-star\"></i>']}],vins:[{name:'Château Margaux 2015',desc:'Bordeaux — Grand Cru Classé, nez de cassis et d\'épices',price:'27,000 د.ج',tags:['Rouge <i class=\"fas fa-star\"></i>']},{name:'Krug Grande Cuvée',desc:'Champagne d\'exception, bulles fines et élégantes',price:'33,000 د.ج',tags:['Champagne <i class=\"fas fa-star\"></i>']},{name:'Domaine de la Romanée-Conti',desc:'Bourgogne — Grand Cru, Pinot Noir d\'exception',price:'68,000 د.ج',tags:['Rouge <i class=\"fas fa-star\"></i>']}]};
+['entrees','plats','desserts','vins'].forEach(c=>{document.getElementById('menu-'+c).innerHTML=menu[c].map(i=>'<div class=\"menu-item\" onclick=\"openDish(\''+i.name.replace(/'/g,"\\'")+'\',\''+i.desc.replace(/'/g,"\\'")+'\',\''+i.price+'\')\"><div class=\"mi-top\"><h4>'+i.name+'</h4><span class=\"mi-price\">'+i.price+'</span></div><div class=\"mi-desc\">'+i.desc+'</div><div class=\"mi-tags\">'+i.tags.map(t=>'<span>'+t+'</span>').join('')+'</div></div>').join('');});
+function switchMenu(cat,btn){document.querySelectorAll('.menu-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.menu-grid').forEach(g=>g.classList.remove('active'));btn.classList.add('active');document.getElementById('menu-'+cat).classList.add('active');}
+function openDish(n,d,p){document.getElementById('dishModalContent').innerHTML='<button style=\"float:right;background:none;border:none;color:var(--text-muted);font-size:1.1rem;cursor:pointer\" onclick=\"document.getElementById(\'dishModal\').classList.remove(\'open\')\"><i class=\"fas fa-xmark\"></i></button><h3 style=\"font-family:\'Playfair Display\',serif;font-size:1.2rem;margin-bottom:.3rem\">'+n+'</h3><p style=\"color:var(--text-muted);font-size:.78rem;line-height:1.7\">'+d+'</p><div style=\"font-size:1.3rem;font-weight:700;color:var(--gold);margin:.8rem 0\">'+p+'</div><button class=\"btn btn-primary\" style=\"font-size:.6rem;padding:.3rem 1rem\" onclick=\"showToast(\'<i class=&quot;fas fa-utensils&quot;></i> \',\'Ajouté à la commande\');document.getElementById(\'dishModal\').classList.remove(\'open\')\"><i class=&quot;fas fa-utensils&quot;></i> Commander</button>';document.getElementById('dishModal').classList.add('open');}
+
+const tms=[{q:'\"Un voyage culinaire inoubliable. La maîtrise du Chef Moreau est époustouflante. Chaque plat raconte une histoire.\"',a:'Sophie L.',r:'Critique gastronomique • Le Monde'},{q:'\"Le cadre est magnifique, le service impeccable, chaque plat est une œuvre d\'art culinaire.\"',a:'Marc D.',r:'Chef étoilé • Guide MICHELIN'},{q:'\"Notre dîner de mariage restera gravé dans nos mémoires. Une expérience parfaite du début à la fin.\"',a:'Claire & Alexandre',r:'Réception privée'},{q:'\"L\'accord mets-vins proposé par le sommelier était parfait. Un véritable voyage des sens.\"',a:'Julien P.',r:'Journaliste • Figaro Scope'}];
+let tii=0;
+(function(){const d=document.getElementById('testDots');tms.forEach((_,i)=>{const dot=document.createElement('div');dot.className='dot'+(i===0?' active':'');dot.onclick=()=>{tii=i;showT(i);};d.appendChild(dot);});showT(0);setInterval(()=>{tii=(tii+1)%tms.length;showT(tii);},5000);})();
+function showT(i){document.getElementById('tcQuote').textContent=tms[i].q;document.getElementById('tcAuthor').textContent=tms[i].a;document.getElementById('tcRole').textContent=tms[i].r;document.querySelectorAll('#testDots .dot').forEach((d,idx)=>d.classList.toggle('active',idx===i));}
+function nextTest(){tii=(tii+1)%tms.length;showT(tii);}function prevTest(){tii=(tii-1+tms.length)%tms.length;showT(tii);}
+
+function submitRes(){const n=document.getElementById('resName').value.trim();const p=document.getElementById('resPhone').value.trim();const d=document.getElementById('resDate').value;if(!n||!p||!d){showToast('<i class=\"fas fa-triangle-exclamation\"></i> ','Veuillez remplir tous les champs obligatoires');return;}showToast('<i class=\"fas fa-circle-check\"></i> ','Réservation confirmée — Réf: BISTRO-'+Math.floor(1000+Math.random()*9000));document.getElementById('resName').value='';document.getElementById('resPhone').value='';}
+function subNL(){const e=document.getElementById('nlEmail').value.trim();if(!e||!e.includes('@')){showToast('<i class=\"fas fa-triangle-exclamation\"></i> ','Email invalide');return;}showToast('<i class=\"fas fa-newspaper\"></i> ','Inscrit à la newsletter !');document.getElementById('nlEmail').value='';}
+function showToast(i,m){const t=document.getElementById('toast');document.getElementById('toastMsg').innerHTML=i+m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
+
+document.getElementById('resDate').valueAsDate=new Date(Date.now()+86400000);
+window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60);if(window.scrollY>60)document.getElementById('navLinks').classList.remove('open');});
+document.querySelectorAll('.r-up,.r-scale,.cd').forEach(el=>{new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.1}).observe(el);});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('dishModal').classList.remove('open');});
+
+function toggleTheme(){const h=document.documentElement;const b=document.querySelector('.theme-btn');if(h.getAttribute('data-theme')==='light'){h.removeAttribute('data-theme');b.innerHTML='<i class=\"fas fa-moon\"></i>';localStorage.setItem('bistro_theme','dark');}else{h.setAttribute('data-theme','light');b.innerHTML='<i class=\"fas fa-sun\"></i>';localStorage.setItem('bistro_theme','light');}}
+(function(){if(localStorage.getItem('bistro_theme')==='light'){document.documentElement.setAttribute('data-theme','light');document.querySelector('.theme-btn').innerHTML='<i class=\"fas fa-sun\"></i>';}})();
+
+function navigateToSection(e,id){if(e){e.preventDefault();e.stopPropagation();}const overlay=document.getElementById('transitionOverlay');overlay.classList.add('active');document.getElementById('navLinks').classList.remove('open');setTimeout(()=>{document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});},200);setTimeout(()=>overlay.classList.remove('active'),700);}
+document.querySelectorAll('nav a[href^=\"#\"]').forEach(a=>{a.addEventListener('click',function(e){const href=this.getAttribute('href');if(href&&href.length>1){navigateToSection(e,href.substring(1));}});});
+document.querySelectorAll('.btn-reserve').forEach(a=>{a.addEventListener('click',function(e){navigateToSection(e,'reservation');});});
+</script>
+</body>
+</html>
