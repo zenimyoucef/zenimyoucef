@@ -271,7 +271,9 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overf
 .hero-stats{gap:.8rem;max-width:260px;}
 .nav{padding:.7rem .8rem;}
 .nav-logo{font-size:.75rem;}
-.nav-links{top:44px;padding:.6rem 1.2rem;gap:.5rem;}
+.nav-links{display:none;position:fixed;top:44px;left:0;right:0;background:rgba(8,8,14,.96);flex-direction:column;padding:.6rem 1.2rem;gap:.5rem;border-bottom:1px solid var(--border);}
+[data-theme="light"] .nav-links{background:rgba(240,240,245,.96);}
+.nav-links.open{display:flex;}
 .nav-links a,.nav-links .theme-toggle{font-size:.7rem;}
 .mobile-toggle{display:flex;font-size:1.2rem;}
 .projects{padding:1.5rem .8rem 2.5rem;}
