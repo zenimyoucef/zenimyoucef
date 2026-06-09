@@ -13,7 +13,7 @@ function ProgCard({ prog, index }) {
       <div className="prog-feat">
         {prog.features.map((f, i) => <span key={i}>{f}</span>)}
       </div>
-      <div className="pc-price">{prog.price.toLocaleString('fr-DZ')} د.ج</div>
+      <div className="pc-price">{prog.price.toLocaleString('fr-DZ')} DZD</div>
       <button className="btn btn-primary btn-sm" onClick={() => showToast('💪', `${prog.title} coming soon!`)}>
         Enroll Now
       </button>

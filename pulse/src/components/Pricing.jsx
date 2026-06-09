@@ -15,7 +15,7 @@ export default function Pricing() {
         {PRICING_PLANS.map((plan, i) => (
           <div className={`pricing-card ${plan.featured ? 'feat' : ''}`} key={i}>
             <div className="pc-name">{plan.name}</div>
-            <div className="pc-price">{plan.price.toLocaleString('fr-DZ')} د.ج</div>
+            <div className="pc-price">{plan.price.toLocaleString('fr-DZ')} DZD</div>
             <div className="pc-period">/شهر</div>
             <ul className="pc-features">
               {plan.features.map((f, j) => <li key={j}>{f}</li>)}

@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Quantum — Premium Technology Algérie 🇩🇿</title>
+<title>Quantum — Premium Technology</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -180,7 +180,7 @@ nav.open{opacity:1;transform:translateY(0);pointer-events:all;}
 <body>
 <div class="ambient"><div class="orb"></div><div class="orb"></div><div class="orb"></div></div>
 
-<div class="top-bar"><span>🇩🇿 Quantum Algérie</span><span>🚚 Livraison <strong>gratuite</strong> dès 100,000 د.ج</span><span>🔒 Paiement sécurisé</span></div>
+<div class="top-bar"><span>🇩🇿 Quantum</span><span>🚚 Livraison <strong>gratuite</strong> dès 100,000 DZD</span><span>🔒 Paiement sécurisé</span></div>
 
 <header id="header">
 <div class="logo"><span class="q">Q</span>uantum</div>
@@ -188,7 +188,6 @@ nav.open{opacity:1;transform:translateY(0);pointer-events:all;}
 <div class="header-right">
 <button onclick="toggleNav()" id="menuToggle" aria-label="Menu">☰</button>
 <button onclick="toggleTheme()" id="themeBtn" aria-label="Thème">🌙</button>
-<a href="admin.html" style="font-size:0.6rem;opacity:0.3;">⚙️</a>
 <button onclick="toggleCart()" aria-label="Panier">🛒<span class="cart-badge" id="cartBadge">0</span></button>
 </div>
 </header>
@@ -199,7 +198,7 @@ nav.open{opacity:1;transform:translateY(0);pointer-events:all;}
 <div class="hero-inner">
 <span class="badge">✦ Flagship 2026</span>
 <h1>La Technologie<br><span class="grad">Repensée.</span></h1>
-<p>Découvrez le meilleur de l'innovation. Performances de pointe, design élégant — livré chez vous en Algérie.</p>
+<p>Découvrez le meilleur de l'innovation. Performances de pointe, design élégant — livré chez vous à Alger.</p>
 <div style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeU .8s ease .9s forwards;">
 <a href="#products" class="btn btn-accent">Voir les Produits</a>
 <a href="#quiz" class="btn btn-ghost">Quiz →</a>
@@ -238,7 +237,7 @@ nav.open{opacity:1;transform:translateY(0);pointer-events:all;}
 <h3 style="margin-bottom:0.5rem;">💰 Calculateur de Mensualités</h3>
 <p style="color:var(--text-muted);font-size:0.72rem;margin-bottom:1rem;">Simulez vos mensualités en 3x, 6x ou 12x sans frais</p>
 <div class="inst-calc">
-<input type="number" id="instAmount" placeholder="Montant (د.ج)" value="495000">
+<input type="number" id="instAmount" placeholder="Montant (DZD)" value="495000">
 <button onclick="calcInstallments()">Calculer</button>
 </div>
 <div class="inst-results" id="instResults"></div>
@@ -268,11 +267,11 @@ nav.open{opacity:1;transform:translateY(0);pointer-events:all;}
 <div class="as-card"><div style="font-size:1.8rem;">🔧</div><div><h4 style="font-size:0.85rem;font-weight:600;">Garantie</h4><p style="font-size:0.68rem;color:var(--text-muted);">1 à 2 ans selon produit. Extension 3 ans.</p></div></div>
 <div class="as-card"><div style="font-size:1.8rem;">🛠️</div><div><h4 style="font-size:0.85rem;font-weight:600;">Réparation</h4><p style="font-size:0.68rem;color:var(--text-muted);">Centre SAV Alger. Réparation sous 48h.</p></div></div>
 <div class="as-card"><div style="font-size:1.8rem;">🚚</div><div><h4 style="font-size:0.85rem;font-weight:600;">Retour Gratuit</h4><p style="font-size:0.68rem;color:var(--text-muted);">Retour sous 14 jours. Échange immédiat.</p></div></div>
-<div class="as-card"><div style="font-size:1.8rem;">📞</div><div><h4 style="font-size:0.85rem;font-weight:600;">Support</h4><p style="font-size:0.68rem;color:var(--text-muted);">+213 555 45 67 89 • Lun-Sam 9h-19h</p></div></div>
+<div class="as-card"><div style="font-size:1.8rem;">📞</div><div><h4 style="font-size:0.85rem;font-weight:600;">Support</h4><p style="font-size:0.68rem;color:var(--text-muted);">+213 540 75 35 28 • Lun-Sam 9h-19h</p></div></div>
 </div>
 </section>
 
-<footer><div class="logo"><span class="q">Q</span>uantum Algérie</div><p>Premium technology — livré dans toute l'Algérie 🇩🇿 © 2026</p></footer>
+<footer><div class="logo"><span class="q">Q</span>uantum</div><p>Premium technology — livré à Alger 🇩🇿 © 2026</p></footer>
 
 <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
 <div class="cart-sidebar" id="cartSidebar">
@@ -295,7 +294,7 @@ const products=[
 {id:6,name:'QuantumPods Max',tab:'audio',price:115000,img:'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=600&h=400&fit=crop',specs:['Over-ear','Hi-Res','ANC'],tag:null},
 ];
 let cart=JSON.parse(localStorage.getItem('qn_cart')||'[]');let tab='all';
-function fmtDZD(n){return Math.round(n).toLocaleString('fr-DZ')+' د.ج';}
+function fmtDZD(n){return Math.round(n).toLocaleString('fr-DZ')+' DZD';}
 function setTab(t,btn){tab=t;document.querySelectorAll('.ps-tabs button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderProducts();}
 function renderProducts(){const grid=document.getElementById('productGrid');const f=tab==='all'?products:products.filter(p=>p.tab===tab);
 grid.innerHTML=f.map((p,i)=>'<div class="product-card" style="animation-delay:'+(i*0.08)+'s"><div class="pc-img" style="background-image:url('+p.img+')">'+(p.tag?'<span class="pc-tag '+(p.tag==='new'?'new':'best')+'">'+(p.tag==='new'?'NOUVEAU':'BEST SELLER')+'</span>':'')+'</div><div class="pc-body"><div class="pc-cat">'+p.tab+'</div><h3>'+p.name+'</h3><div class="pc-price">'+fmtDZD(p.price)+'</div><div class="pc-specs">'+p.specs.map(s=>'<span>'+s+'</span>').join('')+'</div><div class="pc-actions"><button class="pc-detail" onclick="openDetail('+p.id+')">Détails</button><button class="pc-buy" onclick="addToCart('+p.id+')">Acheter</button></div></div></div>').join('');}

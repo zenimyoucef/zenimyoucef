@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Velora — Mode Femme Algérie</title>
+<title>Velora — Mode Femme | Alger</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Inter:wght@200;300;400;500;600&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
@@ -332,13 +332,12 @@ footer p{font-size:0.6rem;}
 <script src="buynow.js"></script>
 </head>
 <body>
-<div class="top-bar"><span> Livraison Algérie</span><span>🚚 Gratuite dès 50,000 د.ج</span><span>💳 Paiement à la livraison</span></div>
+<div class="top-bar"><span> Livraison Alger</span><span>🚚 Gratuite dès 50,000 DZD</span><span>💳 Paiement à la livraison</span></div>
 
 <header id="header">
 <div class="logo">Velora<span>.</span></div>
 <nav id="nav"><a href="#collection" onclick="closeNav()">Collection</a><a href="#quiz" onclick="closeNav()">Style Quiz</a><a href="#looks" onclick="closeNav()">Looks</a><a href="#avis" onclick="closeNav()">Avis</a></nav>
 <div class="header-actions">
-<a href="admin.html" style="font-size:0.7rem;color:var(--text-muted);text-decoration:none;opacity:0.5;">⚙</a>
 <button onclick="toggleCart()" aria-label="Panier"><i class="fas fa-shopping-bag"></i><span class="cart-badge" id="cartBadge">0</span></button>
 <button onclick="showWishlist()" aria-label="Favoris"><i class="far fa-heart"></i><span class="wishlist-badge" id="wishlistBadge">0</span></button>
 <button class="menu-toggle" id="menuToggle" onclick="toggleNav()"><span></span><span></span><span></span></button>
@@ -350,8 +349,8 @@ footer p{font-size:0.6rem;}
 <section class="hero">
 <div class="hero-content">
 <div class="hero-sub">Curated for you</div>
-<h1>L'<span class="accent">Élégance</span> à l'Algérienne</h1>
-<p>Des pièces raffinées pour la femme moderne, livrées chez vous dans toute l'Algérie.</p>
+<h1>L'<span class="accent">Élégance</span> à l'Algeroise</h1>
+<p>Des pièces raffinées pour la femme moderne, livrées chez vous à Alger.</p>
 <div class="hero-cta"><a href="#collection" class="btn btn-primary">Collection</a><a href="#quiz" class="btn btn-secondary">Style Quiz</a></div>
 </div>
 </section>
@@ -409,7 +408,7 @@ footer p{font-size:0.6rem;}
 <h3>💬 <span style="color:var(--rose-dark);">Avis</span> Client·es</h3>
 <p style="text-align:center;color:var(--text-muted);font-size:0.75rem;margin-bottom:1rem;">Ce que nos client·es disent de Velora</p>
 <div class="avis-grid">
-<div class="avis-card"><div class="av-stars">★★★★★</div><div class="av-text">"La robe est magnifique, encore plus belle en vrai. Tissu de qualité, livraison rapide à Alger."</div><div class="av-author">Sarah K.</div></div>
+<div class="avis-card"><div class="av-stars">★★★★★</div><div class="av-text">"La robe est magnifique, encore plus belle en vrai. Tissu de qualité, livraison rapide."</div><div class="av-author">Sarah K.</div></div>
 <div class="avis-card"><div class="av-stars">★★★★★</div><div class="av-text">"Le sac en cuir est absolument sublime. Qualité exceptionnelle, digne des grandes marques."</div><div class="av-author">Nadia B.</div></div>
 <div class="avis-card"><div class="av-stars">★★★★★</div><div class="av-text">"Première commande chez Velora et je suis conquise ! Le pull en cachemire est doux comme un nuage."</div><div class="av-author">Meriem A.</div></div>
 </div>
@@ -429,7 +428,7 @@ footer p{font-size:0.6rem;}
 <button style="display:block;width:100%;max-width:650px;margin:1rem auto 0;padding:0.65rem;background:var(--charcoal);color:#fff;border:none;border-radius:25px;cursor:pointer;font-weight:600;font-size:0.85rem;font-family:'Inter',sans-serif;" onclick="submitOrder()">✅ Confirmer la commande</button>
 </section>
 
-<footer><div class="logo">Velora<span>.</span></div><p style="color:var(--text-muted);font-size:0.72rem;">Mode femme — Alger, Algérie © 2026</p></footer>
+<footer><div class="logo">Velora<span>.</span></div><p style="color:var(--text-muted);font-size:0.72rem;">Mode femme — Alger © 2026</p></footer>
 
 <!-- ── Cart Overlay & Sidebar ── -->
 <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
@@ -472,7 +471,7 @@ const products=[
 {id:10,name:'Sac à Main Cuir',cat:'accessories',price:95000,stock:10,img:'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600&h=600&fit=crop',stars:5,desc:'Sac en cuir pleine fleur, élégance discrète.',materiau:'Cuir',fit:'—'},
 ];
 let cart=JSON.parse(localStorage.getItem('vl_cart')||'[]');let filter='all';
-function fmtDZD(n){return Math.round(n).toLocaleString('fr-DZ')+' د.ج';}
+function fmtDZD(n){return Math.round(n).toLocaleString('fr-DZ')+' DZD';}
 
 /* ── Skeleton → Products ── */
 function renderProducts(){

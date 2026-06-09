@@ -391,15 +391,15 @@ section{padding:3rem 1.2rem;}
 
 <script>
 const destinations=[
-  {name:'Tokyo',loc:'Japan',region:'asia',price:'182,000 د.ج',img:'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=700&h=500&fit=crop',badge:'cul'},
-  {name:'Bali',loc:'Indonesia',region:'asia',price:'125,000 د.ج',img:'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=700&h=500&fit=crop',badge:'rel'},
-  {name:'Tuscany',loc:'Italy',region:'europe',price:'224,000 د.ج',img:'https://images.unsplash.com/photo-1523531294919-4bcd7c65e216?w=700&h=500&fit=crop',badge:'cul'},
-  {name:'Patagonia',loc:'Chile/Argentina',region:'americas',price:'322,000 د.ج',img:'https://images.unsplash.com/photo-1540638349513-d4e6f0ca6c5a?w=700&h=500&fit=crop',badge:'adv'},
-  {name:'Serengeti',loc:'Tanzania',region:'africa',price:'406,000 د.ج',img:'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=700&h=500&fit=crop',badge:'adv'},
-  {name:'Santorini',loc:'Greece',region:'europe',price:'168,000 د.ج',img:'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=700&h=500&fit=crop',badge:'rel'},
-  {name:'Kyoto',loc:'Japan',region:'asia',price:'210,000 د.ج',img:'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=700&h=500&fit=crop',badge:'cul'},
-  {name:'Machu Picchu',loc:'Peru',region:'americas',price:'266,000 د.ج',img:'https://images.unsplash.com/photo-1587595431973-160d0d94add1?w=700&h=500&fit=crop',badge:'adv'},
-  {name:'Maldives',loc:'Maldives',region:'asia',price:'238,000 د.ج',img:'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=700&h=500&fit=crop',badge:'rel'},
+  {name:'Tokyo',loc:'Japan',region:'asia',price:'182,000 DZD',img:'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=700&h=500&fit=crop',badge:'cul'},
+  {name:'Bali',loc:'Indonesia',region:'asia',price:'125,000 DZD',img:'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=700&h=500&fit=crop',badge:'rel'},
+  {name:'Tuscany',loc:'Italy',region:'europe',price:'224,000 DZD',img:'https://images.unsplash.com/photo-1523531294919-4bcd7c65e216?w=700&h=500&fit=crop',badge:'cul'},
+  {name:'Patagonia',loc:'Chile/Argentina',region:'americas',price:'322,000 DZD',img:'https://images.unsplash.com/photo-1540638349513-d4e6f0ca6c5a?w=700&h=500&fit=crop',badge:'adv'},
+  {name:'Serengeti',loc:'Tanzania',region:'africa',price:'406,000 DZD',img:'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=700&h=500&fit=crop',badge:'adv'},
+  {name:'Santorini',loc:'Greece',region:'europe',price:'168,000 DZD',img:'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=700&h=500&fit=crop',badge:'rel'},
+  {name:'Kyoto',loc:'Japan',region:'asia',price:'210,000 DZD',img:'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=700&h=500&fit=crop',badge:'cul'},
+  {name:'Machu Picchu',loc:'Peru',region:'americas',price:'266,000 DZD',img:'https://images.unsplash.com/photo-1587595431973-160d0d94add1?w=700&h=500&fit=crop',badge:'adv'},
+  {name:'Maldives',loc:'Maldives',region:'asia',price:'238,000 DZD',img:'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=700&h=500&fit=crop',badge:'rel'},
 ];
 let cf='all';
 function renderDests(){const g=document.getElementById('destGrid');const f=cf==='all'?destinations:destinations.filter(d=>d.region===cf);g.innerHTML=f.map((d,i)=>'<div class="dest-card" style="animation-delay:'+(i*0.08)+'s" onclick="openDest(\''+d.name.replace(/'/g,"\\'")+'\',\''+d.loc.replace(/'/g,"\\'")+'\',\''+d.price+'\',\''+d.img+'\',\''+d.badge+'\')"><img src="'+d.img+'" alt="'+d.name+'" loading="lazy"><span class="dc-badge '+d.badge+'">'+(d.badge==='adv'?'Adventure':d.badge==='rel'?'Relax':'Culture')+'</span><div class="dc-info"><div class="dc-loc">📍 '+d.loc+'</div><h3>'+d.name+'</h3><div class="dc-price">'+d.price+'</div></div></div>').join('');g.classList.remove('visible');setTimeout(()=>g.classList.add('visible'),20);}
