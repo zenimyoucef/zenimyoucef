@@ -481,7 +481,7 @@ function renderProducts(){
     var inWl=typeof isInWishlist==='function'?isInWishlist(p.id):false;
     var h= p.cat==='accessories'?200 : p.cat==='outerwear'?320 : 280;
     return '<div class="lookbook-item" style="height:'+h+'px">'+
-      '<button class="wishlist-heart'+(inWl?' active':'')+'" onclick="event.stopPropagation();toggleWishlist('+p.id+');this.classList.toggle(\\'active\\');var i=this.querySelector(\\'i\\');if(i){i.style.animation=\\'none\\';setTimeout(function(){i.style.animation=\\'\\'},10);}" aria-label="Ajouter aux favoris"><i class="'+(inWl?'fas':'far')+' fa-heart"></i></button>'+
+      '<button class="wishlist-heart'+(inWl?' active':'')+'" onclick="event.stopPropagation();toggleWishlist('+p.id+');this.classList.toggle(\'active\');var i=this.querySelector(\'i\');if(i){i.style.animation=\'none\';setTimeout(function(){i.style.animation=\'\'},10);}" aria-label="Ajouter aux favoris"><i class="'+(inWl?'fas':'far')+' fa-heart"></i></button>'+
       '<div class="lb-img-wrap" onclick="quickView('+p.id+')"><div class="lb-img" style="background-image:url('+p.img+')"></div></div>'+
       '<div class="lb-overlay" onclick="quickView('+p.id+')"></div>'+
       '<div class="lb-info">'+
@@ -549,7 +549,7 @@ function updateCart(){
       '<div style="text-align:right;flex-shrink:0;"><div style="font-size:0.72rem;font-weight:600;">'+fmtDZD(i.price*i.qty)+'</div><button onclick="removeFromCart('+i.id+')" style="background:none;border:none;color:var(--text-muted);font-size:0.65rem;cursor:pointer;margin-top:0.2rem;">✕</button></div></div>';
   }).join('')+
   '<div style="display:flex;justify-content:space-between;padding:0.6rem 0;font-size:0.8rem;font-weight:700;"><span>Total</span><span style="color:var(--rose-dark);">'+fmtDZD(total)+'</span></div>'+
-  '<button class="btn btn-primary" style="width:100%;padding:0.5rem;font-size:0.7rem;justify-content:center;" onclick="toggleCart();document.getElementById(\\'commande\\').scrollIntoView({behavior:\\'smooth\\'})">Commander</button>';
+  '<button class="btn btn-primary" style="width:100%;padding:0.5rem;font-size:0.7rem;justify-content:center;" onclick="toggleCart();document.getElementById(\'commande\').scrollIntoView({behavior:\'smooth\'})">Commander</button>';
 }
 function changeCartQty(id,delta){
   var item=cart.find(function(x){return x.id===id;});

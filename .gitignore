@@ -1,6 +1,6 @@
 node_modules/
 pulse/node_modules/
-dist/
+/dist/
 .env
 *.log
 .DS_Store
