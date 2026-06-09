@@ -18,25 +18,24 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overf
 .top-bar{background:var(--charcoal);color:#fff;padding:0.35rem 0;text-align:center;font-size:0.65rem;display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;position:fixed;top:0;left:0;right:0;z-index:101;}
 
 /* ── Header ── */
-header{position:fixed;top:32px;left:0;right:0;z-index:100;padding:0 3rem;height:68px;display:flex;align-items:center;justify-content:space-between;background:rgba(248,246,243,0.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);transition:all 0.4s;}
-header.scrolled{background:rgba(248,246,243,0.97);backdrop-filter:blur(20px);box-shadow:var(--shadow);}
+header{position:fixed;top:32px;left:0;right:0;z-index:100;padding:0 3rem;height:68px;display:flex;align-items:center;justify-content:space-between;background:rgba(248,246,243,0.65);backdrop-filter:blur(12px);transition:all 0.5s ease;}
+header.scrolled{background:rgba(248,246,243,0.92);backdrop-filter:blur(20px);box-shadow:var(--shadow);}
 .logo{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:700;color:var(--text);letter-spacing:-0.5px;}
 .logo span{color:var(--rose-dark);font-style:italic;}
-nav{display:flex;align-items:center;gap:2rem;}
-nav a{color:var(--charcoal);text-decoration:none;font-size:0.68rem;text-transform:uppercase;letter-spacing:2px;font-weight:500;transition:color 0.3s;position:relative;}
-nav a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1.5px;background:var(--rose-dark);transition:width 0.3s;border-radius:1px;}
-nav a:hover{color:var(--rose-dark);}
-nav a:hover::after{width:100%;}
-.header-actions{display:flex;align-items:center;gap:0.4rem;}
-.header-actions button{background:none;border:1px solid transparent;cursor:pointer;color:var(--charcoal);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all 0.3s;font-size:1rem;position:relative;}
-.header-actions button:hover{background:var(--rose);color:var(--rose-dark);border-color:var(--rose);}
-.cart-badge,.wishlist-badge{position:absolute;top:-1px;right:-1px;background:var(--rose-dark);color:#fff;font-size:0.45rem;font-weight:700;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;transform:scale(0);transition:transform 0.3s;border:1.5px solid var(--surface);}
+nav{display:flex;align-items:center;gap:2.2rem;}
+nav a{color:var(--text);text-decoration:none;font-size:0.65rem;text-transform:uppercase;letter-spacing:2.5px;font-weight:500;transition:opacity 0.3s;opacity:0.7;}
+nav a:hover{opacity:1;}
+.header-actions{display:flex;align-items:center;gap:0.2rem;}
+.header-actions button{background:none;border:none;cursor:pointer;color:var(--text);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all 0.3s;font-size:1.05rem;position:relative;opacity:0.75;}
+.header-actions button:hover{opacity:1;background:var(--surface-alt);}
+.cart-badge,.wishlist-badge{position:absolute;top:0;right:0;background:var(--rose-dark);color:#fff;font-size:0.4rem;font-weight:600;min-width:14px;height:14px;border-radius:7px;display:flex;align-items:center;justify-content:center;transform:scale(0);transition:transform 0.3s;padding:0 3px;}
 .cart-badge.show,.wishlist-badge.show{transform:scale(1);}
-.wishlist-badge{top:-3px;right:-3px;width:18px;height:18px;font-size:0.45rem;}
+.wishlist-badge{top:-1px;right:-1px;}
 .nav-overlay{position:fixed;inset:0;z-index:98;background:rgba(0,0,0,0.3);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity 0.3s ease;}
 .nav-overlay.open{opacity:1;pointer-events:all;}
-.menu-toggle{display:none;flex-direction:column;gap:3px;background:none;border:none;padding:8px;cursor:pointer;}
-.menu-toggle span{display:block;width:22px;height:2.5px;background:var(--charcoal);border-radius:2px;transition:all 0.3s ease;}
+.menu-toggle{display:none;flex-direction:column;gap:3px;background:none;border:none;padding:6px;cursor:pointer;}
+.menu-toggle span{display:block;width:20px;height:2px;background:var(--text);border-radius:1.5px;transition:all 0.3s ease;opacity:0.7;}
+.menu-toggle:hover span{opacity:1;}
 .menu-toggle.open span:nth-child(1){transform:rotate(45deg) translate(2px,2px);}
 .menu-toggle.open span:nth-child(2){opacity:0;}
 .menu-toggle.open span:nth-child(3){transform:rotate(-45deg) translate(2px,-2px);}
@@ -328,9 +327,9 @@ footer p{font-size:0.6rem;}
 <div class="logo">Velora<span>.</span></div>
 <nav id="nav"><a href="#collection" onclick="closeNav()">Collection</a><a href="#quiz" onclick="closeNav()">Style Quiz</a><a href="#looks" onclick="closeNav()">Looks</a><a href="#avis" onclick="closeNav()">Avis</a></nav>
 <div class="header-actions">
-<a href="admin.html" style="font-size:0.65rem;color:var(--text-muted);text-decoration:none;">⚙</a>
-<button onclick="toggleCart()" aria-label="Panier"><span style="font-size:1.1rem;">🛍</span><span class="cart-badge" id="cartBadge">0</span></button>
-<button onclick="showWishlist()" aria-label="Favoris" style="font-size:1rem;">♥<span class="wishlist-badge" id="wishlistBadge">0</span></button>
+<a href="admin.html" style="font-size:0.7rem;color:var(--text-muted);text-decoration:none;opacity:0.5;">⚙</a>
+<button onclick="toggleCart()" aria-label="Panier"><i class="fas fa-shopping-bag"></i><span class="cart-badge" id="cartBadge">0</span></button>
+<button onclick="showWishlist()" aria-label="Favoris"><i class="far fa-heart"></i><span class="wishlist-badge" id="wishlistBadge">0</span></button>
 <button class="menu-toggle" id="menuToggle" onclick="toggleNav()"><span></span><span></span><span></span></button>
 </div>
 </header>
