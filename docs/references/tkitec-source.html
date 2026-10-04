@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tki Tec - Elite PC Hardware & Accessories</title>
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/homepage.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="./assets/js/store-config.js" defer></script>
+  <script src="./assets/js/demo-products.js" defer></script>
+  <script src="./assets/js/storefront.js" defer></script>
+  <script src="./assets/js/script.js" defer></script>
+  <script src="./assets/js/home.js" defer></script>
+  <link rel="preload" as="image" href="./assets/images/setup%20red.png">
+  <link rel="stylesheet" href="./assets/css/store-pages.css">
+  <link rel="stylesheet" href="./assets/css/light-theme.css">
+  <script src="./assets/js/site-shell.js" defer></script>
+</head>
+
+<body id="top" class="gaming-storefront">
+
+  <div data-store-shell></div>
+  <main>
+    <section class="hero-section">
+      <div class="container hero-layout">
+        <div class="hero-copy">
+          <p class="eyebrow">NEXT LEVEL PERFORMANCE</p>
+          <h1>GAMING PCs <span>POWER YOUR PLAY.</span></h1>
+          <p class="hero-description">Prebuilt gaming PCs and high-performance components.</p>
+          <div class="hero-actions">
+            <a href="#prebuilt" class="button-primary">Shop prebuilt PCs <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="shop-category-section" aria-labelledby="shopCategoryHeading">
+      <div class="container">
+        <h2 id="shopCategoryHeading" class="visually-hidden">Shop by category</h2>
+        <nav class="visual-category-grid" aria-label="Shop by category">
+          <a class="visual-category-card" data-category="prebuilt" href="shop.html?cat=prebuilt"><div class="category-photo"><img src="./assets/images/prebuilt%20pc.png" alt="" loading="lazy" decoding="async"></div><span>Prebuilt PCs <ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon></span></a>
+          <a class="visual-category-card" data-category="gpu" href="shop.html?cat=gpu"><div class="category-photo"><img src="./assets/images/gpu.png" alt="" loading="lazy" decoding="async"></div><span>GPUs <ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon></span></a>
+          <a class="visual-category-card" data-category="cpu" href="shop.html?cat=cpu"><div class="category-photo"><img src="./assets/images/cpu.png" alt="" loading="lazy" decoding="async"></div><span>CPUs <ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon></span></a>
+          <a class="visual-category-card" data-category="ram" href="shop.html?cat=ram"><div class="category-photo"><img src="./assets/images/ram.png" alt="" loading="lazy" decoding="async"></div><span>RAM <ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon></span></a>
+          <a class="visual-category-card" data-category="storage" href="shop.html?cat=storage"><div class="category-photo"><img src="./assets/images/storage.png" alt="" loading="lazy" decoding="async"></div><span>Storage <ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon></span></a>
+          <a class="visual-category-card" data-category="peripherals" href="shop.html?cat=peripherals"><div class="category-photo"><img src="./assets/images/accessoires.png" alt="" loading="lazy" decoding="async"></div><span>Accessories <ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon></span></a>
+        </nav>
+      </div>
+    </section>
+
+    <section class="store-section prebuilt-section" id="prebuilt" aria-labelledby="prebuiltHeading">
+      <div class="container">
+        <div class="section-heading"><div><h2 id="prebuiltHeading">Featured Gaming PCs</h2><p class="section-subtitle">High-performance prebuilt PCs, ready to game.</p></div><a href="shop.html?cat=prebuilt" class="text-link">View All PCs <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon></a></div>
+        <div id="prebuiltProducts" aria-live="polite"><p class="store-message">Loading prebuilt PCs...</p></div>
+      </div>
+    </section>
+
+    <section class="category-section components-section" id="components" aria-labelledby="componentsHeading">
+      <div class="container">
+        <div class="section-heading"><h2 id="componentsHeading">PCs &amp; Components</h2><a href="shop.html?cat=all" class="text-link">View all <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon></a></div>
+        <nav class="category-grid" aria-label="Browse PCs and components by category">
+          <a class="category-link" href="shop.html?cat=prebuilt"><span>Prebuilt PCs</span><ion-icon class="category-arrow" name="arrow-forward-outline" aria-hidden="true"></ion-icon></a>
+          <a class="category-link" href="shop.html?cat=gpu"><span>GPUs</span><ion-icon class="category-arrow" name="arrow-forward-outline" aria-hidden="true"></ion-icon></a>
+          <a class="category-link" href="shop.html?cat=cpu"><span>CPUs</span><ion-icon class="category-arrow" name="arrow-forward-outline" aria-hidden="true"></ion-icon></a>
+          <a class="category-link" href="shop.html?cat=motherboard"><span>Motherboards</span><ion-icon class="category-arrow" name="arrow-forward-outline" aria-hidden="true"></ion-icon></a>
+          <a class="category-link" href="shop.html?cat=ram"><span>RAM</span><ion-icon class="category-arrow" name="arrow-forward-outline" aria-hidden="true"></ion-icon></a>
+          <a class="category-link" href="shop.html?cat=storage"><span>Storage</span><ion-icon class="category-arrow" name="arrow-forward-outline" aria-hidden="true"></ion-icon></a>
+          <a class="category-link" href="shop.html?cat=peripherals"><span>Accessories</span><ion-icon class="category-arrow" name="arrow-forward-outline" aria-hidden="true"></ion-icon></a>
+        </nav>
+        <div class="components-inventory">
+          <div id="componentProducts" aria-live="polite"><p class="store-message">Loading components...</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="why-store-section" aria-labelledby="whyStoreHeading">
+      <div class="container">
+        <div class="why-store-heading"><p class="eyebrow">THE TKI TEC DIFFERENCE</p><h2 id="whyStoreHeading">Good parts. Straight answers.</h2></div>
+        <div class="why-store-list">
+          <article><ion-icon name="checkmark-circle-outline" aria-hidden="true"></ion-icon><div><h3>Genuine components</h3><p>Hardware selected for dependable builds.</p></div></article>
+          <article><ion-icon name="chatbubbles-outline" aria-hidden="true"></ion-icon><div><h3>Expert advice</h3><p>Get help choosing compatible parts.</p></div></article>
+          <article><ion-icon name="construct-outline" aria-hidden="true"></ion-icon><div><h3>Custom PC builds</h3><p>Configure a build around your needs.</p></div></article>
+          <article><ion-icon name="logo-whatsapp" aria-hidden="true"></ion-icon><div><h3>Talk to our team</h3><p>Ask about a product directly on WhatsApp.</p></div></article>
+        </div>
+      </div>
+    </section>
+    <section class="store-contact-section" aria-labelledby="storeContactHeading">
+      <div class="container"><div class="store-contact-panel"><div><h2 id="storeContactHeading">Let’s build your next setup.</h2><p>Ask about a product or get help choosing your components.</p></div><a class="button-whatsapp" data-whatsapp-contact href="https://wa.me/" target="_blank" rel="noopener noreferrer"><ion-icon name="logo-whatsapp" aria-hidden="true"></ion-icon>Contact WhatsApp</a></div></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><img src="./assets/images/logo.png" alt="Tki Tec"><span class="store-wordmark">TKI <span class="store-wordmark-accent">TEC</span></span></a>
+        <p class="footer-text">PC hardware, selected for your setup.</p>
+        <ul class="social-list">
+          <li><a href="https://www.tiktok.com/@tki_tec?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Tki Tec on TikTok"><ion-icon name="logo-tiktok"></ion-icon></a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <p class="copyright">&copy; 2026 Tki Tec Hardware · Prices in DZD</p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#top" class="go-top-btn" data-go-top><ion-icon name="arrow-up-outline"></ion-icon></a>
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

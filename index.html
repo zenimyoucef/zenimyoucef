@@ -1,567 +1,84 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Zenim Youcef — Portfolio | Web Developer & Designer</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-:root{--bg:#08080e;--surface:#0e0e16;--surface2:#161620;--border:rgba(255,255,255,.03);--text:#e0e0ee;--text-muted:#5a5a72;--accent:#6366f1;--accent2:#a855f7;--accent3:#ec4899;--green:#22c55e;--gold:#f59e0b;--cyan:#00f0ff;--teal:#3a8e7a;--orange:#ff5a00;--rose:#d4a0a0;--card-shadow:0 20px 60px rgba(0,0,0,.5);--radius:16px;}
-[data-theme="light"]{--bg:#f0f0f5;--surface:#ffffff;--surface2:#e8e8ee;--border:rgba(0,0,0,.04);--text:#12121c;--text-muted:#6a6a7a;--accent:#4f46e5;--accent2:#9333ea;--accent3:#db2777;--green:#16a34a;--gold:#d97706;--card-shadow:0 20px 60px rgba(0,0,0,.06);}
-html{scroll-behavior:smooth;}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6;transition:background .4s,color .4s;-webkit-font-smoothing:antialiased;}
-::selection{background:var(--accent);color:#fff;}
-::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:var(--surface);}::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px;}
-
-/* ── Terminal Background ── */
-.terminal-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;}
-.terminal-bg .grid{position:absolute;inset:0;background-image:linear-gradient(rgba(99,102,241,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,.03) 1px,transparent 1px);background-size:50px 50px;mask-image:radial-gradient(ellipse at center,black 30%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse at center,black 30%,transparent 70%);}
-.terminal-bg .glow{position:absolute;top:20%;left:30%;width:600px;height:600px;background:radial-gradient(circle,rgba(99,102,241,.04),transparent 70%);filter:blur(80px);animation:bgPulse 8s ease-in-out infinite alternate;}
-@keyframes bgPulse{0%{opacity:.5;transform:scale(1);}100%{opacity:1;transform:scale(1.1);}}
-
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:.8rem 2rem;display:flex;align-items:center;justify-content:space-between;background:rgba(8,8,14,.8);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:all .3s;}
-.nav-logo{font-size:.85rem;font-weight:700;letter-spacing:-.5px;background:linear-gradient(135deg,var(--accent),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-family:'JetBrains Mono',monospace;}
-.nav-logo .tag{font-size:.45rem;opacity:.5;font-weight:400;background:none;-webkit-text-fill-color:var(--text-muted);}
-.nav-links{display:flex;gap:1.5rem;align-items:center;}
-.nav-links a{color:var(--text-muted);text-decoration:none;font-size:.65rem;font-weight:500;transition:color .3s;position:relative;}
-.nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--accent);transition:width .3s;}
-.nav-links a:hover{color:var(--text);}
-.nav-links a:hover::after{width:100%;}
-.mobile-toggle{display:none;background:none;border:none;color:var(--text);font-size:1.3rem;cursor:pointer;}
-.theme-toggle{background:none;border:none;color:var(--text-muted);font-size:1rem;cursor:pointer;padding:.2rem;transition:all .3s;}
-.theme-toggle:hover{color:var(--accent);}
-
-.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden;}
-.hero-content{position:relative;z-index:1;max-width:900px;}
-.hero-badge{display:inline-flex;align-items:center;gap:.4rem;padding:.25rem 1rem;border:1px solid rgba(99,102,241,.2);border-radius:20px;font-size:.52rem;color:var(--accent);font-weight:500;margin-bottom:1.5rem;font-family:'JetBrains Mono',monospace;opacity:0;transform:translateY(15px);animation:heroFade .6s ease forwards;}
-.hero h1{font-size:4rem;font-weight:800;line-height:1.05;letter-spacing:-2px;margin-bottom:.3rem;opacity:0;transform:translateY(20px);animation:heroFade .7s ease .1s forwards;}
-.hero h1 .grad{background:linear-gradient(135deg,var(--accent),var(--accent2),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:200% 200%;animation:gradShift 4s ease-in-out infinite;}
-@keyframes gradShift{0%,100%{background-position:0% 50%;}50%{background-position:100% 50%;}}
-.hero .sub{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--text-muted);letter-spacing:3px;margin-bottom:.5rem;opacity:0;animation:heroFade .6s ease .15s forwards;}
-.hero p{font-size:.9rem;color:var(--text-muted);max-width:600px;margin:0 auto 2rem;opacity:0;animation:heroFade .6s ease .2s forwards;}
-@keyframes heroFade{to{opacity:1;transform:translateY(0);}}
-.hero-stats{display:flex;gap:3rem;justify-content:center;flex-wrap:wrap;opacity:0;animation:heroFade .6s ease .3s forwards;}
-.hero-stat{text-align:center;}
-.hero-stat .hs-val{font-size:2rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-family:'JetBrains Mono',monospace;}
-.hero-stat .hs-label{font-size:.5rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:2.5px;margin-top:.15rem;}
-.hero-contact{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-top:1.5rem;opacity:0;animation:heroFade .6s ease .35s forwards;}
-.hero-contact a{display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1.2rem;border-radius:8px;font-size:.7rem;font-weight:500;text-decoration:none;transition:all .3s;}
-.hero-contact .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;}
-.hero-contact .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(99,102,241,.3);}
-.hero-contact .btn-secondary{background:transparent;color:var(--text);border:1px solid var(--border);}
-.hero-contact .btn-secondary:hover{border-color:var(--accent);color:var(--accent);}
-
-.section-label{font-size:.5rem;text-transform:uppercase;letter-spacing:3px;color:var(--accent);font-weight:600;margin-bottom:.4rem;text-align:center;font-family:'JetBrains Mono',monospace;}
-.section-title{font-size:2.5rem;font-weight:800;letter-spacing:-1px;margin-bottom:.2rem;text-align:center;}
-.section-sub{color:var(--text-muted);font-size:.82rem;margin-bottom:3rem;max-width:500px;margin-left:auto;margin-right:auto;text-align:center;}
-
-.theme-filters{display:flex;justify-content:center;gap:.4rem;flex-wrap:wrap;margin-bottom:2rem;}
-.theme-filter{padding:.25rem 1.2rem;border:1px solid var(--border);background:transparent;color:var(--text-muted);border-radius:6px;cursor:pointer;font-size:.55rem;font-weight:500;font-family:'Inter',sans-serif;transition:all .3s;text-transform:uppercase;letter-spacing:1.5px;}
-.theme-filter:hover{border-color:var(--accent);color:var(--text);background:rgba(99,102,241,.04);}
-.theme-filter.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-color:transparent;}
-
-.projects{padding:2rem 2rem 4rem;max-width:1200px;margin:0 auto;}
-
-/* ── Featured TKITEC card ── */
-.featured-site{background:linear-gradient(135deg,rgba(99,102,241,.06),rgba(168,85,247,.06));border:1px solid rgba(99,102,241,.15);border-radius:var(--radius);padding:2rem;margin-bottom:3rem;text-align:center;position:relative;overflow:hidden;}
-.featured-site::before{content:'';position:absolute;top:-50%;right:-30%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(99,102,241,.04),transparent);pointer-events:none;}
-.featured-site .fs-badge{display:inline-flex;align-items:center;gap:.3rem;padding:.2rem .7rem;background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.2);border-radius:20px;font-size:.45rem;color:var(--accent);font-weight:600;letter-spacing:2px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;margin-bottom:.6rem;}
-.featured-site h3{font-size:1.8rem;font-weight:800;letter-spacing:-.5px;margin-bottom:.2rem;}
-.featured-site h3 span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.featured-site p{color:var(--text-muted);font-size:.78rem;margin-bottom:.8rem;max-width:500px;margin-left:auto;margin-right:auto;}
-.featured-site .fs-link{display:inline-flex;align-items:center;gap:.5rem;padding:.55rem 1.5rem;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-radius:8px;text-decoration:none;font-size:.7rem;font-weight:600;transition:all .3s;}
-.featured-site .fs-link:hover{transform:translateY(-3px);box-shadow:0 10px 35px rgba(99,102,241,.3);}
-
-.project-card{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:center;margin-bottom:3.5rem;padding:2.5rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);transition:all .5s cubic-bezier(.22,1,.36,1);position:relative;overflow:hidden;opacity:0;transform:translateY(40px);}
-.project-card.visible{opacity:1;transform:translateY(0);}
-.project-card:hover{border-color:rgba(99,102,241,.15);box-shadow:var(--card-shadow);transform:translateY(-4px);}
-.project-card:nth-child(even){direction:rtl;}.project-card:nth-child(even)>*{direction:ltr;}
-.project-card .pc-glow{position:absolute;top:-30%;right:-20%;width:300px;height:300px;border-radius:50%;filter:blur(80px);pointer-events:none;opacity:0;transition:opacity .6s;}
-.project-card:hover .pc-glow{opacity:1;}
-
-.project-visual{border-radius:12px;overflow:hidden;position:relative;aspect-ratio:16/10;background:var(--surface2);border:1px solid var(--border);}
-.project-visual img{width:100%;height:100%;object-fit:cover;transition:transform .7s;}
-.project-card:hover .project-visual img{transform:scale(1.06);}
-.project-visual .pv-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.6),transparent 50%);display:flex;align-items:flex-end;padding:1rem;opacity:0;transition:opacity .3s;gap:.5rem;}
-.project-card:hover .pv-overlay{opacity:1;}
-.pv-overlay a{padding:.3rem 1rem;background:rgba(255,255,255,.1);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);border-radius:6px;color:#fff;text-decoration:none;font-size:.6rem;font-weight:600;transition:all .3s;}
-.pv-overlay a:hover{background:var(--accent);border-color:var(--accent);}
-
-.project-info .pi-tag{display:inline-flex;padding:.12rem .6rem;border-radius:4px;font-size:.45rem;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.4rem;}
-.project-info h3{font-size:1.8rem;font-weight:800;letter-spacing:-.5px;margin-bottom:.15rem;}
-.project-info .pi-desc{color:var(--text-muted);font-size:.78rem;line-height:1.7;margin-bottom:.6rem;}
-.project-info .pi-tech{display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.6rem;}
-.project-info .pi-tech span{padding:.12rem .5rem;background:var(--surface2);border:1px solid var(--border);border-radius:4px;font-size:.5rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;}
-.project-info .pi-features{display:grid;grid-template-columns:1fr 1fr;gap:.2rem .8rem;margin-bottom:.8rem;}
-.project-info .pi-features li{list-style:none;display:flex;align-items:center;gap:.4rem;font-size:.68rem;color:var(--text-muted);}
-.project-info .pi-features li::before{content:'→';color:var(--accent);font-weight:700;font-size:.6rem;}
-.project-info .pi-links{display:flex;gap:.6rem;flex-wrap:wrap;}
-.project-info .pi-links a{padding:.35rem 1.2rem;border-radius:6px;font-size:.65rem;font-weight:600;text-decoration:none;transition:all .3s;}
-.pi-link-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;}
-.pi-link-primary:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(99,102,241,.3);}
-.pi-link-secondary{background:transparent;color:var(--text);border:1px solid var(--border);}
-.pi-link-secondary:hover{border-color:var(--accent);color:var(--accent);}
-.pi-link-live{background:rgba(34,197,94,.12);color:var(--green);border:1px solid rgba(34,197,94,.2);}
-.pi-link-live:hover{background:rgba(34,197,94,.2);transform:translateY(-2px);}
-
-/* ── Per-project colors ── */
-.project-card.qn{--p1:#0071e3;--p2:#5856d6;}.project-card.qn .pi-tag{background:rgba(0,113,227,.08);color:#0071e3;border:1px solid rgba(0,113,227,.15);}.project-card.qn .pi-link-primary{background:linear-gradient(135deg,#0071e3,#5856d6);}.project-card.qn .pc-glow{background:radial-gradient(circle,rgba(0,113,227,.06),transparent);}
-.project-card.vl{--p1:#c48a8a;--p2:#c9a96e;}.project-card.vl .pi-tag{background:rgba(196,138,138,.08);color:#c48a8a;border:1px solid rgba(196,138,138,.15);}.project-card.vl .pi-link-primary{background:linear-gradient(135deg,#c48a8a,#c9a96e);}.project-card.vl .pc-glow{background:radial-gradient(circle,rgba(196,138,138,.06),transparent);}
-.project-card.bs{--p1:#d4a84b;--p2:#8b2f3a;}.project-card.bs .pi-tag{background:rgba(212,168,75,.08);color:#d4a84b;border:1px solid rgba(212,168,75,.15);}.project-card.bs .pi-link-primary{background:linear-gradient(135deg,#d4a84b,#8b2f3a);}.project-card.bs .pc-glow{background:radial-gradient(circle,rgba(212,168,75,.06),transparent);}
-.project-card.pl{--p1:#ff5a00;--p2:#ff1a5e;}.project-card.pl .pi-tag{background:rgba(255,90,0,.08);color:#ff5a00;border:1px solid rgba(255,90,0,.15);}.project-card.pl .pi-link-primary{background:linear-gradient(135deg,#ff5a00,#ff1a5e);color:#000;}.project-card.pl .pc-glow{background:radial-gradient(circle,rgba(255,90,0,.06),transparent);}
-.project-card.nm{--p1:#4a9e8a;--p2:#d48a5a;}.project-card.nm .pi-tag{background:rgba(74,158,138,.08);color:#4a9e8a;border:1px solid rgba(74,158,138,.15);}.project-card.nm .pi-link-primary{background:linear-gradient(135deg,#4a9e8a,#d48a5a);}.project-card.nm .pc-glow{background:radial-gradient(circle,rgba(74,158,138,.06),transparent);}
-.project-card.ad{--p1:#6c5ce7;--p2:#a855f7;}.project-card.ad .pi-tag{background:rgba(108,92,231,.08);color:#6c5ce7;border:1px solid rgba(108,92,231,.15);}.project-card.ad .pi-link-primary{background:linear-gradient(135deg,#6c5ce7,#a855f7);}.project-card.ad .pc-glow{background:radial-gradient(circle,rgba(108,92,231,.06),transparent);}
-
-.banner{padding:4rem 2rem;text-align:center;max-width:800px;margin:0 auto;}
-.banner-quote{font-family:'Playfair Display',serif;font-size:1.4rem;font-style:italic;color:var(--text-muted);line-height:1.8;}
-
-.skills{padding:4rem 2rem;max-width:1200px;margin:0 auto;}
-.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:2rem;}
-
-/* ── Category Skill Cards ── */
-.scc-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.8rem 1.5rem 1.5rem;transition:all .5s cubic-bezier(.22,1,.36,1);position:relative;overflow:hidden;}
-.scc-card:hover{transform:translateY(-4px);box-shadow:var(--card-shadow);border-color:rgba(99,102,241,.12);}
-.scc-card .scc-glow{position:absolute;top:-40%;right:-30%;width:200px;height:200px;border-radius:50%;filter:blur(70px);pointer-events:none;opacity:0;transition:opacity .6s;}
-.scc-card:hover .scc-glow{opacity:1;}
-.scc-card .scc-top{display:flex;align-items:center;gap:.6rem;margin-bottom:.9rem;padding-bottom:.7rem;border-bottom:1px solid var(--border);}
-.scc-card .scc-icon{font-size:1.6rem;flex-shrink:0;filter:drop-shadow(0 2px 8px rgba(99,102,241,.15));}
-.scc-card .scc-top h3{font-size:.82rem;font-weight:700;letter-spacing:-.3px;line-height:1.2;}
-.scc-card .scc-count{font-size:.45rem;color:var(--text-muted);letter-spacing:1.5px;font-weight:500;white-space:nowrap;}
-.scc-skills{display:flex;flex-direction:column;gap:.32rem;}
-.scc-skill{display:flex;align-items:center;justify-content:space-between;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,.02);transition:all .25s;cursor:default;}
-.scc-skill:last-child{border-bottom:none;}
-.scc-skill:hover{padding-left:.35rem;}
-.scc-skill .scc-name{font-size:.62rem;font-weight:500;color:var(--text);display:flex;align-items:center;gap:.3rem;}
-.scc-skill .scc-name .scc-blip{width:4px;height:4px;border-radius:50%;display:inline-block;flex-shrink:0;}
-.scc-skill .scc-badge{font-size:.4rem;font-weight:600;padding:.12rem .5rem;border-radius:20px;text-transform:uppercase;letter-spacing:.8px;white-space:nowrap;}
-
-/* ── Level Badge Colors ── */
-.scc-badge.advanced{background:rgba(34,197,94,.12);color:var(--green);border:1px solid rgba(34,197,94,.15);}
-.scc-badge.intermediate{background:rgba(99,102,241,.12);color:var(--accent);border:1px solid rgba(99,102,241,.15);}
-.scc-badge.learning{background:rgba(245,158,11,.12);color:var(--gold);border:1px solid rgba(245,158,11,.15);}
-
-/* ── Category Glow Colors ── */
-.scc-card.cat-front .scc-glow{background:radial-gradient(circle,rgba(99,102,241,.06),transparent);}
-.scc-card.cat-back .scc-glow{background:radial-gradient(circle,rgba(34,197,94,.06),transparent);}
-.scc-card.cat-ecom .scc-glow{background:radial-gradient(circle,rgba(245,158,11,.06),transparent);}
-.scc-card.cat-design .scc-glow{background:radial-gradient(circle,rgba(236,72,153,.06),transparent);}
-.scc-card.cat-front .scc-top h3{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.scc-card.cat-back .scc-top h3{background:linear-gradient(135deg,var(--green),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.scc-card.cat-ecom .scc-top h3{background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.scc-card.cat-design .scc-top h3{background:linear-gradient(135deg,var(--accent3),var(--rose));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.scc-card.cat-front .scc-icon{filter:drop-shadow(0 2px 8px rgba(99,102,241,.2));}
-.scc-card.cat-back .scc-icon{filter:drop-shadow(0 2px 8px rgba(34,197,94,.2));}
-.scc-card.cat-ecom .scc-icon{filter:drop-shadow(0 2px 8px rgba(245,158,11,.2));}
-.scc-card.cat-design .scc-icon{filter:drop-shadow(0 2px 8px rgba(236,72,153,.2));}
-
-/* ── CTA Section ── */
-.cta-section{padding:3rem 2rem 2rem;max-width:800px;margin:0 auto;}
-.cta-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2.5rem 2rem;text-align:center;position:relative;overflow:hidden;}
-.cta-card::before{content:'';position:absolute;top:-40%;right:-20%;width:350px;height:350px;border-radius:50%;background:radial-gradient(circle,rgba(99,102,241,.04),transparent);pointer-events:none;}
-.cta-card h2{font-size:1.5rem;font-weight:800;letter-spacing:-.8px;margin-bottom:.3rem;}
-.cta-card h2 span{background:linear-gradient(135deg,var(--accent),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.cta-card p{color:var(--text-muted);font-size:.78rem;margin-bottom:1.3rem;line-height:1.7;}
-.cta-buttons{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;}
-.cta-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1.6rem;border-radius:8px;font-size:.72rem;font-weight:600;text-decoration:none;transition:all .35s cubic-bezier(.22,1,.36,1);}
-.cta-btn:hover{transform:translateY(-3px);}
-.cta-whatsapp{background:rgba(34,197,94,.1);color:var(--green);border:1px solid rgba(34,197,94,.2);}
-.cta-whatsapp:hover{background:var(--green);color:#fff;box-shadow:0 8px 25px rgba(34,197,94,.25);border-color:var(--green);}
-.cta-linkedin{background:rgba(0,119,181,.1);color:#0a66c2;border:1px solid rgba(0,119,181,.2);}
-.cta-linkedin:hover{background:#0a66c2;color:#fff;box-shadow:0 8px 25px rgba(10,102,194,.25);border-color:#0a66c2;}
-
-/* ── Scroll Progress Bar ── */
-.scroll-progress{position:fixed;top:0;left:0;z-index:999;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));transition:width 50ms linear;border-radius:0 2px 2px 0;box-shadow:0 0 12px rgba(99,102,241,.4);}
-
-/* ── Back to Top ── */
-.back-to-top{position:fixed;bottom:2rem;right:2rem;z-index:99;width:40px;height:40px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);color:var(--text-muted);display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transform:translateY(20px);pointer-events:none;transition:all .4s cubic-bezier(.22,1,.36,1);font-size:1rem;text-decoration:none;}
-.back-to-top.visible{opacity:1;transform:translateY(0);pointer-events:auto;}
-.back-to-top:hover{background:var(--accent);color:#fff;border-color:var(--accent);transform:translateY(-4px);box-shadow:0 8px 25px rgba(99,102,241,.3);}
-.back-to-top svg{transition:transform .3s;}
-.back-to-top:hover svg{transform:translateY(-2px);}
-
-/* ── Section Reveal ── */
-.reveal{opacity:0;transform:translateY(40px);transition:all .7s cubic-bezier(.22,1,.36,1);}
-.reveal.visible{opacity:1;transform:translateY(0);}
-.reveal-delay-1{transition-delay:.1s;}
-.reveal-delay-2{transition-delay:.2s;}
-.reveal-delay-3{transition-delay:.3s;}
-.reveal-delay-4{transition-delay:.4s;}
-
-/* ── Cursor blink ── */
-.cursor-blink{display:inline-block;width:2px;height:1em;background:var(--accent);margin-left:2px;vertical-align:text-bottom;animation:cursorBlink 1s step-end infinite;}
-@keyframes cursorBlink{0%,100%{opacity:1;}50%{opacity:0;}}
-
-/* ── Link Arrow Animation ── */
-.link-arrow{display:inline-flex;align-items:center;gap:.4rem;}
-.link-arrow .arrow-icon{transition:transform .3s cubic-bezier(.22,1,.36,1);}
-.link-arrow:hover .arrow-icon{transform:translateX(4px);}
-
-/* ── Featured Site Arrow Bounce ── */
-.fs-link .arrow-icon{transition:transform .3s cubic-bezier(.22,1,.36,1);}
-.fs-link:hover .arrow-icon{transform:translateX(4px);}
-
-/* ── Filter Button Active Arrow ── */
-.theme-filter{position:relative;}
-.theme-filter.active::after{content:'↓';position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);font-size:.5rem;color:var(--accent);animation:filterArrowBounce 1s ease-in-out infinite;}
-@keyframes filterArrowBounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(-3px);}}
-
-/* ── Skill Card Grid Responsive ── */
-@media(min-width:1200px){.skills-grid{grid-template-columns:repeat(4,1fr);}}
-@media(max-width:1199px)and(min-width:769px){.skills-grid{grid-template-columns:repeat(2,1fr);}}
-@media(max-width:768px){.skills-grid{grid-template-columns:1fr;gap:.8rem;}}
-
-/* ── Project Card Link Hover ── */
-.pi-link-primary,.pi-link-secondary,.pi-link-live{position:relative;overflow:hidden;}
-.pi-link-primary::after,.pi-link-secondary::after,.pi-link-live::after{content:'→';margin-left:.3rem;transition:transform .3s cubic-bezier(.22,1,.36,1);}
-.pi-link-primary:hover::after,.pi-link-secondary:hover::after,.pi-link-live:hover::after{transform:translateX(3px);}
-
-/* ── Hero Stat Count Up ── */
-.hero-stat .hs-val{display:inline-block;}
-
-.footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--border);margin-top:2rem;}
-.footer .name{font-size:.9rem;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-family:'JetBrains Mono',monospace;margin-bottom:.2rem;}
-.footer p{color:var(--text-muted);font-size:.65rem;}
-.footer-links{display:flex;gap:.6rem;justify-content:center;margin-top:.8rem;flex-wrap:wrap;}
-.footer-links a{color:var(--text-muted);text-decoration:none;font-size:.6rem;transition:all .3s;padding:.15rem .5rem;border:1px solid var(--border);border-radius:4px;}
-.footer-links a:hover{color:var(--accent);border-color:var(--accent);}
-
-@media(max-width:968px){
-.project-card{grid-template-columns:1fr;gap:1.5rem;padding:1.5rem;}
-.project-card:nth-child(even){direction:ltr;}
-.hero h1{font-size:2.8rem;}
-.section-title{font-size:1.8rem;}
-.project-info .pi-features{grid-template-columns:1fr;}
-.hero-stat .hs-val{font-size:1.6rem;}
-}
-
-@media(max-width:768px){
-.nav-links{top:50px;padding:.8rem 1.5rem;gap:.6rem;}
-.nav-links a,.nav-links .theme-toggle{font-size:.75rem;padding:.6rem 0;min-height:44px;display:flex;align-items:center;}
-.hero{padding:5rem 1.2rem 3rem;}
-.hero p{font-size:.85rem;}
-.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem;max-width:300px;margin:0 auto 1.2rem;}
-.hero-stat .hs-val{font-size:1.5rem;}
-.project-info h3{font-size:1.3rem;}
-.project-info .pi-desc{font-size:.72rem;}
-.project-info .pi-links a{padding:.45rem 1rem;min-height:44px;display:flex;align-items:center;}
-.featured-site h3{font-size:1.4rem;}
-.featured-site .fs-link{padding:.5rem 1.2rem;min-height:44px;display:inline-flex;align-items:center;}
-.banner{padding:2.5rem 1.2rem;}
-.banner-quote{font-size:1.1rem;}
-.skills{padding:2.5rem 1rem;}
-.scc-card{padding:1.3rem 1.2rem 1.2rem;}
-.scc-card .scc-icon{font-size:1.3rem;}
-.cta-section{padding:2rem 1rem 1.5rem;}
-.cta-card{padding:2rem 1.2rem;}
-.cta-card h2{font-size:1.2rem;}
-.cta-btn{padding:.5rem 1.2rem;min-height:44px;}
-.footer{padding:2rem 1rem;}
-.section-title{font-size:1.6rem;}
-.section-sub{font-size:.75rem;margin-bottom:2rem;}
-.theme-filters{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none;padding-bottom:.3rem;justify-content:flex-start;gap:.3rem;}
-.theme-filters::-webkit-scrollbar{display:none;}
-.theme-filter{white-space:nowrap;font-size:.5rem;padding:.25rem .9rem;flex-shrink:0;}
-.theme-filter.active::after{display:none;}
-.project-visual .pv-overlay a{min-height:44px;display:flex;align-items:center;font-size:.65rem;}
-.hero-contact a{min-height:44px;padding:.45rem 1rem;}
-}
-
-@media(max-width:600px){
-.hero h1{font-size:2rem;letter-spacing:-1px;}
-.hero .sub{font-size:.5rem;letter-spacing:2px;}
-.hero-stats{gap:.8rem;max-width:260px;}
-.nav{padding:.7rem .8rem;}
-.nav-logo{font-size:.75rem;}
-.nav-links{display:none;position:fixed;top:44px;left:0;right:0;background:rgba(8,8,14,.96);flex-direction:column;padding:.6rem 1.2rem;gap:.5rem;border-bottom:1px solid var(--border);}
-[data-theme="light"] .nav-links{background:rgba(240,240,245,.96);}
-.nav-links.open{display:flex;}
-.nav-links a,.nav-links .theme-toggle{font-size:.7rem;}
-.mobile-toggle{display:flex;font-size:1.2rem;}
-.projects{padding:1.5rem .8rem 2.5rem;}
-.project-card{padding:1rem;gap:1rem;margin-bottom:2rem;}
-.project-visual{aspect-ratio:16/10;}
-.project-info .pi-tag{font-size:.4rem;padding:.1rem .5rem;}
-.project-info .pi-tech span{font-size:.45rem;}
-.project-info .pi-features li{font-size:.62rem;}
-.project-info .pi-links a{font-size:.6rem;padding:.4rem .8rem;}
-.featured-site{padding:1.2rem;margin-bottom:2rem;}
-.featured-site h3{font-size:1.2rem;}
-.featured-site p{font-size:.7rem;}
-.featured-site .fs-link{font-size:.65rem;padding:.45rem 1rem;}
-.section-title{font-size:1.4rem;}
-.reveal{transition:all .5s cubic-bezier(.22,1,.36,1);}
-.back-to-top{bottom:1rem;right:1rem;width:36px;height:36px;}
-}
-
-@media(max-width:400px){
-.hero h1{font-size:1.6rem;}
-.hero-stats{grid-template-columns:1fr 1fr;gap:.6rem;max-width:220px;}
-.hero-stat .hs-val{font-size:1.2rem;}
-.hero-stat .hs-label{font-size:.45rem;letter-spacing:1.5px;}
-.hero p{font-size:.78rem;}
-.section-title{font-size:1.2rem;}
-.section-label{font-size:.45rem;}
-.project-info h3{font-size:1.1rem;}
-.project-card{padding:.8rem;border-radius:12px;}
-.featured-site{padding:1rem;border-radius:12px;}
-.featured-site h3{font-size:1rem;}
-.cta-card{padding:1.5rem 1rem;}
-.cta-card h2{font-size:1.1rem;}
-.cta-card p{font-size:.7rem;}
-.cta-buttons{flex-direction:column;align-items:center;}
-.cta-btn{width:100%;justify-content:center;}
-.nav-links{padding:.5rem 1rem;}
-.banner-quote{font-size:1rem;}
-.scc-card{padding:1rem .8rem .9rem;border-radius:12px;}
-.scc-card .scc-top h3{font-size:.7rem;}
-.scc-skill .scc-name{font-size:.55rem;}
-.scc-skill .scc-badge{font-size:.35rem;padding:.1rem .4rem;}
-.footer .name{font-size:.8rem;}
-.footer p{font-size:.55rem;}
-.footer-links a{font-size:.5rem;padding:.12rem .4rem;}
-.hero-contact{gap:.5rem;}
-.hero-contact a{font-size:.65rem;padding:.4rem .8rem;}
-}
-</style>
-</head>
-<body>
-
-<div class="scroll-progress" id="scrollProgress"></div>
-
-<div class="terminal-bg"><div class="grid"></div><div class="glow"></div></div>
-
-<nav class="nav">
-  <div class="nav-logo">✦ Zenim <span class="tag">/ portfolio</span></div>
-  <div class="nav-links" id="navLinks">
-    <a href="#projects">Projects</a>
-    <a href="#skills">Skills</a>
-    <a href="https://www.tkitec.store" target="_blank">tkitec.store</a>
-    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Theme" style="background:none;border:none;color:var(--text-muted);font-size:1rem;cursor:pointer;padding:.2rem;transition:all .3s;">🌙</button>
-  </div>
-  <button class="mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">☰</button>
-</nav>
-
-<section class="hero">
-  <div class="hero-content">
-    <div class="hero-badge">✦ ./zenim-youcef developer<span class="cursor-blink"></span></div>
-    <div class="sub">WEB DEVELOPER & DESIGNER</div>
-    <h1>Hi, I'm <span class="grad">Zenim Youcef</span></h1>
-    <p>I build real websites, fashion boutiques, fitness platforms, restaurant sites, you name it. Some are plain HTML and CSS, others are full React SPAs. I make sure every detail is right.</p>
-    <div class="hero-stats">
-      <div class="hero-stat"><div class="hs-val" data-target="7">0</div><div class="hs-label">Websites</div></div>
-      <div class="hero-stat"><div class="hs-val" data-target="5">0</div><div class="hs-label">Unique Themes</div></div>
-      <div class="hero-stat"><div class="hs-val" data-target="100" data-suffix="%">0</div><div class="hs-label">Responsive</div></div>
-      <div class="hero-stat"><div class="hs-val" data-target="5">0</div><div class="hs-label">Frameworks</div></div>
-    </div>
-    <div class="hero-contact">
-      <a href="#projects" class="btn-primary">View My Work →</a>
-      <a href="https://www.tkitec.store" target="_blank" class="btn-secondary">🚀 tkitec.store</a>
-    </div>
-  </div>
-</section>
-
-<a href="#" class="back-to-top" id="backToTop" aria-label="Back to top">
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
-</a>
-
-<section class="projects reveal" id="projects">
-  <div class="section-label reveal reveal-delay-1">✦ Featured Work</div>
-  <div class="section-title reveal reveal-delay-2">Projects</div>
-  <p class="section-sub reveal reveal-delay-3">Every project here stands on its own, its own look, its own feel, its own set of features. And they all work beautifully on any screen.</p>
-
-  <div class="theme-filters reveal reveal-delay-4">
-    <button class="theme-filter active" onclick="filterProjects('all',this)">All</button>
-    <button class="theme-filter" onclick="filterProjects('ecommerce',this)">🛒 Ecommerce</button>
-    <button class="theme-filter" onclick="filterProjects('restaurant',this)">🍽️ Restaurant</button>
-    <button class="theme-filter" onclick="filterProjects('fitness',this)">💪 Fitness</button>
-    <button class="theme-filter" onclick="filterProjects('travel',this)">🌍 Travel</button>
-  </div>
-
-  <!-- Featured: tkitec.store -->
-  <div class="featured-site reveal reveal-delay-1">
-    <div class="fs-badge">🚀 LIVE WEBSITE</div>
-    <h3><span>tkitec.store</span></h3>
-    <p>This is my main e-commerce site, a fully functional online store where you can browse products, add them to your cart, and check out. Built from scratch with modern web technologies.</p>
-    <a href="https://www.tkitec.store" target="_blank" class="fs-link link-arrow">🌐 Visit tkitec.store <span class="arrow-icon">→</span></a>
-  </div>
-
-  <div class="project-card qn" data-theme="ecommerce">
-    <div class="pc-glow"></div>
-    <div class="project-visual"><img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800&h=500&fit=crop" alt="Quantum" loading="lazy"><div class="pv-overlay"><a href="../quantum/index.html">🔗 Live Demo</a></div></div>
-    <div class="project-info"><div class="pi-tag">💻 Tech Store — Algérie</div><h3>Quantum</h3><p class="pi-desc">An Apple-inspired tech store I built for the Algerian market. The product cards float with a glassmorphism effect that feels tactile, and there's a configurator that lets you pick your RAM and storage before adding to cart. I also added a device comparison tool, an installment calculator for 3x, 6x, or 12x payments, and a style quiz that recommends products based on your preferences. Behind the scenes, there's a full admin dashboard for managing orders and inventory.</p><div class="pi-tech"><span>HTML5</span><span>CSS3</span><span>JS</span><span>Backdrop Blur</span><span>DZD Currency</span></div><div class="pi-links"><a href="../quantum/index.html" class="pi-link-primary">View Store →</a></div></div>
-  </div>
-
-  <div class="project-card vl" data-theme="ecommerce">
-    <div class="pc-glow"></div>
-    <div class="project-visual"><img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&h=500&fit=crop" alt="Velora" loading="lazy"><div class="pv-overlay"><a href="../velora/index.html">🔗 Live Demo</a></div></div>
-    <div class="project-info"><div class="pi-tag">👗 Fashion Boutique — Algérie</div><h3>Velora</h3><p class="pi-desc">Velora is a fashion boutique with an editorial feel, beautiful typography, a drifting parallax background, and a hero section that sets the mood right away. I built a style quiz that suggests pieces based on your taste, plus an outfit builder that shows live pricing as you mix and match. There's also a size guide, customer stories, and a full admin dashboard with analytics.</p><div class="pi-tech"><span>HTML5</span><span>CSS3</span><span>JS</span><span>Playfair Display</span><span>DZD Currency</span></div><div class="pi-links"><a href="../velora/index.html" class="pi-link-primary">View Store →</a></div></div>
-  </div>
-
-  <div class="project-card bs" data-theme="restaurant">
-    <div class="pc-glow"></div>
-    <div class="project-visual"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=500&fit=crop" alt="Bistro Lumière" loading="lazy"><div class="pv-overlay"><a href="../bistro/index.html">🔗 Live Demo</a></div></div>
-    <div class="project-info"><div class="pi-tag">🍽️ French Restaurant — Paris</div><h3>Bistro Lumière</h3><p class="pi-desc">Bistro Lumière is a Parisian restaurant site with warm, ambient lighting throughout. The menu is laid out as a vertical timeline with dot markers, easy to browse and nice to look at. I also included a wine pairing section, a full-bleed chef spotlight with parallax, a horizontal gallery strip for food photography, and a smooth dark/light theme toggle.</p><div class="pi-tech"><span>HTML5</span><span>CSS3</span><span>JS</span><span>Playfair Display</span><span>Intersection Observer</span></div><div class="pi-links"><a href="../bistro/index.html" class="pi-link-primary">View Site →</a><a href="../bistro/index.html#reservation" class="pi-link-live">🎯 Reserve</a></div></div>
-  </div>
-
-  <div class="project-card pl" data-theme="fitness">
-    <div class="pc-glow"></div>
-    <div class="project-visual"><img src="https://images.unsplash.com/photo-1534258936925-c58bed479fcb?w=800&h=500&fit=crop" alt="PULSE" loading="lazy"><div class="pv-overlay"><a href="../pulse/dist/index.html">🔗 Live Demo</a></div></div>
-    <div class="project-info"><div class="pi-tag">💪 Fitness & Wellness — React App</div><h3>PULSE</h3><p class="pi-desc">PULSE is a full React fitness dashboard I built from the ground up. It tracks workouts, calculates BMI and body fat, shows your progress with charts, and even has a challenge timer to keep you motivated. I used React Router for navigation between pages, Recharts for the trend visualizations, and custom hooks so everything stays clean and reusable.</p><div class="pi-tech"><span>React 18</span><span>Vite</span><span>React Router</span><span>Recharts</span><span>Lucide</span><span>CSS3</span></div><div class="pi-links"><a href="../pulse/dist/index.html" class="pi-link-primary">View App →</a></div></div>
-  </div>
-
-  <div class="project-card nm" data-theme="travel">
-    <div class="pc-glow"></div>
-    <div class="project-visual"><img src="https://images.unsplash.com/photo-1488085061387-422e29b40080?w=800&h=500&fit=crop" alt="Nomad" loading="lazy"><div class="pv-overlay"><a href="../nomad/index.html">🔗 Live Demo</a></div></div>
-    <div class="project-info"><div class="pi-tag">🌍 Travel Magazine</div><h3>Nomad</h3><p class="pi-desc">Nomad is a travel magazine site with a right-aligned Ken Burns hero that slowly zooms into the photo, it sets the tone right away. Destination cards float with a staggered layout that makes browsing feel playful, and the alternating story blocks give each section its own rhythm. There's also an overlapping gallery grid, experience cards with a trip planner, and a dark/light theme toggle.</p><div class="pi-tech"><span>HTML5</span><span>CSS3</span><span>JS</span><span>Playfair Display</span><span>Intersection Observer</span></div><div class="pi-links"><a href="../nomad/index.html" class="pi-link-primary">View Site →</a><a href="../nomad/index.html#planner" class="pi-link-live">✈️ Plan Trip</a></div></div>
-  </div>
-
-  <!-- ── Admin Pro Dashboard ── -->
-  <div class="project-card ad" data-theme="dashboard">
-    <div class="pc-glow"></div>
-    <div class="project-visual"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop" alt="Admin Pro Dashboard" loading="lazy"><div class="pv-overlay"><a href="../admin-demo/index.html">🔗 Live Demo</a></div></div>
-    <div class="project-info"><div class="pi-tag">📊 Admin Dashboard, Visual Demo</div><h3>Admin Pro</h3><p class="pi-desc">Admin Pro is a full admin dashboard demo with four pages, Dashboard, Orders, Products, and Analytics. I built it with Chart.js for revenue and category visualizations, and added a bilingual EN/FR toggle so it works in two languages. There's a dark/light theme with smooth transitions, product cards you can edit or delete, and a collapsible sidebar for mobile screens.</p><div class="pi-tech"><span>HTML5</span><span>CSS3</span><span>JS</span><span>Chart.js</span><span>Bilingual</span><span>Dark/Light</span></div><div class="pi-links"><a href="../admin-demo/index.html" class="pi-link-primary">View Dashboard →</a></div></div>
-  </div>
-</section>
-
-<section class="banner reveal">
-  <p class="banner-quote reveal reveal-delay-1">"Seven projects, each with its own personality. From <span style="color:var(--accent);">vanilla HTML and CSS</span> to a full <span style="color:var(--accent2);">React SPA</span> and a bilingual <span style="color:var(--accent3);">admin dashboard</span> , I focus on clean code, thoughtful design, and never taking shortcuts."</p>
-</section>
-
-<section class="skills reveal" id="skills">
-  <div class="section-label reveal reveal-delay-1">✦ Developer Stack</div>
-  <div class="section-title reveal reveal-delay-2">What I Work With</div>
-  <p class="section-sub reveal reveal-delay-3">The tools I reach for when building real projects, from plain HTML to React SPAs and everything in between.</p>
-  <div class="skills-grid">
-    <!-- Front-End Development -->
-    <div class="scc-card cat-front reveal reveal-delay-1">
-      <div class="scc-glow"></div>
-      <div class="scc-top">
-        <span class="scc-icon">⚛️</span>
-        <div><h3>Front-End Development</h3><span class="scc-count">6 skills</span></div>
-      </div>
-      <div class="scc-skills">
-        <div class="scc-skill"><span class="scc-name"><span class="scc-blip" style="background:var(--accent)"></span>HTML5</span><span class="scc-badge advanced">Advanced</span></div>
-        <div class="scc-skill"><span class="scc-name"><span class="scc-blip" style="background:var(--accent)"></span>CSS3</span><span class="scc-badge advanced">Advanced</span></div>
-        <div class="scc-skill"><span class="scc-name"><span class="scc-blip" style="background:var(--accent)"></span>JavaScript ES6+</span><span class="scc-badge advanced">Advanced</span></div>
-        <div class="scc-skill"><span class="scc-name"><span class="scc-blip" style="background:var(--accent2)"></span>TypeScript</span><span class="scc-badge intermediate">Intermediate</span></div>
-        <div class="scc-skill"><span class="scc-name"><span class="scc-blip" style="background:var(--accent)"></span>React</span><span class="scc-badge advanced">Advanced</span></div>
-        <div class="scc-skill"><span class="scc-name"><span class="scc-blip" style="background:var(--gold)"></span>Next.js</span><span class="scc-badge learning">Learning</span></div>
-      </div>
-    </div>
-    <!-- Back-End & Logic -->
-    <div class="scc-card cat-back reveal reveal-delay-2">
-      <div class="scc-glow"></div>
-      <div class="scc-top">
-        <span class="scc-icon">⚙️</span>
-        <div><h3>Back-End &amp; Logic</h3><span class="scc-count">8 skills</span></div>
-      </div>
-      <div class="scc-skills">
-        <div class="scc-skill"><span class="scc-name"><span class="scc-blip" style="background:var(--green)"></span>Python</span><span class="scc-badge intermediate">Intermediate</span></div>
-        <div class="scc-skill"><span class="scc-name"><span class="scc-blip" style="background:var(--green)"></span>Node.js</span><span class="scc-badge intermediate">Intermediate</span></div>
-        <div class="scc-skill"><span class="scc-name"><span class="scc-blip" style="background:var(--green)"></span>Express.js</span><span class="scc-badge intermediate">Intermediate</span></div>
-        <div class="scc-skill"><span class="scc-name"><span class="scc-blip" style="background:var(--green)"></span>REST APIs</span><span class="scc-badge advanced">Advanced</span></div>
-        <div class="scc-skill"><span class="scc-name"><span class="scc-blip" style="background:var(--green)"></span>JSON / Data</span><span class="scc-badge advanced">Advanced</span></div>
-        <div class="scc-skill"><span class="scc-name"><span class="scc-blip" style="background:var(--green)"></span>Auth Logic</span><span class="scc-badge advanced">Advanced</span></div>
-        <div class="scc-skill"><span class="scc-name"><span class="scc-blip" style="background:var(--green)"></span>Form Handling</span><span class="scc-badge advanced">Advanced</span></div>
-        <div class="scc-skill"><span class="scc-name"><span class="scc-blip" style="background:var(--green)"></span>Order Systems</span><span class="scc-badge advanced">Advanced</span></div>
-      </div>
-    </div>
-    <!-- E-Commerce Features -->
-    <div class="scc-card cat-ecom reveal reveal-delay-3">
-      <div class="scc-glow"></div>
-      <div class="scc-top">
-        <span class="scc-icon">🛒</span>
-        <div><h3>Ecommerce Features</h3><span class="scc-count">9 skills</span></div>
-      </div>
-      <div class="scc-skills">
-        <div class="scc-skill"><span class="scc-name"><span class="scc-blip" style="background:var(--gold)"></span>Product Catalogs</span><span class="scc-badge advanced">Advanced</span></div>
-        <div class="scc-skill"><span class="scc-name"><span class="scc-blip" style="background:var(--gold)"></span>Shopping Cart</span><span class="scc-badge advanced">Advanced</span></div>
-        <div class="scc-skill"><span class="scc-name"><span class="scc-blip" style="background:var(--gold)"></span>Wishlist</span><span class="scc-badge advanced">Advanced</span></div>
-        <div class="scc-skill"><span class="scc-name"><span class="scc-blip" style="background:var(--gold)"></span>Checkout Flow</span><span class="scc-badge advanced">Advanced</span></div>
-        <div class="scc-skill"><span class="scc-name"><span class="scc-blip" style="background:var(--gold)"></span>Buy Now System</span><span class="scc-badge advanced">Advanced</span></div>
-        <div class="scc-skill"><span class="scc-name"><span class="scc-blip" style="background:var(--gold)"></span>Order Management</span><span class="scc-badge advanced">Advanced</span></div>
-        <div class="scc-skill"><span class="scc-name"><span class="scc-blip" style="background:var(--gold)"></span>Admin Dashboard</span><span class="scc-badge advanced">Advanced</span></div>
-        <div class="scc-skill"><span class="scc-name"><span class="scc-blip" style="background:var(--gold)"></span>LocalStorage State</span><span class="scc-badge advanced">Advanced</span></div>
-        <div class="scc-skill"><span class="scc-name"><span class="scc-blip" style="background:var(--gold)"></span>CSV Export</span><span class="scc-badge intermediate">Intermediate</span></div>
-      </div>
-    </div>
-    <!-- UI/UX & Design -->
-    <div class="scc-card cat-design reveal reveal-delay-4">
-      <div class="scc-glow"></div>
-      <div class="scc-top">
-        <span class="scc-icon">🎨</span>
-        <div><h3>UI/UX &amp; Design</h3><span class="scc-count">9 skills</span></div>
-      </div>
-      <div class="scc-skills">
-        <div class="scc-skill"><span class="scc-name"><span class="scc-blip" style="background:var(--accent3)"></span>Modern UI Design</span><span class="scc-badge advanced">Advanced</span></div>
-        <div class="scc-skill"><span class="scc-name"><span class="scc-blip" style="background:var(--accent3)"></span>Glassmorphism</span><span class="scc-badge advanced">Advanced</span></div>
-        <div class="scc-skill"><span class="scc-name"><span class="scc-blip" style="background:var(--accent3)"></span>Dark/Light Themes</span><span class="scc-badge advanced">Advanced</span></div>
-        <div class="scc-skill"><span class="scc-name"><span class="scc-blip" style="background:var(--accent3)"></span>Animations</span><span class="scc-badge advanced">Advanced</span></div>
-        <div class="scc-skill"><span class="scc-name"><span class="scc-blip" style="background:var(--accent3)"></span>Micro Interactions</span><span class="scc-badge advanced">Advanced</span></div>
-        <div class="scc-skill"><span class="scc-name"><span class="scc-blip" style="background:var(--accent3)"></span>Hover Effects</span><span class="scc-badge advanced">Advanced</span></div>
-        <div class="scc-skill"><span class="scc-name"><span class="scc-blip" style="background:var(--accent3)"></span>Mobile First Design</span><span class="scc-badge advanced">Advanced</span></div>
-        <div class="scc-skill"><span class="scc-name"><span class="scc-blip" style="background:var(--accent3)"></span>Landing Pages</span><span class="scc-badge advanced">Advanced</span></div>
-        <div class="scc-skill"><span class="scc-name"><span class="scc-blip" style="background:var(--accent3)"></span>Product Pages</span><span class="scc-badge advanced">Advanced</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── CTA Section ── -->
-<section class="cta-section reveal">
-  <div class="cta-card reveal reveal-delay-1">
-    <h2>Need a <span>website, store, or dashboard</span>?</h2>
-    <p>Whatever you need, a landing page, an online store, or a full admin dashboard, I can build it. Responsive, animated, and made to work.</p>
-    <div class="cta-buttons">
-      <a href="https://wa.me/213540753528" target="_blank" class="cta-btn cta-whatsapp" rel="noopener">💬 WhatsApp Me</a>
-      <a href="https://www.linkedin.com/in/zenim-youcef" target="_blank" class="cta-btn cta-linkedin" rel="noopener">🔗 LinkedIn Profile</a>
-    </div>
-  </div>
-</section>
-
-<footer class="footer reveal">
-  <div class="name reveal reveal-delay-1">Zenim Youcef</div>
-  <p class="reveal reveal-delay-2">From vanilla HTML to React, clean code and thoughtful design, every project.</p>
-  <div class="footer-links reveal reveal-delay-3">
-    <a href="../quantum/index.html">💻 Quantum</a><a href="../velora/index.html">👗 Velora</a>
-    <a href="../bistro/index.html">🍽️ Bistro</a><a href="../pulse/dist/index.html">💪 PULSE</a><a href="../nomad/index.html">🌍 Nomad</a><a href="../admin-demo/index.html" style="background:rgba(108,92,231,.1);border-color:rgba(108,92,231,.3);color:#6c5ce7;">📊 Admin Pro</a>
-    <a href="https://www.tkitec.store" target="_blank" style="background:rgba(99,102,241,.1);border-color:rgba(99,102,241,.3);color:var(--accent);">🚀 tkitec.store</a>
-  </div>
-  <p style="margin-top:.6rem;font-size:.55rem;color:var(--text-muted);" class="reveal reveal-delay-4">© 2026  Zenim Youcef  Built with care, from start to finish.</p>
-</footer>
-
-<script>
-function filterProjects(theme, btn){document.querySelectorAll('.project-card').forEach(card=>{card.style.display=theme==='all'||card.dataset.theme===theme?'':'none';});document.querySelectorAll('.theme-filter').forEach(t=>t.classList.remove('active'));btn.classList.add('active');}
-
-// ── Intersection Observer for scroll reveals ──
-const revealObserver=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revealObserver.unobserve(e.target);}})},{threshold:.12});
-document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el))
-
-// ── Project card entrance (existing) ──
-document.querySelectorAll('.project-card').forEach(el=>{new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.15}).observe(el);});
-
-// ── Mobile toggle ──
-document.querySelector('.mobile-toggle')?.addEventListener('click',()=>{document.getElementById('navLinks').classList.toggle('open');});
-document.querySelectorAll('.nav-links a').forEach(a=>{a.addEventListener('click',()=>document.getElementById('navLinks')?.classList.remove('open'));});
-
-// ── Theme toggle ──
-function toggleTheme(){const h=document.documentElement;const b=document.querySelector('.theme-toggle');if(h.getAttribute('data-theme')==='light'){h.removeAttribute('data-theme');b.textContent='🌙';localStorage.setItem('pf_theme','dark');}else{h.setAttribute('data-theme','light');b.textContent='☀️';localStorage.setItem('pf_theme','light');}}
-(function(){if(localStorage.getItem('pf_theme')==='light'){document.documentElement.setAttribute('data-theme','light');document.querySelector('.theme-toggle').textContent='☀️';}})();
-
-// ── Scroll Progress Bar ──
-const progressBar=document.getElementById('scrollProgress');
-window.addEventListener('scroll',()=>{const s=document.documentElement.scrollTop;const h=document.documentElement.scrollHeight-window.innerHeight;progressBar.style.width=(h>0?(s/h)*100:0)+'%';},{passive:true});
-
-// ── Back to Top Button ──
-const backToTop=document.getElementById('backToTop');
-window.addEventListener('scroll',()=>{backToTop.classList.toggle('visible',window.scrollY>400);},{passive:true});
-backToTop.addEventListener('click',e=>{e.preventDefault();window.scrollTo({top:0,behavior:'smooth'});});
-
-// ── Hero Stats Count Up ──
-function animateStats(){document.querySelectorAll('.hero-stat .hs-val').forEach(el=>{const target=parseFloat(el.dataset.target);const suffix=el.dataset.suffix||'';if(target===0){el.textContent='0'+suffix;return;}const duration=2000;const start=performance.now();const animate=(now)=>{const p=Math.min((now-start)/duration,1);const eased=1-Math.pow(1-p,3);const val=Math.round(eased*target);el.textContent=val.toLocaleString()+suffix;if(p<1)requestAnimationFrame(animate);};requestAnimationFrame(animate);});}
-const statsObserver=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){animateStats();statsObserver.unobserve(e.target);}})},{threshold:.5});
-const heroStats=document.querySelector('.hero-stats');if(heroStats)statsObserver.observe(heroStats);
-
-</script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#F1EBDD" />
+    <title>Zenim Youcef — Web Developer &amp; Designer</title>
+    <meta
+      name="description"
+      content="Zenim Youcef builds thoughtful digital experiences where design and engineering meet. Explore TKI TEC, a live PC hardware store, and experiments in e-commerce, fitness, fashion and travel."
+    />
+    <link rel="canonical" href="https://zenimyoucef.github.io/zenimyoucef/" />
+    <link rel="icon" type="image/svg+xml" href="/zenimyoucef/favicon.svg" />
+    <link
+      rel="preload"
+      href="/zenimyoucef/fonts/cormorant-roman.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/zenimyoucef/fonts/manrope.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta
+      property="og:title"
+      content="Zenim Youcef — Web Developer &amp; Designer"
+    />
+    <meta
+      property="og:description"
+      content="Code, design and a little intention. Selected work and creative experiments by Zenim Youcef."
+    />
+    <meta
+      property="og:url"
+      content="https://zenimyoucef.github.io/zenimyoucef/"
+    />
+    <meta
+      property="og:image"
+      content="https://zenimyoucef.github.io/zenimyoucef/images/social-cover.jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Zenim Youcef — crafting digital products with code and intention"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Zenim Youcef — Web Developer &amp; Designer"
+    />
+    <meta
+      name="twitter:description"
+      content="Thoughtful digital experiences where design and engineering meet."
+    />
+    <meta
+      name="twitter:image"
+      content="https://zenimyoucef.github.io/zenimyoucef/images/social-cover.jpg"
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Zenim Youcef",
+        "url": "https://zenimyoucef.github.io/zenimyoucef/",
+        "jobTitle": "Web Developer & Designer",
+        "sameAs": [
+          "https://github.com/zenimyoucef",
+          "https://www.linkedin.com/in/zenim-youcef"
+        ]
+      }
+    </script>
+    <script type="module" crossorigin src="/zenimyoucef/assets/index-B9U_7DTl.js"></script>
+    <link rel="stylesheet" crossorigin href="/zenimyoucef/assets/index-BDZgGibf.css">
+  </head>
+  <body>
+    <div id="root"><a class="skip-link" href="#main">Skip to content</a><div id="top"></div><header class="site-header wrap"><a class="brand" href="#top" aria-label="Zenim Youcef, back to top">ZENIM<span>.</span></a><nav class="desktop-nav" aria-label="Main navigation"><a href="#work">Work</a><a href="#playground">Playground</a><a href="#about">About</a><a href="#contact" class="nav-contact">Contact</a></nav><button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-navigation"><span></span><span></span></button><noscript><style>.menu-toggle{display:none!important}.site-header noscript{width:100%}</style><nav class="mobile-fallback-nav" aria-label="Mobile navigation"><a href="#work">Work</a><a href="#playground">Playground</a><a href="#about">About</a><a href="#contact">Contact</a></nav></noscript><a href="https://wa.me/213540753528" target="_blank" rel="noopener noreferrer" class="quick-contact" aria-label="Contact Zenim on WhatsApp (opens in a new tab)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5h16v12H9l-5 3V5Z" stroke="currentColor" stroke-width="1.5"></path><path d="M8 9h8M8 13h5" stroke="currentColor" stroke-width="1.5"></path></svg><span class="quick-contact-label" aria-hidden="true">LET’S TALK ↗</span><span class="sr-only"> (opens in a new tab)</span></a><dialog id="mobile-navigation" class="mobile-menu" aria-label="Navigation"><div class="menu-masthead"><span class="menu-brand">ZENIM<span>.</span></span><button type="button" class="menu-close" aria-label="Close menu"><span></span><span></span></button></div><p class="menu-index-label">The journal / Index</p><nav class="menu-links" aria-label="Explore the portfolio"><a href="#contact" style="--menu-order:0"><span class="menu-link-number">0<!-- -->1</span><span>Contact</span><svg class="arrow-icon " width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.2"></path></svg></a><a href="#work" style="--menu-order:1"><span class="menu-link-number">0<!-- -->2</span><span>Work</span><svg class="arrow-icon " width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.2"></path></svg></a><a href="#playground" style="--menu-order:2"><span class="menu-link-number">0<!-- -->3</span><span>Playground</span><svg class="arrow-icon " width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.2"></path></svg></a><a href="#about" style="--menu-order:3"><span class="menu-link-number">0<!-- -->4</span><span>About</span><svg class="arrow-icon " width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.2"></path></svg></a></nav><div class="menu-bottom"><p>Ideas into useful<br/><em>places on the web.</em></p><div class="menu-socials"><a href="https://github.com/zenimyoucef" target="_blank" rel="noopener noreferrer" class="">GitHub<!-- --> ↗<span class="sr-only"> (opens in a new tab)</span></a><a href="https://www.linkedin.com/in/zenim-youcef" target="_blank" rel="noopener noreferrer" class="">LinkedIn<!-- --> ↗<span class="sr-only"> (opens in a new tab)</span></a><a href="https://wa.me/213540753528" target="_blank" rel="noopener noreferrer" class="">WhatsApp<!-- --> ↗<span class="sr-only"> (opens in a new tab)</span></a></div></div></dialog></header><main id="main" tabindex="-1"><section class="hero" aria-labelledby="hero-heading"><div class="hero-composition"><div class="hero-copy"><p class="hero-eyebrow">Web developer &amp; designer <span aria-hidden="true">/</span><span class="hero-byline">Zenim Youcef</span></p><h1 id="hero-heading" class="hero-title"><span class="line-mask"><span>Crafting</span></span><span class="line-mask"><span>digital products</span></span><span class="line-mask"><span>with code &amp;</span></span><span class="line-mask"><span><em>intention.</em></span></span></h1><p class="hero-intro">I’m Zenim Youcef, a web developer and designer focused on building thoughtful, responsive digital experiences.</p><div class="hero-actions"><a href="#contact" class="button-primary">Get in touch <svg class="arrow-icon " width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.2"></path></svg></a><a href="#work" class="text-link">View my work <svg class="arrow-icon " width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.2"></path></svg></a></div></div><figure class="hero-art"><span class="vertical-caption" aria-hidden="true">FIELD RECORD / 01 — PERSPECTIVE</span><div class="mountain-print"><picture><source type="image/avif" srcSet="/zenimyoucef/images/cinematic-640.avif 640w, /zenimyoucef/images/cinematic-1024.avif 1024w, /zenimyoucef/images/cinematic-1600.avif 1600w" sizes="100vw"/><img src="/zenimyoucef/images/cinematic-1600.webp" srcSet="/zenimyoucef/images/cinematic-640.webp 640w, /zenimyoucef/images/cinematic-1024.webp 1024w, /zenimyoucef/images/cinematic-1600.webp 1600w" sizes="100vw" width="1536" height="1024" alt="Cinematic decorative collage of an anonymous figure looking toward alpine mountains" fetchPriority="high"/></picture></div><div class="code-stamp" aria-hidden="true"><span>Ideas</span><span>Code</span><span>People</span></div><figcaption><span class="art-note">A little perspective<br/>goes a long way.</span><span class="photo-caption">FIELD NOTES — CODE &amp; DESIGN</span></figcaption></figure></div><div class="hero-footnote"><span><span class="accent">01</span> / An introduction</span><span class="hero-footnote-center">Ideas. Code. People.</span><a href="#work">Scroll to explore <svg class="arrow-icon scroll-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="transform:rotate(-90deg)"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.2"></path></svg></a></div></section><section class="tech-strip" aria-labelledby="tech-heading"><div class="tech-inner wrap"><div class="tech-intro"><h2 id="tech-heading">My tech stack</h2><p>Tools I use to build<br/>thoughtful web experiences.</p></div><ul class="tech-list"><li><span class="tech-icon" style="--icon-color:#f5d53e;--icon-url:url(/zenimyoucef/icons/javascript.svg)" aria-hidden="true"></span><span>JavaScript</span></li><li><span class="tech-icon" style="--icon-color:#3b91d7;--icon-url:url(/zenimyoucef/icons/typescript.svg)" aria-hidden="true"></span><span>TypeScript</span></li><li><span class="tech-icon" style="--icon-color:#61d5e8;--icon-url:url(/zenimyoucef/icons/react.svg)" aria-hidden="true"></span><span>React</span></li><li><span class="tech-icon" style="--icon-color:#eee8dd;--icon-url:url(/zenimyoucef/icons/nextdotjs.svg)" aria-hidden="true"></span><span>Next.js</span><small>learning</small></li><li><span class="tech-icon" style="--icon-color:#7db63c;--icon-url:url(/zenimyoucef/icons/nodedotjs.svg)" aria-hidden="true"></span><span>Node.js</span></li><li><span class="tech-icon" style="--icon-color:#eee8dd;--icon-url:url(/zenimyoucef/icons/express.svg)" aria-hidden="true"></span><span>Express</span></li><li><span class="tech-icon" style="--icon-color:#70a9d1;--icon-url:url(/zenimyoucef/icons/python.svg)" aria-hidden="true"></span><span>Python</span></li><li><span class="tech-icon" style="--icon-color:#d5dfcf;--icon-url:url(/zenimyoucef/icons/openapiinitiative.svg)" aria-hidden="true"></span><span>REST APIs</span></li></ul><p class="tech-aside">Same tools.<br/>Different worlds.</p></div></section><div class="project-spread wrap"><section class="work-section wrap section-space" id="work" aria-labelledby="work-heading"><div class="section-label " data-reveal="true"><span class="section-number">02</span><span class="label-slash" aria-hidden="true">/</span><span>Selected work</span><span class="label-rule" aria-hidden="true"></span></div><div class="section-heading" data-reveal="true"><h2 id="work-heading">Live &amp; Usable<span class="accent">.</span></h2><p>Real projects. <span class="serif-italic">Built to be used.</span></p></div><div class="project-gallery project-gallery--live" id="live-gallery" data-autoplay="paused" data-reduced-motion="true" role="region" aria-roledescription="carousel" aria-label="Live projects"><div class="gallery-toolbar"><div class="gallery-reading" aria-live="polite" aria-atomic="true"><span class="gallery-progress">01<!-- --> / <!-- -->03</span><span class="gallery-timer" aria-hidden="true"><span class=""></span></span><span class="gallery-current-title">AUREA Nails by Yasmine</span></div><div class="gallery-navigation"><span class="gallery-hint" aria-hidden="true">Swipe / drag</span><button type="button" class="gallery-autoplay-control" aria-label="Pause automatic advance" aria-pressed="false" disabled=""><svg viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true"><path d="M5 3v10M11 3v10" stroke="currentColor" stroke-width="1.5"></path></svg></button><button type="button" class="gallery-arrow gallery-arrow--previous" aria-label="Previous live project" aria-controls="live-gallery-track" disabled=""><svg class="arrow-icon " width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.2"></path></svg></button><button type="button" class="gallery-arrow gallery-arrow--next" aria-label="Next live project" aria-controls="live-gallery-track"><svg class="arrow-icon " width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.2"></path></svg></button></div></div><div class="gallery-track" id="live-gallery-track" tabindex="0" role="group" aria-label="Live projects: use arrow keys to browse"><div class="gallery-slide" role="group" aria-roledescription="slide" aria-current="true" aria-label="1 of 3: AUREA Nails by Yasmine"><article class="project-feature live-slide" data-status="live" data-project="aurea" data-tone="beauty" data-featured="true"><a href="https://aureanails.vercel.app/" target="_blank" rel="noopener noreferrer" class="featured-media live-slide-media" aria-label="Visit AUREA Nails by Yasmine"><div class="live-image-frame"><picture><source type="image/avif" srcSet="/zenimyoucef/images/aurea-640.avif 640w, /zenimyoucef/images/aurea-960.avif 960w, /zenimyoucef/images/aurea-1280.avif 1280w" sizes="(max-width: 767px) 85vw, 55vw"/><img src="/zenimyoucef/images/aurea-1280.webp" srcSet="/zenimyoucef/images/aurea-640.webp 640w, /zenimyoucef/images/aurea-960.webp 960w, /zenimyoucef/images/aurea-1280.webp 1280w" sizes="(max-width: 767px) 85vw, 55vw" alt="Actual AUREA Nails by Yasmine website showing salon photography, its manicure gallery and appointment booking form" width="1440" height="950" loading="lazy" decoding="async"/></picture></div><span class="live-media-caption">A view from the live site <span aria-hidden="true">↗</span></span><span class="sr-only"> (opens in a new tab)</span></a><div class="live-slide-copy"><p class="live-slide-index"><span>01</span> <span class="status-dot"></span> Live &amp; usable</p><p class="live-slide-category">Beauty Salon / Booking Website</p><h3>AUREA Nails by Yasmine</h3><p class="live-slide-description">Salon services, a curated manicure gallery and a personal booking journey, with date selection and WhatsApp confirmation.</p><p class="live-slide-stack">Responsive design / Appointment booking / WhatsApp confirmation</p><div class="live-slide-actions"><a href="https://aureanails.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-link feature-cta">Visit live site <svg class="arrow-icon " width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.2"></path></svg><span class="sr-only"> (opens in a new tab)</span></a><details class="project-reading"><summary>Project notes <span aria-hidden="true">+</span></summary><div class="project-reading-content"><p>Service selection, date and time availability, and a customer details form lead into a WhatsApp confirmation flow. About and contact sections introduce the salon and make the next step feel personal.</p><p><span class="small-label">Built around</span>Salon services &amp; gallery · Date / time selection · Customer details form · About &amp; contact</p><p><span class="small-label">Role</span>Web development &amp; interface design</p></div></details></div></div></article></div><div class="gallery-slide" role="group" aria-roledescription="slide" aria-label="2 of 3: TKI TEC"><article class="project-feature live-slide" data-status="live" data-project="tkitec" data-tone="commerce" data-featured="false"><a href="https://tkitec.store/" target="_blank" rel="noopener noreferrer" class="featured-media live-slide-media" aria-label="Visit TKI TEC"><div class="live-image-frame"><picture><source type="image/avif" srcSet="/zenimyoucef/images/tkitec-640.avif 640w, /zenimyoucef/images/tkitec-960.avif 960w, /zenimyoucef/images/tkitec-1280.avif 1280w" sizes="(max-width: 767px) 85vw, 55vw"/><img src="/zenimyoucef/images/tkitec-1280.webp" srcSet="/zenimyoucef/images/tkitec-640.webp 640w, /zenimyoucef/images/tkitec-960.webp 960w, /zenimyoucef/images/tkitec-1280.webp 1280w" sizes="(max-width: 767px) 85vw, 55vw" alt="Actual TKI TEC storefront, showing its gaming PC hero and hardware categories" width="1440" height="950" loading="lazy" decoding="async"/></picture></div><span class="live-media-caption">A view from the live site <span aria-hidden="true">↗</span></span><span class="sr-only"> (opens in a new tab)</span></a><div class="live-slide-copy"><p class="live-slide-index"><span>02</span> <span class="status-dot"></span> Live &amp; usable</p><p class="live-slide-category">PC Hardware / E-Commerce Platform</p><h3>TKI TEC</h3><p class="live-slide-description">Prebuilt PCs, components and a PC builder. A responsive hardware storefront with product discovery and WhatsApp ordering.</p><p class="live-slide-stack">HTML5 / CSS3 / JavaScript</p><div class="live-slide-actions"><a href="https://tkitec.store/" target="_blank" rel="noopener noreferrer" class="text-link feature-cta">Visit live site <svg class="arrow-icon " width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.2"></path></svg><span class="sr-only"> (opens in a new tab)</span></a><details class="project-reading"><summary>Project notes <span aria-hidden="true">+</span></summary><div class="project-reading-content"><p>A PC builder and detailed product discovery help shoppers explore their next setup. Responsive storefront design keeps the catalogue usable across screens.</p><p><span class="small-label">Built around</span>Product catalogue · Category browsing · Prebuilt PCs &amp; components · WhatsApp orders &amp; enquiries · PC builder</p><p><span class="small-label">Role</span>Web development &amp; interface design</p></div></details></div></div></article></div><div class="gallery-slide" role="group" aria-roledescription="slide" aria-label="3 of 3: ACENDI DZ"><article class="project-feature live-slide" data-status="live" data-project="acendi" data-tone="institutional" data-featured="false"><a href="https://acendi-dz.vercel.app/ar" target="_blank" rel="noopener noreferrer" class="featured-media live-slide-media" aria-label="Visit ACENDI DZ"><div class="live-image-frame"><picture><source type="image/avif" srcSet="/zenimyoucef/images/acendi-640.avif 640w, /zenimyoucef/images/acendi-960.avif 960w, /zenimyoucef/images/acendi-1280.avif 1280w" sizes="(max-width: 767px) 85vw, 55vw"/><img src="/zenimyoucef/images/acendi-1280.webp" srcSet="/zenimyoucef/images/acendi-640.webp 640w, /zenimyoucef/images/acendi-960.webp 960w, /zenimyoucef/images/acendi-1280.webp 1280w" sizes="(max-width: 767px) 85vw, 55vw" alt="ACENDI institutional and economic organization website, Arabic homepage" width="1440" height="950" loading="lazy" decoding="async"/></picture></div><span class="live-media-caption">A view from the live site <span aria-hidden="true">↗</span></span><span class="sr-only"> (opens in a new tab)</span></a><div class="live-slide-copy"><p class="live-slide-index"><span>03</span> <span class="status-dot"></span> Live &amp; usable</p><p class="live-slide-category">Institutional / Economic Organization Website</p><h3>ACENDI DZ</h3><p class="live-slide-description">An Arabic RTL information space for an economic organization. News, leadership, activities and partners, clearly structured.</p><p class="live-slide-stack">Arabic RTL / Responsive design / Multilingual content</p><div class="live-slide-actions"><a href="https://acendi-dz.vercel.app/ar" target="_blank" rel="noopener noreferrer" class="text-link feature-cta">Visit live site <svg class="arrow-icon " width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.2"></path></svg><span class="sr-only"> (opens in a new tab)</span></a><details class="project-reading"><summary>Project notes <span aria-hidden="true">+</span></summary><div class="project-reading-content"><p>Responsive institutional UX with a multilingual content structure, news architecture and newsletter access.</p><p><span class="small-label">Built around</span>News &amp; organization information · Leadership &amp; team · Activities, events &amp; partners · Contact &amp; newsletter</p></div></details></div></div></article></div></div><nav class="gallery-project-index" aria-label="Choose a live project"><button type="button" aria-label="Show AUREA Nails by Yasmine" aria-current="true"><span>01</span> <!-- -->AUREA</button><button type="button" aria-label="Show TKI TEC"><span>02</span> <!-- -->TKI TEC</button><button type="button" aria-label="Show ACENDI DZ"><span>03</span> <!-- -->ACENDI</button></nav></div><div class="collection-next" data-status="upcoming"><span class="small-label">04<!-- --> / Next chapter</span><p>Upcoming live project<!-- --> <span>— Coming soon.</span></p></div></section><section class="playground-section wrap section-space" id="playground" aria-labelledby="playground-heading"><div class="section-label " data-reveal="true"><span class="section-number">03</span><span class="label-slash" aria-hidden="true">/</span><span>Playground / Hobby projects</span><span class="label-rule" aria-hidden="true"></span></div><div class="section-heading playground-heading" data-reveal="true"><h2 id="playground-heading">A little room to <em>play.</em></h2><p>Creative experiments, <span class="serif-italic">side projects and ideas.</span></p></div><div class="project-gallery project-gallery--archive" id="playground-gallery" data-autoplay="paused" data-reduced-motion="true" role="region" aria-roledescription="carousel" aria-label="Playground collection"><div class="gallery-toolbar"><div class="gallery-reading" aria-live="polite" aria-atomic="true"><span class="gallery-progress">01<!-- --> / <!-- -->08</span><span class="gallery-timer" aria-hidden="true"><span class=""></span></span><span class="gallery-current-title">Quantum</span></div><div class="gallery-navigation"><span class="gallery-hint" aria-hidden="true">Swipe / drag</span><button type="button" class="gallery-autoplay-control" aria-label="Pause automatic advance" aria-pressed="false" disabled=""><svg viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true"><path d="M5 3v10M11 3v10" stroke="currentColor" stroke-width="1.5"></path></svg></button><button type="button" class="gallery-arrow gallery-arrow--previous" aria-label="Previous experiment" aria-controls="playground-gallery-track" disabled=""><svg class="arrow-icon " width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.2"></path></svg></button><button type="button" class="gallery-arrow gallery-arrow--next" aria-label="Next experiment" aria-controls="playground-gallery-track"><svg class="arrow-icon " width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.2"></path></svg></button></div></div><div class="gallery-track" id="playground-gallery-track" tabindex="0" role="group" aria-label="Playground collection: use arrow keys to browse"><div class="gallery-slide" role="group" aria-roledescription="slide" aria-current="true" aria-label="1 of 8: Quantum"><article class="project-card archive-card project-card--quantum" data-status="experimental" data-project="quantum" data-crop="standard"><a href="https://zenimyoucef.github.io/zenimyoucef/quantum/index.html" target="_blank" rel="noopener noreferrer" class="project-media" aria-label="View Quantum demo"><picture><source type="image/avif" srcSet="/zenimyoucef/images/quantum-640.avif 640w, /zenimyoucef/images/quantum-960.avif 960w, /zenimyoucef/images/quantum-1280.avif 1280w" sizes="(max-width: 767px) 80vw, (max-width: 1199px) 42vw, 28vw"/><img src="/zenimyoucef/images/quantum-1280.webp" srcSet="/zenimyoucef/images/quantum-640.webp 640w, /zenimyoucef/images/quantum-960.webp 960w, /zenimyoucef/images/quantum-1280.webp 1280w" sizes="(max-width: 767px) 80vw, (max-width: 1199px) 42vw, 28vw" alt="Quantum demo product catalogue showing laptops, phones and headphones with configuration and purchase controls" width="1440" height="950" loading="lazy" decoding="async"/></picture><span class="media-view">Explore demo <svg class="arrow-icon " width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.2"></path></svg></span><span class="sr-only"> (opens in a new tab)</span></a><div class="archive-heading"><p class="small-label">Field study / <!-- -->01</p><h3>Quantum</h3></div><p class="archive-category">Premium tech / E-commerce concept</p><p class="archive-description">Configure, compare and discover technology for Algeria.</p><p class="archive-stack">HTML5 / CSS3 / JavaScript</p><div class="archive-actions"><a href="https://zenimyoucef.github.io/zenimyoucef/quantum/index.html" target="_blank" rel="noopener noreferrer" class="text-link">View demo <svg class="arrow-icon " width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.2"></path></svg><span class="sr-only"> (opens in a new tab)</span></a><details class="project-reading"><summary>Project notes <span aria-hidden="true">+</span></summary><div class="project-reading-content"><p>A recommendation quiz, order systems and an admin dashboard explore the full product journey, beyond a storefront.</p></div></details></div></article></div><div class="gallery-slide" role="group" aria-roledescription="slide" aria-label="2 of 8: Velora"><article class="project-card archive-card project-card--velora" data-status="experimental" data-project="velora" data-crop="portrait"><a href="https://zenimyoucef.github.io/zenimyoucef/velora/index.html" target="_blank" rel="noopener noreferrer" class="project-media" aria-label="View Velora demo"><picture><source type="image/avif" srcSet="/zenimyoucef/images/velora-640.avif 640w, /zenimyoucef/images/velora-960.avif 960w, /zenimyoucef/images/velora-1280.avif 1280w" sizes="(max-width: 767px) 80vw, (max-width: 1199px) 42vw, 28vw"/><img src="/zenimyoucef/images/velora-1280.webp" srcSet="/zenimyoucef/images/velora-640.webp 640w, /zenimyoucef/images/velora-960.webp 960w, /zenimyoucef/images/velora-1280.webp 1280w" sizes="(max-width: 767px) 80vw, (max-width: 1199px) 42vw, 28vw" alt="Velora fashion boutique demo showing its editorial typography and fashion imagery" width="1440" height="950" loading="lazy" decoding="async"/></picture><span class="media-view">Explore demo <svg class="arrow-icon " width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.2"></path></svg></span><span class="sr-only"> (opens in a new tab)</span></a><div class="archive-heading"><p class="small-label">Field study / <!-- -->02</p><h3>Velora</h3></div><p class="archive-category">Fashion / Editorial commerce</p><p class="archive-description">Editorial fashion, a personal style quiz and an outfit builder.</p><p class="archive-stack">HTML5 / CSS3 / JavaScript</p><div class="archive-actions"><a href="https://zenimyoucef.github.io/zenimyoucef/velora/index.html" target="_blank" rel="noopener noreferrer" class="text-link">View demo <svg class="arrow-icon " width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.2"></path></svg><span class="sr-only"> (opens in a new tab)</span></a><details class="project-reading"><summary>Project notes <span aria-hidden="true">+</span></summary><div class="project-reading-content"><p>Parallax, expressive typography and an admin dashboard with analytics complete the boutique concept.</p></div></details></div></article></div><div class="gallery-slide" role="group" aria-roledescription="slide" aria-label="3 of 8: Bistro Lumière"><article class="project-card archive-card project-card--bistro" data-status="experimental" data-project="bistro" data-crop="warm"><a href="https://zenimyoucef.github.io/zenimyoucef/bistro/index.html" target="_blank" rel="noopener noreferrer" class="project-media" aria-label="View Bistro Lumière demo"><picture><source type="image/avif" srcSet="/zenimyoucef/images/bistro-640.avif 640w, /zenimyoucef/images/bistro-960.avif 960w, /zenimyoucef/images/bistro-1280.avif 1280w" sizes="(max-width: 767px) 80vw, (max-width: 1199px) 42vw, 28vw"/><img src="/zenimyoucef/images/bistro-1280.webp" srcSet="/zenimyoucef/images/bistro-640.webp 640w, /zenimyoucef/images/bistro-960.webp 960w, /zenimyoucef/images/bistro-1280.webp 1280w" sizes="(max-width: 767px) 80vw, (max-width: 1199px) 42vw, 28vw" alt="Bistro Lumière restaurant demo with warm food photography and elegant serif typography" width="1440" height="950" loading="lazy" decoding="async"/></picture><span class="media-view">Explore demo <svg class="arrow-icon " width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.2"></path></svg></span><span class="sr-only"> (opens in a new tab)</span></a><div class="archive-heading"><p class="small-label">Field study / <!-- -->03</p><h3>Bistro Lumière</h3></div><p class="archive-category">Restaurant / Hospitality concept</p><p class="archive-description">Parisian dining, wine pairings and a reservation experience.</p><p class="archive-stack">HTML5 / CSS3 / JavaScript</p><div class="archive-actions"><a href="https://zenimyoucef.github.io/zenimyoucef/bistro/index.html" target="_blank" rel="noopener noreferrer" class="text-link">View demo <svg class="arrow-icon " width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.2"></path></svg><span class="sr-only"> (opens in a new tab)</span></a><details class="project-reading"><summary>Project notes <span aria-hidden="true">+</span></summary><div class="project-reading-content"><p>Warm photography, a parallax chef spotlight and an editorial gallery set the pace of this restaurant concept.</p></div></details></div></article></div><div class="gallery-slide" role="group" aria-roledescription="slide" aria-label="4 of 8: PULSE"><article class="project-card archive-card project-card--pulse" data-status="experimental" data-project="pulse" data-crop="interface"><a href="https://zenimyoucef.github.io/zenimyoucef/pulse/dist/index.html" target="_blank" rel="noopener noreferrer" class="project-media" aria-label="View PULSE demo"><picture><source type="image/avif" srcSet="/zenimyoucef/images/pulse-640.avif 640w, /zenimyoucef/images/pulse-960.avif 960w, /zenimyoucef/images/pulse-1280.avif 1280w" sizes="(max-width: 767px) 80vw, (max-width: 1199px) 42vw, 28vw"/><img src="/zenimyoucef/images/pulse-1280.webp" srcSet="/zenimyoucef/images/pulse-640.webp 640w, /zenimyoucef/images/pulse-960.webp 960w, /zenimyoucef/images/pulse-1280.webp 1280w" sizes="(max-width: 767px) 80vw, (max-width: 1199px) 42vw, 28vw" alt="PULSE fitness demo showing its BMI calculator with illustrative sample inputs" width="1440" height="950" loading="lazy" decoding="async"/></picture><span class="media-view">Explore demo <svg class="arrow-icon " width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.2"></path></svg></span><span class="sr-only"> (opens in a new tab)</span></a><div class="archive-heading"><p class="small-label">Field study / <!-- -->04</p><h3>PULSE</h3></div><p class="archive-category">Fitness / React application</p><p class="archive-description">Workout tracking and body metrics, with readable progress charts.</p><p class="archive-stack">React / React Router / Recharts</p><div class="archive-actions"><a href="https://zenimyoucef.github.io/zenimyoucef/pulse/dist/index.html" target="_blank" rel="noopener noreferrer" class="text-link">View demo <svg class="arrow-icon " width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.2"></path></svg><span class="sr-only"> (opens in a new tab)</span></a><details class="project-reading"><summary>Project notes <span aria-hidden="true">+</span></summary><div class="project-reading-content"><p>Built with reusable custom hooks, React Router navigation, Recharts visualizations and a challenge timer.</p></div></details></div></article></div><div class="gallery-slide" role="group" aria-roledescription="slide" aria-label="5 of 8: Nomad"><article class="project-card archive-card project-card--nomad" data-status="experimental" data-project="nomad" data-crop="landscape"><a href="https://zenimyoucef.github.io/zenimyoucef/nomad/index.html" target="_blank" rel="noopener noreferrer" class="project-media" aria-label="View Nomad demo"><picture><source type="image/avif" srcSet="/zenimyoucef/images/nomad-640.avif 640w, /zenimyoucef/images/nomad-960.avif 960w, /zenimyoucef/images/nomad-1280.avif 1280w" sizes="(max-width: 767px) 80vw, (max-width: 1199px) 42vw, 28vw"/><img src="/zenimyoucef/images/nomad-1280.webp" srcSet="/zenimyoucef/images/nomad-640.webp 640w, /zenimyoucef/images/nomad-960.webp 960w, /zenimyoucef/images/nomad-1280.webp 1280w" sizes="(max-width: 767px) 80vw, (max-width: 1199px) 42vw, 28vw" alt="Nomad travel magazine demo with destination photography and travel stories" width="1440" height="950" loading="lazy" decoding="async"/></picture><span class="media-view">Explore demo <svg class="arrow-icon " width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.2"></path></svg></span><span class="sr-only"> (opens in a new tab)</span></a><div class="archive-heading"><p class="small-label">Field study / <!-- -->05</p><h3>Nomad</h3></div><p class="archive-category">Travel / Digital magazine</p><p class="archive-description">Destination stories, immersive photography and a trip planner.</p><p class="archive-stack">HTML5 / CSS3 / JavaScript</p><div class="archive-actions"><a href="https://zenimyoucef.github.io/zenimyoucef/nomad/index.html" target="_blank" rel="noopener noreferrer" class="text-link">View demo <svg class="arrow-icon " width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.2"></path></svg><span class="sr-only"> (opens in a new tab)</span></a><details class="project-reading"><summary>Project notes <span aria-hidden="true">+</span></summary><div class="project-reading-content"><p>A slow Ken Burns hero and staggered destination cards bring a sense of discovery to an editorial travel experience.</p></div></details></div></article></div><div class="gallery-slide" role="group" aria-roledescription="slide" aria-label="6 of 8: Admin Pro"><article class="project-card archive-card project-card--admin" data-status="experimental" data-project="admin" data-crop="interface"><a href="https://zenimyoucef.github.io/zenimyoucef/admin-demo/index.html" target="_blank" rel="noopener noreferrer" class="project-media" aria-label="View Admin Pro demo"><picture><source type="image/avif" srcSet="/zenimyoucef/images/admin-640.avif 640w, /zenimyoucef/images/admin-960.avif 960w, /zenimyoucef/images/admin-1280.avif 1280w" sizes="(max-width: 767px) 80vw, (max-width: 1199px) 42vw, 28vw"/><img src="/zenimyoucef/images/admin-1280.webp" srcSet="/zenimyoucef/images/admin-640.webp 640w, /zenimyoucef/images/admin-960.webp 960w, /zenimyoucef/images/admin-1280.webp 1280w" sizes="(max-width: 767px) 80vw, (max-width: 1199px) 42vw, 28vw" alt="Admin Pro bilingual dashboard demo showing analytics charts and order management" width="1440" height="950" loading="lazy" decoding="async"/></picture><span class="media-view">Explore demo <svg class="arrow-icon " width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.2"></path></svg></span><span class="sr-only"> (opens in a new tab)</span></a><div class="archive-heading"><p class="small-label">Field study / <!-- -->06</p><h3>Admin Pro</h3></div><p class="archive-category">Administration / Interface study</p><p class="archive-description">Bilingual orders, products and analytics in one clear dashboard.</p><p class="archive-stack">JavaScript / Canvas API / CSS3</p><div class="archive-actions"><a href="https://zenimyoucef.github.io/zenimyoucef/admin-demo/index.html" target="_blank" rel="noopener noreferrer" class="text-link">View demo <svg class="arrow-icon " width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.2"></path></svg><span class="sr-only"> (opens in a new tab)</span></a><details class="project-reading"><summary>Project notes <span aria-hidden="true">+</span></summary><div class="project-reading-content"><p>Native canvas charts, dark and light themes and a mobile sidebar support this visual interface study.</p></div></details></div></article></div><div class="gallery-slide" role="group" aria-roledescription="slide" aria-label="7 of 8: Next experiment"><article class="upcoming-card archive-card" data-status="upcoming"><div class="archive-empty-print" aria-hidden="true"><span>↳</span><em>A page still<br/>taking shape.</em></div><p class="small-label">Coming soon</p><h3>Next experiment</h3><p>Another idea taking shape. A new field study will find its home here.</p><span class="upcoming-note">Playground / In progress</span></article></div><div class="gallery-slide" role="group" aria-roledescription="slide" aria-label="8 of 8: An open page"><article class="upcoming-card archive-card" data-status="upcoming"><div class="archive-empty-print" aria-hidden="true"><span>↳</span><em>A page still<br/>taking shape.</em></div><p class="small-label">Coming soon</p><h3>An open page</h3><p>A little space for curiosity. More experiments will join this evolving collection.</p><span class="upcoming-note">Playground / In progress</span></article></div></div></div><p class="playground-note"><span aria-hidden="true">↳</span> some ideas deserve to exist just because.</p></section></div><div class="reflection-spread wrap"><section class="about-section wrap section-space" id="about" aria-labelledby="about-heading"><div class="section-label " data-reveal="true"><span class="section-number">04</span><span class="label-slash" aria-hidden="true">/</span><span>Behind the pixels</span><span class="label-rule" aria-hidden="true"></span></div><div class="about-intro" data-reveal="true"><h2 id="about-heading">I care about<br/>clean code,<br/>beautiful interfaces<br/>and a <em>kinder internet.</em></h2><div class="about-copy"><p class="about-statement">I care about clean code, beautiful interfaces and digital products that feel considered.</p><p>I enjoy working where design and engineering meet — taking an idea from visual concept to functional product.</p><p>Sometimes that means an online store. Sometimes it’s a small experiment. The attention to detail stays the same.</p></div></div><details class="tools-section"><summary>Explore my working toolkit <span aria-hidden="true">+</span></summary><div class="tools-heading"><h3>Tools I use to build.</h3><span class="small-label">A working toolkit</span></div><div class="tools-grid"><div class="tool-group" data-reveal="true"><h4><span class="accent">0<!-- -->1</span> <!-- -->Frontend</h4><ul><li>HTML5 / CSS3</li><li>JavaScript ES6+</li><li>TypeScript</li><li>React</li><li>Next.js <span class="learning-note">learning</span></li></ul></div><div class="tool-group" data-reveal="true"><h4><span class="accent">0<!-- -->2</span> <!-- -->Backend / Logic</h4><ul><li>Node.js / Express</li><li>Python</li><li>REST APIs</li><li>JSON &amp; data handling</li><li>Authentication logic</li></ul></div><div class="tool-group" data-reveal="true"><h4><span class="accent">0<!-- -->3</span> <!-- -->Product / Commerce</h4><ul><li>Product catalogues</li><li>Carts &amp; wishlists</li><li>Checkout flows</li><li>Order management</li><li>Admin dashboards</li></ul></div><div class="tool-group" data-reveal="true"><h4><span class="accent">0<!-- -->4</span> <!-- -->Design / Experience</h4><ul><li>Responsive design</li><li>UI design</li><li>Animation</li><li>Micro-interactions</li><li>Dark / light interfaces</li></ul></div></div></details></section><figure class="reflection-landscape" aria-hidden="true"><img src="/zenimyoucef/images/mountain-640.webp" width="640" height="424" alt="" loading="lazy"/></figure><section class="process-section wrap section-space" id="process" aria-labelledby="process-heading"><div class="section-label " data-reveal="true"><span class="section-number">05</span><span class="label-slash" aria-hidden="true">/</span><span>My approach</span><span class="label-rule" aria-hidden="true"></span></div><h2 id="process-heading" data-reveal="true">Thoughtful<br class="mobile-break"/> from the start.</h2><ol class="process-index" data-reveal="true"><li><span class="phase-number">0<!-- -->1</span><span class="phase-node" aria-hidden="true"></span><div><h3>Understand</h3><p>Problems &amp; people.</p></div></li><li><span class="phase-number">0<!-- -->2</span><span class="phase-node" aria-hidden="true"></span><div><h3>Plan</h3><p>Structure &amp; technical direction.</p></div></li><li><span class="phase-number">0<!-- -->3</span><span class="phase-node" aria-hidden="true"></span><div><h3>Build</h3><p>Clean, scalable, intentional code.</p></div></li><li><span class="phase-number">0<!-- -->4</span><span class="phase-node" aria-hidden="true"></span><div><h3>Iterate</h3><p>Launch, learn, improve.</p></div></li></ol><p class="process-note">build. refine. repeat.</p></section></div></main><div class="contact-background"><section class="contact-section wrap" id="contact" aria-labelledby="contact-heading"><div class="section-label section-label--light" data-reveal="true"><span class="section-number">06</span><span class="label-slash" aria-hidden="true">/</span><span>Let’s connect</span><span class="label-rule" aria-hidden="true"></span></div><div class="contact-composition" data-reveal="true"><h2 id="contact-heading">Let’s build<br/>something<br/> <em>good.</em></h2><div class="contact-copy"><figure class="contact-fragment" aria-hidden="true"><img src="/zenimyoucef/images/mountain-640.webp" width="640" height="424" alt="" loading="lazy"/><figcaption>FIELD RECORD / 01 — REVISITED</figcaption></figure><p>Have a project, an idea, or just want to say hi? I’d love to hear from you.</p><a href="https://wa.me/213540753528" target="_blank" rel="noopener noreferrer" class="conversation-link">Start a conversation<!-- --> <span class="circle-arrow"><svg class="arrow-icon " width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.2"></path></svg></span><span class="sr-only"> (opens in a new tab)</span></a><div class="social-links"><a href="https://github.com/zenimyoucef" target="_blank" rel="noopener noreferrer" class="">GitHub<svg class="arrow-icon " width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.2"></path></svg><span class="sr-only"> (opens in a new tab)</span></a><a href="https://www.linkedin.com/in/zenim-youcef" target="_blank" rel="noopener noreferrer" class="">LinkedIn<svg class="arrow-icon " width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.2"></path></svg><span class="sr-only"> (opens in a new tab)</span></a><a href="https://wa.me/213540753528" target="_blank" rel="noopener noreferrer" class="">WhatsApp<svg class="arrow-icon " width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.2"></path></svg><span class="sr-only"> (opens in a new tab)</span></a></div><p class="contact-note">say hello.</p></div></div></section><footer class="footer wrap"><div class="footer-brand"><a class="brand" href="#top" aria-label="Zenim Youcef, back to top">ZENIM<span>.</span></a><p>Web developer &amp; designer<br/><span>Algeria / Available worldwide</span></p></div><div class="footer-meta"><span>© 2026 Zenim Youcef</span><a href="#top" class="back-to-top">Back to top <svg class="arrow-icon " width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="transform:rotate(-90deg)"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.2"></path></svg></a></div></footer></div></div>
+  </body>
 </html>

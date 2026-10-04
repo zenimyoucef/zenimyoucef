@@ -1,0 +1,51 @@
+[
+  {
+    "name": "quantum",
+    "url": "https://zenimyoucef.github.io/zenimyoucef/quantum/index.html",
+    "status": 200,
+    "title": "Quantum — Premium Technology",
+    "screenshot": "quantum.png"
+  },
+  {
+    "name": "tkitec",
+    "url": "https://www.tkitec.store/",
+    "status": 200,
+    "title": "Tki Tec - Elite PC Hardware & Accessories",
+    "screenshot": "tkitec.png"
+  },
+  {
+    "name": "bistro",
+    "url": "https://zenimyoucef.github.io/zenimyoucef/bistro/index.html",
+    "status": 200,
+    "title": "Bistro Lumière — Cuisine d'Exception | Alger",
+    "screenshot": "bistro.png"
+  },
+  {
+    "name": "velora",
+    "url": "https://zenimyoucef.github.io/zenimyoucef/velora/index.html",
+    "status": 200,
+    "title": "Velora — Mode Femme | Alger",
+    "screenshot": "velora.png"
+  },
+  {
+    "name": "pulse",
+    "url": "https://zenimyoucef.github.io/zenimyoucef/pulse/dist/index.html",
+    "status": 200,
+    "title": "PULSE — Track. Measure. Evolve.",
+    "screenshot": "pulse.png"
+  },
+  {
+    "name": "nomad",
+    "url": "https://zenimyoucef.github.io/zenimyoucef/nomad/index.html",
+    "status": 200,
+    "title": "NOMAD — Wander Further | Travel Magazine",
+    "screenshot": "nomad.png"
+  },
+  {
+    "name": "admin",
+    "url": "https://zenimyoucef.github.io/zenimyoucef/admin-demo/index.html",
+    "status": 200,
+    "title": "Admin Pro — Dashboard Demo",
+    "screenshot": "admin.png"
+  }
+]

@@ -1,0 +1,218 @@
+const original = "https://zenimyoucef.github.io/zenimyoucef/";
+
+export const projects = [
+  {
+    id: "aurea",
+    title: "AUREA Nails by Yasmine",
+    indexTitle: "AUREA",
+    category: "Beauty Salon / Booking Website",
+    type: "Service business",
+    status: "live",
+    featured: true,
+    order: 1,
+    tone: "beauty",
+    summary: "Salon services, a curated manicure gallery and a personal booking journey, with date selection and WhatsApp confirmation.",
+    subtitle: "Beauty, considered down to the details",
+    role: "Web development & interface design",
+    description:
+      "An elegant salon experience, from discovering services and browsing the manicure gallery to choosing an appointment. A polished, responsive journey designed around personal care.",
+    longDescription:
+      "Service selection, date and time availability, and a customer details form lead into a WhatsApp confirmation flow. About and contact sections introduce the salon and make the next step feel personal.",
+    stack: ["Responsive design", "Appointment booking", "WhatsApp confirmation"],
+    capabilities: ["Salon services & gallery", "Date / time selection", "Customer details form", "About & contact"],
+    image: "aurea",
+    imageAlt: "Actual AUREA Nails by Yasmine website showing salon photography, its manicure gallery and appointment booking form",
+    liveUrl: "https://aureanails.vercel.app/",
+    sourceUrl: null,
+  },
+  {
+    id: "tkitec",
+    title: "TKI TEC",
+    category: "PC Hardware / E-Commerce Platform",
+    type: "E-commerce",
+    status: "live",
+    featured: false,
+    order: 2,
+    tone: "commerce",
+    summary: "Prebuilt PCs, components and a PC builder. A responsive hardware storefront with product discovery and WhatsApp ordering.",
+    subtitle: "Commerce / Hardware & discovery",
+    role: "Web development & interface design",
+    description:
+      "A storefront for high-performance hardware. Browse prebuilt PCs, components and accessories by category, discover products, and order or enquire through WhatsApp.",
+    longDescription:
+      "A PC builder and detailed product discovery help shoppers explore their next setup. Responsive storefront design keeps the catalogue usable across screens.",
+    stack: ["HTML5", "CSS3", "JavaScript"],
+    capabilities: [
+      "Product catalogue",
+      "Category browsing",
+      "Prebuilt PCs & components",
+      "WhatsApp orders & enquiries",
+      "PC builder",
+    ],
+    image: "tkitec",
+    imageAlt:
+      "Actual TKI TEC storefront, showing its gaming PC hero and hardware categories",
+    liveUrl: "https://tkitec.store/",
+    sourceUrl: null,
+  },
+  {
+    id: "acendi",
+    title: "ACENDI DZ",
+    indexTitle: "ACENDI",
+    category: "Institutional / Economic Organization Website",
+    subtitle: "Institutional / An Arabic-first information space",
+    status: "live",
+    featured: false,
+    order: 3,
+    tone: "institutional",
+    summary: "An Arabic RTL information space for an economic organization. News, leadership, activities and partners, clearly structured.",
+    layout: "secondary-feature",
+    description: "An Arabic RTL website for an economic organization. A clear institutional structure brings together news, organization information, leadership, activities and events, partners, and contact details.",
+    longDescription: "Responsive institutional UX with a multilingual content structure, news architecture and newsletter access.",
+    liveUrl: "https://acendi-dz.vercel.app/ar",
+    image: "acendi",
+    imageAlt: "ACENDI institutional and economic organization website, Arabic homepage",
+    stack: ["Arabic RTL", "Responsive design", "Multilingual content"],
+    capabilities: ["News & organization information", "Leadership & team", "Activities, events & partners", "Contact & newsletter"],
+  },
+  {
+    id: "quantum",
+    order: 1,
+    summary: "Configure, compare and discover technology for Algeria.",
+    layout: "featured",
+    title: "Quantum",
+    category: "Premium tech / E-commerce concept",
+    type: "E-commerce concept",
+    status: "experimental",
+    featured: false,
+    description:
+      "An Apple-inspired tech store for Algeria, with product configuration, device comparison and an installment calculator.",
+    longDescription:
+      "A recommendation quiz, order systems and an admin dashboard explore the full product journey, beyond a storefront.",
+    stack: ["HTML5", "CSS3", "JavaScript"],
+    image: "quantum",
+    imageAlt:
+      "Quantum demo product catalogue showing laptops, phones and headphones with configuration and purchase controls",
+    liveUrl: `${original}quantum/index.html`,
+    sourceUrl: null,
+  },
+  {
+    id: "velora",
+    order: 2,
+    crop: "portrait",
+    summary: "Editorial fashion, a personal style quiz and an outfit builder.",
+    title: "Velora",
+    category: "Fashion / Editorial commerce",
+    type: "Fashion concept",
+    status: "experimental",
+    featured: false,
+    description:
+      "A fashion boutique with an editorial eye. A style quiz, outfit builder and size guide make browsing more personal.",
+    longDescription:
+      "Parallax, expressive typography and an admin dashboard with analytics complete the boutique concept.",
+    stack: ["HTML5", "CSS3", "JavaScript"],
+    image: "velora",
+    imageAlt:
+      "Velora fashion boutique demo showing its editorial typography and fashion imagery",
+    liveUrl: `${original}velora/index.html`,
+    sourceUrl: null,
+  },
+  {
+    id: "bistro",
+    order: 3,
+    crop: "warm",
+    summary: "Parisian dining, wine pairings and a reservation experience.",
+    title: "Bistro Lumière",
+    category: "Restaurant / Hospitality concept",
+    type: "Restaurant concept",
+    status: "experimental",
+    featured: false,
+    description:
+      "A little Parisian atmosphere, translated to the web. A menu timeline, wine pairings and a reservation experience.",
+    longDescription:
+      "Warm photography, a parallax chef spotlight and an editorial gallery set the pace of this restaurant concept.",
+    stack: ["HTML5", "CSS3", "JavaScript"],
+    image: "bistro",
+    imageAlt:
+      "Bistro Lumière restaurant demo with warm food photography and elegant serif typography",
+    liveUrl: `${original}bistro/index.html`,
+    sourceUrl: null,
+  },
+  {
+    id: "pulse",
+    order: 4,
+    crop: "interface",
+    summary: "Workout tracking and body metrics, with readable progress charts.",
+    title: "PULSE",
+    category: "Fitness / React application",
+    type: "Fitness experiment",
+    status: "experimental",
+    featured: false,
+    description:
+      "An exercise in useful data. Workout tracking, BMI and body metrics, with trend charts that make progress readable.",
+    longDescription:
+      "Built with reusable custom hooks, React Router navigation, Recharts visualizations and a challenge timer.",
+    stack: ["React", "React Router", "Recharts"],
+    image: "pulse",
+    imageAlt:
+      "PULSE fitness demo showing its BMI calculator with illustrative sample inputs",
+    liveUrl: `${original}pulse/dist/index.html`,
+    sourceUrl: null,
+  },
+  {
+    id: "nomad",
+    order: 5,
+    crop: "landscape",
+    summary: "Destination stories, immersive photography and a trip planner.",
+    layout: "featured",
+    title: "Nomad",
+    category: "Travel / Digital magazine",
+    type: "Travel concept",
+    status: "experimental",
+    featured: false,
+    description:
+      "For the curious. A travel magazine with destination stories, overlapping galleries and a trip planner.",
+    longDescription:
+      "A slow Ken Burns hero and staggered destination cards bring a sense of discovery to an editorial travel experience.",
+    stack: ["HTML5", "CSS3", "JavaScript"],
+    image: "nomad",
+    imageAlt:
+      "Nomad travel magazine demo with destination photography and travel stories",
+    liveUrl: `${original}nomad/index.html`,
+    sourceUrl: null,
+  },
+  {
+    id: "admin",
+    order: 6,
+    crop: "interface",
+    summary: "Bilingual orders, products and analytics in one clear dashboard.",
+    title: "Admin Pro",
+    category: "Administration / Interface study",
+    type: "Dashboard demo",
+    status: "experimental",
+    featured: false,
+    description:
+      "Making the everyday readable. Orders, products and analytics presented in a bilingual EN/FR visual dashboard demo.",
+    longDescription:
+      "Native canvas charts, dark and light themes and a mobile sidebar support this visual interface study.",
+    stack: ["JavaScript", "Canvas API", "CSS3"],
+    image: "admin",
+    imageAlt:
+      "Admin Pro bilingual dashboard demo showing analytics charts and order management",
+    liveUrl: `${original}admin-demo/index.html`,
+    sourceUrl: null,
+  },
+];
+
+export const upcomingProjects = [
+  { id: "next-live", title: "Upcoming live project", collection: "live", order: 4, description: "Coming soon. A new build will join the collection here." },
+  { id: "next-experiment", title: "Next experiment", collection: "playground", order: 7, description: "Another idea taking shape. A new field study will find its home here." },
+  { id: "future-experiment", title: "An open page", collection: "playground", order: 8, description: "A little space for curiosity. More experiments will join this evolving collection." },
+].map((project) => ({ ...project, status: "upcoming", featured: false }));
+
+export const liveProjects = projects.filter(
+  (project) => project.status === "live",
+).sort((a, b) => a.order - b.order);
+export const experiments = projects.filter(
+  (project) => project.status === "experimental",
+).sort((a, b) => a.order - b.order);

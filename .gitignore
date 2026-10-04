@@ -1,8 +1,7 @@
 node_modules/
-pulse/node_modules/
-/dist/
-.env
-*.log
+dist/
+artifacts/
+*.local
 .DS_Store
-Thumbs.db
-nul
+docs/references/original-repository/
+docs/references/original-repository.zip

@@ -1,0 +1,29 @@
+{
+  "name": "zenim-editorial-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build && node scripts/prerender.mjs",
+    "preview": "vite preview --host 127.0.0.1",
+    "check:build": "node scripts/check-build.mjs",
+    "test:menu": "node tests/browser.mjs --menu-only",
+    "test:refinements": "node tests/refinements.mjs",
+    "test:galleries": "node tests/galleries.mjs",
+    "test:autoplay": "node tests/autoplay.mjs",
+    "test:deployment": "node tests/deployment.mjs",
+    "test": "node tests/browser.mjs"
+  },
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
+    "@playwright/test": "^1.56.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "sharp": "^0.35.5",
+    "vite": "^7.1.0"
+  }
+}
