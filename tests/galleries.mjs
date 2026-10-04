@@ -43,8 +43,29 @@ try {
   await expect(details).toContainText("WhatsApp");
   const archive = page.locator("#playground-gallery");
   await archive.scrollIntoViewIfNeeded();
-  await expect(archive.locator('[data-status="experimental"]')).toHaveCount(6);
+  await expect(archive.locator('[data-status="experimental"]')).toHaveCount(7);
   await expect(archive.locator('[data-status="upcoming"]')).toHaveCount(2);
+  const cards = archive.locator('[data-status="experimental"]');
+  assert.deepEqual(await cards.locator("h3").allTextContents(), ["Quantum", "Velora", "HZ Fashion", "Bistro Lumi\u00e8re", "PULSE", "Nomad", "Admin Pro"]);
+  const slugs = ["quantum", "velora", "hz-fashion", "bistro", "pulse", "nomad", "admin-demo"];
+  for (let index = 0; index < slugs.length; index++) {
+    const card = cards.nth(index);
+    await expect(card.locator(".project-media")).toHaveAttribute("href", "/zenimyoucef/" + slugs[index] + "/");
+    await expect(card.locator(".small-label").first()).toHaveText("Field study / " + String(index + 1).padStart(2, "0"));
+    const img = card.locator("img");
+    await img.evaluate(el => { el.loading = "eager"; });
+    await img.evaluate(el => el.decode());
+    const image = await img.evaluate(el => ({ position: getComputedStyle(el).objectPosition, fit: getComputedStyle(el).objectFit, source: el.currentSrc }));
+    assert.equal(image.position, "50% 0%");
+    assert.equal(image.fit, "cover");
+    assert.ok(image.source.includes("-hero-"));
+  }
+  const partial = await archive.locator(".gallery-track").evaluate(track => {
+    const right = track.getBoundingClientRect().right;
+    return [...track.children].some(slide => { const box = slide.getBoundingClientRect(); return box.left < right - 2 && box.right > right + 2; });
+  });
+  assert.ok(partial, "Desktop keeps a partial next card visible");
+  await archive.screenshot({ path: "artifacts/playground-updated-desktop.png" });
   await archive.getByRole("button", { name: "Next experiment" }).click();
   assert.ok(await archive.locator(".gallery-track").evaluate(el => el.scrollLeft > 0), "Playground controls reveal more entries");
   const archiveTrack = archive.locator(".gallery-track");
@@ -80,6 +101,25 @@ try {
   await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
   await expect(mobile.locator("#live-gallery .gallery-progress")).toHaveText("02 / 03");
   assert.ok(await mobile.evaluate(() => document.documentElement.scrollWidth <= innerWidth), "Rails do not overflow the mobile document");
+  const mobileArchive = mobile.locator("#playground-gallery");
+  await mobileArchive.scrollIntoViewIfNeeded();
+  const mobilePartial = await mobileArchive.locator(".gallery-track").evaluate(track => {
+    const right = track.getBoundingClientRect().right;
+    return [...track.children].some(slide => { const box = slide.getBoundingClientRect(); return box.left < right - 2 && box.right > right + 2; });
+  });
+  assert.ok(mobilePartial, "Mobile keeps a partial next card visible");
+  await mobileArchive.screenshot({ path: "artifacts/playground-updated-mobile.png" });
+  const playgroundTrack = mobileArchive.locator(".gallery-track");
+  const playgroundBox = await playgroundTrack.boundingBox();
+  const px = playgroundBox.x + playgroundBox.width * .85;
+  const py = Math.max(100, playgroundBox.y + 140);
+  await cdp.send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: [{ x: px, y: py }] });
+  for (let i = 1; i <= 12; i++) {
+    await cdp.send("Input.dispatchTouchEvent", { type: "touchMove", touchPoints: [{ x: px - i * 23, y: py }] });
+    await mobile.waitForTimeout(20);
+  }
+  await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+  await expect(mobileArchive.locator(".gallery-progress")).toHaveText("02 / 09");
   await context.close();
   console.log("PASS: gallery arrows, order, boundaries, keyboard, mouse drag, touch swipe, details and skip-link focus.");
 } finally {

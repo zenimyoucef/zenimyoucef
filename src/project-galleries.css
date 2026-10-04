@@ -162,3 +162,7 @@
   .gallery-arrow--next:hover:not(:disabled) svg { transform: none; }
   .gallery-arrow--previous:hover:not(:disabled) svg { transform: rotate(180deg); }
 }
+
+/* Show the opening viewport consistently across Playground previews. */
+.project-gallery .archive-card .project-media img,
+.project-gallery .archive-card[data-crop] .project-media img { object-fit: cover; object-position: top center; transform-origin: top center; }

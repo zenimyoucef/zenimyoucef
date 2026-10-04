@@ -81,7 +81,7 @@ try {
   await page.locator(".brand").first().evaluate(el => el.focus({ preventScroll: true }));
   await page.mouse.move(1, 1);
   await page.clock.runFor(6500);
-  await expect(archive.locator(".gallery-progress")).toHaveText("01 / 08");
+  await expect(archive.locator(".gallery-progress")).toHaveText("01 / 09");
 
   const mobileContext = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, reducedMotion: "no-preference" });
   const mobile = await mobileContext.newPage();

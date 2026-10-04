@@ -1,4 +1,4 @@
-const original = "https://zenimyoucef.github.io/zenimyoucef/";
+const original = "/zenimyoucef/";
 
 export const projects = [
   {
@@ -90,10 +90,10 @@ export const projects = [
     longDescription:
       "A recommendation quiz, order systems and an admin dashboard explore the full product journey, beyond a storefront.",
     stack: ["HTML5", "CSS3", "JavaScript"],
-    image: "quantum",
+    image: "quantum-hero",
     imageAlt:
-      "Quantum demo product catalogue showing laptops, phones and headphones with configuration and purchase controls",
-    liveUrl: `${original}quantum/index.html`,
+      "Quantum opening launch hero with premium technology branding and product imagery",
+    liveUrl: `${original}quantum/`,
     sourceUrl: null,
   },
   {
@@ -111,15 +111,31 @@ export const projects = [
     longDescription:
       "Parallax, expressive typography and an admin dashboard with analytics complete the boutique concept.",
     stack: ["HTML5", "CSS3", "JavaScript"],
-    image: "velora",
+    image: "velora-hero",
     imageAlt:
       "Velora fashion boutique demo showing its editorial typography and fashion imagery",
-    liveUrl: `${original}velora/index.html`,
+    liveUrl: `${original}velora/`,
+    sourceUrl: null,
+  },
+  {
+    id: "hz-fashion",
+    order: 3,
+    summary: "A fashion campaign, curated collections and a personal shopping experience.",
+    title: "HZ Fashion",
+    category: "Fashion / Contemporary storefront",
+    type: "Fashion concept",
+    status: "experimental",
+    featured: false,
+    description: "A contemporary fashion storefront with campaign imagery, collection browsing and product quick views.",
+    stack: ["React", "Tailwind CSS", "JavaScript"],
+    image: "hz-fashion-hero",
+    imageAlt: "HZ Fashion opening campaign with fashion photography and storefront navigation",
+    liveUrl: `${original}hz-fashion/`,
     sourceUrl: null,
   },
   {
     id: "bistro",
-    order: 3,
+    order: 4,
     crop: "warm",
     summary: "Parisian dining, wine pairings and a reservation experience.",
     title: "Bistro Lumière",
@@ -132,15 +148,15 @@ export const projects = [
     longDescription:
       "Warm photography, a parallax chef spotlight and an editorial gallery set the pace of this restaurant concept.",
     stack: ["HTML5", "CSS3", "JavaScript"],
-    image: "bistro",
+    image: "bistro-hero",
     imageAlt:
       "Bistro Lumière restaurant demo with warm food photography and elegant serif typography",
-    liveUrl: `${original}bistro/index.html`,
+    liveUrl: `${original}bistro/`,
     sourceUrl: null,
   },
   {
     id: "pulse",
-    order: 4,
+    order: 5,
     crop: "interface",
     summary: "Workout tracking and body metrics, with readable progress charts.",
     title: "PULSE",
@@ -153,15 +169,15 @@ export const projects = [
     longDescription:
       "Built with reusable custom hooks, React Router navigation, Recharts visualizations and a challenge timer.",
     stack: ["React", "React Router", "Recharts"],
-    image: "pulse",
+    image: "pulse-hero",
     imageAlt:
-      "PULSE fitness demo showing its BMI calculator with illustrative sample inputs",
-    liveUrl: `${original}pulse/dist/index.html`,
+      "PULSE opening fitness dashboard showing workout tracking and progress metrics",
+    liveUrl: `${original}pulse/`,
     sourceUrl: null,
   },
   {
     id: "nomad",
-    order: 5,
+    order: 6,
     crop: "landscape",
     summary: "Destination stories, immersive photography and a trip planner.",
     layout: "featured",
@@ -175,15 +191,15 @@ export const projects = [
     longDescription:
       "A slow Ken Burns hero and staggered destination cards bring a sense of discovery to an editorial travel experience.",
     stack: ["HTML5", "CSS3", "JavaScript"],
-    image: "nomad",
+    image: "nomad-hero",
     imageAlt:
       "Nomad travel magazine demo with destination photography and travel stories",
-    liveUrl: `${original}nomad/index.html`,
+    liveUrl: `${original}nomad/`,
     sourceUrl: null,
   },
   {
     id: "admin",
-    order: 6,
+    order: 7,
     crop: "interface",
     summary: "Bilingual orders, products and analytics in one clear dashboard.",
     title: "Admin Pro",
@@ -196,18 +212,18 @@ export const projects = [
     longDescription:
       "Native canvas charts, dark and light themes and a mobile sidebar support this visual interface study.",
     stack: ["JavaScript", "Canvas API", "CSS3"],
-    image: "admin",
+    image: "admin-hero",
     imageAlt:
       "Admin Pro bilingual dashboard demo showing analytics charts and order management",
-    liveUrl: `${original}admin-demo/index.html`,
+    liveUrl: `${original}admin-demo/`,
     sourceUrl: null,
   },
 ];
 
 export const upcomingProjects = [
   { id: "next-live", title: "Upcoming live project", collection: "live", order: 4, description: "Coming soon. A new build will join the collection here." },
-  { id: "next-experiment", title: "Next experiment", collection: "playground", order: 7, description: "Another idea taking shape. A new field study will find its home here." },
-  { id: "future-experiment", title: "An open page", collection: "playground", order: 8, description: "A little space for curiosity. More experiments will join this evolving collection." },
+  { id: "next-experiment", title: "Next experiment", collection: "playground", order: 8, description: "Another idea taking shape. A new field study will find its home here." },
+  { id: "future-experiment", title: "An open page", collection: "playground", order: 9, description: "A little space for curiosity. More experiments will join this evolving collection." },
 ].map((project) => ({ ...project, status: "upcoming", featured: false }));
 
 export const liveProjects = projects.filter(
