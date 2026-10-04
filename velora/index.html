@@ -333,6 +333,7 @@ footer p{font-size:0.6rem;}
 <link rel="stylesheet" href="design.css">
 <link rel="stylesheet" href="fonts.css">
 <link rel="stylesheet" href="catalog.css">
+<link rel="stylesheet" href="mobile.css">
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400&display=swap" rel="stylesheet"></head>
 <body>
 <div class="top-bar"><span> Livraison Alger</span><span>🚚 Gratuite dès 50,000 DZD</span><span>💳 Paiement à la livraison</span></div>
@@ -343,7 +344,7 @@ footer p{font-size:0.6rem;}
 <div class="header-actions">
 <button class="search-toggle" onclick="toggleSearch()" aria-label="Rechercher"><span>Rechercher</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="10" cy="10" r="6.5"/><path d="m15 15 6 6"/></svg></button>
 <a class="account-link" href="#commande">Compte</a>
-<button class="bag-toggle" onclick="toggleCart()" aria-label="Panier">Panier (<span class="cart-badge" id="cartBadge">0</span>)</button>
+<button class="bag-toggle" onclick="toggleCart()" aria-label="Panier"><svg class="mobile-bag-icon" viewBox="0 0 28 32" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M5 10h18l1 19H4L5 10Z"/><path d="M9 11V7a5 5 0 0 1 10 0v4"/></svg>Panier (<span class="cart-badge" id="cartBadge">0</span>)</button>
 <button class="menu-toggle" id="menuToggle" onclick="toggleNav()" aria-label="Ouvrir le menu" aria-expanded="false"><span></span><span></span><span></span></button>
 </div></header>
 <div class="search-panel" id="searchPanel" hidden><label for="productSearch">Rechercher une pièce</label><div><input id="productSearch" type="search" placeholder="Robe, laine, sac…" oninput="searchCollection(this.value)"><button onclick="toggleSearch()" aria-label="Fermer la recherche">✕</button></div><p id="searchStatus" aria-live="polite"></p></div>
@@ -567,8 +568,8 @@ function removeFromCart(id){cart=cart.filter(function(x){return x.id!==id;});upd
 function toggleCart(){document.getElementById('cartOverlay').classList.toggle('open');document.getElementById('cartSidebar').classList.toggle('open');}
 
 /* ── Navigation ── */
-function toggleNav(){document.getElementById('nav').classList.toggle('open');document.getElementById('navOverlay').classList.toggle('open');document.getElementById('menuToggle').classList.toggle('open');}
-function closeNav(){document.getElementById('nav').classList.remove('open');document.getElementById('navOverlay').classList.remove('open');document.getElementById('menuToggle').classList.remove('open');}
+function toggleNav(){document.getElementById('nav').classList.toggle('open');document.getElementById('navOverlay').classList.toggle('open');document.getElementById('menuToggle').classList.toggle('open');document.getElementById('menuToggle').setAttribute('aria-expanded',document.getElementById('nav').classList.contains('open'));}
+function closeNav(){document.getElementById('nav').classList.remove('open');document.getElementById('navOverlay').classList.remove('open');document.getElementById('menuToggle').classList.remove('open');document.getElementById('menuToggle').setAttribute('aria-expanded','false');}
 function showToast(i,m){var t=document.getElementById('toast');document.getElementById('toastMsg').textContent=i+' '+m;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2500);}
 
 /* ── Style Quiz ── */

@@ -13,11 +13,20 @@ const previewNote=document.createElement('p');previewNote.className='catalog-pre
 function renderProducts(){
  let visible=products.filter(p=>filter==='all'||filter==='wishlist'&&isInWishlist(p.id)||p.cat===filter);
  if(productSearchTerm)visible=visible.filter(p=>`${p.name} ${p.desc} ${p.materiau}`.toLocaleLowerCase('fr').includes(productSearchTerm));
+ const sort=document.querySelector('.sort-select').value;
+ if(sort==='low-high')visible=[...visible].sort((a,b)=>a.price-b.price);
+ else if(sort==='high-low')visible=[...visible].sort((a,b)=>b.price-a.price);
+ else if(matchMedia('(max-width:768px)').matches&&filter==='all'&&!productSearchTerm){
+  const editorialOrder=[11,12,13,3];
+  visible=[...visible].sort((a,b)=>(editorialOrder.includes(a.id)?editorialOrder.indexOf(a.id):editorialOrder.length)-(editorialOrder.includes(b.id)?editorialOrder.indexOf(b.id):editorialOrder.length));
+ }
  document.getElementById('skeletonGrid').style.display='none';
  const grid=document.getElementById('productGrid');grid.style.display='grid';
  document.getElementById('searchStatus').textContent=`${visible.length} pièce${visible.length===1?'':'s'}`;
  grid.innerHTML=visible.length?visible.map(p=>`<article class="lookbook-item" data-product="${p.id}"><button class="wishlist-heart ${isInWishlist(p.id)?'active':''}" onclick="toggleWishlist(${p.id})" aria-label="${isInWishlist(p.id)?'Retirer des':'Ajouter aux'} favoris : ${p.name}" aria-pressed="${isInWishlist(p.id)}"><span aria-hidden="true">${isInWishlist(p.id)?'♥':'♡'}</span></button><button class="lb-img-wrap" onclick="quickView(${p.id})" aria-label="Découvrir ${p.name}"><img src="${p.img}" alt="${p.name}" width="600" height="800" loading="lazy"></button><div class="lb-info"><p class="lb-cat">${catalogLabels[p.cat]}</p><h3>${p.name}</h3><p class="lb-price">${fmtDZD(p.price)}</p><div class="product-actions"><button class="btn btn-primary" onclick="quickView(${p.id})">Choisir ma taille</button><button class="btn btn-secondary" onclick="quickView(${p.id})">Aperçu</button></div></div></article>`).join(''):'<div class="catalog-empty"><p>Aucune pièce ne correspond à votre recherche.</p><button class="btn btn-secondary" onclick="resetCatalog()">Voir toute la collection</button></div>';
 }
+function sortProducts(){renderProducts();}
+matchMedia('(max-width:768px)').addEventListener('change',()=>renderProducts());
 function resetCatalog(){filter='all';productSearchTerm='';document.getElementById('productSearch').value='';document.querySelectorAll('.filter-links a').forEach((a,i)=>a.classList.toggle('active',i===0));renderProducts();}
 function addToCart(id){quickView(id);}
 const originalQuickView=quickView;
