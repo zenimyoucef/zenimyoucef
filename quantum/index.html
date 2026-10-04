@@ -2,7 +2,8 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Quantum — Premium Technology</title>
+<title>Quantum — Votre univers tech en Algérie</title>
+<meta name="description" content="Découvrez les PC portables, smartphones et casques Quantum. Comparez les appareils, trouvez votre modèle et commandez en DZD avec livraison en Algérie.">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -176,89 +177,61 @@ nav.open{opacity:1;transform:translateY(0);pointer-events:all;}
 @media(max-width:480px){.hero h1{font-size:1.5rem;}}
 </style>
 <script src="buynow.js"></script>
+<link rel="stylesheet" href="design.css">
+<link rel="stylesheet" href="showroom.css">
 </head>
 <body>
-<div class="ambient"><div class="orb"></div><div class="orb"></div><div class="orb"></div></div>
-
-<div class="top-bar"><span>🇩🇿 Quantum</span><span>🚚 Livraison <strong>gratuite</strong> dès 100,000 DZD</span><span>🔒 Paiement sécurisé</span></div>
-
+<a class="skip-link" href="#products">Aller aux produits</a>
+<div class="top-bar"><span><i data-icon="truck"></i> Livraison gratuite dès 100 000 DZD</span><span><i data-icon="shield"></i> Paiement sécurisé</span><span><i data-icon="badge"></i> Garantie 1 à 2 ans</span><span><i data-icon="headphones"></i> Support client en Algérie</span><span class="country">🇩🇿 &nbsp; DZ ⌄</span></div>
 <header id="header">
-<div class="logo"><span class="q">Q</span>uantum</div>
-<nav id="nav"><a href="#products">Produits</a><a href="#quiz">Quiz</a><a href="#reviews">Avis</a><a href="#aftersales">SAV</a></nav>
-<div class="header-right">
-<button onclick="toggleNav()" id="menuToggle" aria-label="Menu">☰</button>
-<button onclick="toggleTheme()" id="themeBtn" aria-label="Thème">🌙</button>
-<button onclick="toggleCart()" aria-label="Panier">🛒<span class="cart-badge" id="cartBadge">0</span></button>
-</div>
+<button onclick="toggleNav()" id="menuToggle" aria-label="Ouvrir le menu" aria-expanded="false"><i data-icon="menu"></i></button>
+<a class="logo" href="./" aria-label="Quantum, accueil"><span class="q">Q</span>uantum</a>
+<nav id="nav" aria-label="Navigation principale"><a href="#products" onclick="selectCategory('all')">Produits ⌄</a><a href="#products" onclick="selectCategory('laptops')">PC Portables</a><a href="#products" onclick="selectCategory('phones')">Smartphones</a><a href="#products" onclick="selectCategory('audio')">Audio</a><a href="#quiz" onclick="chooseNeed('play')">Gaming</a><a href="#products" onclick="selectCategory('audio')">Accessoires</a><a href="#quiz">Quiz</a><a href="#compare">Comparer</a><a href="#aftersales">SAV</a><button onclick="toggleTheme()" id="themeBtn" aria-label="Changer le thème">☾</button></nav>
+<div class="header-right"><button class="search-access" onclick="focusSearch()" aria-label="Rechercher un produit"><i data-icon="search"></i></button><button onclick="showWishlist()" aria-label="Voir mes favoris"><i data-icon="heart"></i><span class="cart-badge" id="wishlistBadge">0</span></button><button onclick="toggleCart()" aria-label="Ouvrir le panier"><i data-icon="cart"></i><span class="cart-badge" id="cartBadge">0</span></button><a class="account-access" href="admin.html" aria-label="Espace administrateur"><i data-icon="user"></i></a></div>
 </header>
 <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
-
-<section class="hero">
-<div class="hero-bg"></div>
-<div class="hero-inner">
-<span class="badge">✦ Flagship 2026</span>
-<h1>La Technologie<br><span class="grad">Repensée.</span></h1>
-<p>Découvrez le meilleur de l'innovation. Performances de pointe, design élégant — livré chez vous à Alger.</p>
-<div style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeU .8s ease .9s forwards;">
-<a href="#products" class="btn btn-accent">Voir les Produits</a>
-<a href="#quiz" class="btn btn-ghost">Quiz →</a>
+<div class="mobile-reassurance"><span><i data-icon="truck"></i><b>Livraison gratuite<small>Dès 100 000 DZD</small></b></span><span><i data-icon="shield"></i><b>Paiement sécurisé<small>À la livraison · CCP</small></b></span><span><i data-icon="headphones"></i><b>Support client<small>en Algérie</small></b></span></div>
+<main>
+<section class="showroom" aria-labelledby="showroomTitle">
+<div class="showroom-grid">
+<div class="central-stage">
+<p class="stage-eyebrow">LA TECHNOLOGIE POUR DEMAIN</p>
+<h1 id="showroomTitle">Vos Idées Méritent<br><span>Plus de Puissance</span></h1>
+<p class="stage-subtitle">PC portables, smartphones, audio et plus encore.<br>Votre univers tech, livré en Algérie.</p>
+<form class="hero-search" onsubmit="searchProducts(event)"><label class="sr-only" for="productSearch">Rechercher un produit</label><i data-icon="search"></i><input id="productSearch" type="search" placeholder="Rechercher un produit, une marque, ou une référence…" autocomplete="off"><button type="submit">Rechercher</button></form>
+<div class="popular-searches" aria-label="Recherches populaires"><span>Recherches populaires :</span><button onclick="quickSearch('laptops')">MacBook</button><button onclick="quickSearch('phones')">iPhone</button><button onclick="chooseNeed('play')">Gaming</button><button onclick="quickSearch('audio')">Casque</button><button onclick="quickSearch('chargeur')">Chargeur</button></div>
+<div class="stage-art"><img src="assets/showroom-stage.webp" alt="Un ordinateur portable, un smartphone et un casque réunis sur un podium bleu lumineux" width="1200" height="800" fetchpriority="high"><span class="stage-note note-left">Performance<br>sans limites <b>↘</b></span><span class="stage-note note-right">Tout votre<br>univers tech <b>↙</b></span></div>
 </div>
-</div>
-</section>
-
-<div class="trust-bar" style="display:flex;justify-content:center;gap:2rem;padding:1.2rem 2rem;flex-wrap:wrap;background:var(--surface-alt);font-size:0.7rem;color:var(--text-muted);border-bottom:1px solid var(--border);">
-<span>🔒 Paiement 100% sécurisé</span><span>🔧 Garantie 1-2 ans</span><span>💰 3x/6x sans intérêts</span><span>⭐ 4.9/5 (+12,000 avis)</span>
-</div>
-
-<section class="features-section">
-<div class="fs-title">Pourquoi Quantum ?</div>
-<h2>L'Excellence Tech</h2>
-<div class="features-grid">
-<div class="feature-card"><span class="fc-icon">🚀</span><h3>Performances Pro</h3><p>Processeurs nouvelle génération. Jusqu'à 3x plus rapide.</p></div>
-<div class="feature-card"><span class="fc-icon">🔋</span><h3>Autonomie 24h</h3><p>Jusqu'à 24h d'autonomie sur une seule charge.</p></div>
-<div class="feature-card"><span class="fc-icon">🎨</span><h3>Écran ProMotion 120Hz</h3><p>Taux de rafraîchissement 120Hz. Couleurs éclatantes.</p></div>
+<article class="bento-card audio-card"><p class="card-kicker"><span>ϟ</span> SÉLECTION <em>AUDIO</em></p><h2>Votre musique.<br><strong>Sans limites.</strong></h2><p>QuantumPods Max · Réduction de bruit</p><button class="pill-cta" onclick="openDetail(6)">Découvrir l’audio <span>→</span></button><img src="assets/audio.webp" alt="Casque QuantumPods Max" width="500" height="500"></article>
+<article class="bento-card student-card"><i class="feature-icon" data-icon="graduate"></i><div><h2>Spécial Étudiants</h2><p>Un portable pour apprendre,<br>créer et aller plus loin.</p><button class="pill-cta" onclick="chooseNeed('work')">En savoir plus <span>→</span></button></div><img src="assets/laptop-card.webp" alt="" width="500" height="400" loading="lazy"></article>
+<article class="bento-card quiz-card"><i class="feature-icon" data-icon="settings"></i><div><h2>Configurez le PC idéal</h2><p>Répondez à quelques questions<br>et trouvez le produit parfait.</p><button class="pill-cta" onclick="chooseNeed('work')">Lancer le Quiz <span>→</span></button></div><img src="assets/laptop-card.webp" alt="" width="500" height="400" loading="lazy"></article>
+<a class="bento-card delivery-card" href="#aftersales"><i data-icon="truck"></i><div><h2>Livraison gratuite</h2><p>Dès 100 000 DZD<br>partout en Algérie</p></div><span class="round-arrow">›</span></a>
+<a class="bento-card security-card" href="#aftersales"><i data-icon="shield"></i><span class="round-arrow">›</span><h2>Paiement sécurisé</h2><p>À la livraison, CCP<br>ou BaridiMob</p></a>
+<a class="bento-card warranty-card" href="#aftersales"><i data-icon="badge"></i><span class="round-arrow">›</span><h2>Garantie produit</h2><p>1 à 2 ans<br>selon le produit</p></a>
+<article class="bento-card setup-card"><div><p class="setup-label">VOTRE PROCHAIN SETUP</p><h2>Préparez<br>votre Setup</h2><p>Le bon PC. Le bon son.<br>Votre expérience.</p><button class="pill-cta" onclick="chooseNeed('play')">Découvrir <span>→</span></button></div><img src="assets/setup.webp" alt="" width="800" height="600" loading="lazy"></article>
 </div>
 </section>
+<div class="category-shortcuts" aria-label="Explorer les catégories"><button onclick="quickSearch('laptops')"><img src="assets/laptop-card.webp" alt="" width="80" height="60">PC Portables<span>›</span></button><button onclick="quickSearch('phones')"><img src="assets/phone-card.webp" alt="" width="60" height="60">Smartphones<span>›</span></button><button onclick="quickSearch('audio')"><img src="assets/audio.webp" alt="" width="60" height="60">Audio<span>›</span></button><button onclick="chooseNeed('play')"><i data-icon="gamepad"></i>Gaming<span>›</span></button><button onclick="quickSearch('audio')"><i data-icon="headphones"></i>Accessoires<span>›</span></button></div>
 
 <section class="products-section" id="products">
-<div class="ps-header">
-<div><div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:2px;color:var(--accent);font-weight:600;">Notre Gamme</div><h2>Choisissez Votre Puissance</h2></div>
-<div class="ps-tabs">
-<button class="active" onclick="setTab('all',this)">Tout</button>
-<button onclick="setTab('laptops',this)">PC Portables</button>
-<button onclick="setTab('phones',this)">Téléphones</button>
-<button onclick="setTab('audio',this)">Audio</button>
-</div>
-</div>
+<div class="ps-header"><div><p class="eyebrow">NOS MEILLEURES SÉLECTIONS</p><h2>Produits Populaires</h2><p class="catalog-subtitle">Les incontournables du moment, choisis pour vous.</p></div><button class="all-products" onclick="clearCatalog()">Voir tous les produits <span>→</span></button></div>
+<div class="ps-tabs" aria-label="Filtrer les produits"><button class="active" data-tab="all" onclick="setTab('all',this)">Tout</button><button data-tab="laptops" onclick="setTab('laptops',this)">PC Portables</button><button data-tab="phones" onclick="setTab('phones',this)">Smartphones</button><button data-tab="audio" onclick="setTab('audio',this)">Audio</button></div><p class="catalog-status" id="catalogStatus" aria-live="polite"></p>
 <div class="product-showcase" id="productGrid"></div>
 </section>
 
-<section class="inst-section">
+<section class="comparison" id="compare"><div class="comparison-inner"><div class="comparison-head"><div><p class="eyebrow">Comparer pour mieux choisir</p><h2 class="experience-title">Le bon choix. Côte à côte.</h2></div><p id="compareCount">0 / 3 produits</p></div><div id="comparisonTable" class="comparison-scroll" aria-live="polite"></div></div></section><section class="inst-section">
 <h3 style="margin-bottom:0.5rem;">💰 Calculateur de Mensualités</h3>
-<p style="color:var(--text-muted);font-size:0.72rem;margin-bottom:1rem;">Simulez vos mensualités en 3x, 6x ou 12x sans frais</p>
+<p style="color:var(--text-muted);font-size:0.72rem;margin-bottom:1rem;">Simulation indicative · hors frais et conditions de financement</p>
 <div class="inst-calc">
-<input type="number" id="instAmount" placeholder="Montant (DZD)" value="495000">
+<input aria-label="Montant en DZD" min="10000" type="number" id="instAmount" placeholder="Montant (DZD)" value="495000">
 <button onclick="calcInstallments()">Calculer</button>
 </div>
 <div class="inst-results" id="instResults"></div>
 </section>
 
-<section class="quiz-section" id="quiz">
-<h3>🎯 <span style="color:var(--accent);">QUIZ</span> — Trouvez votre appareil</h3>
-<p class="quiz-sub">Choisissez votre budget pour des recommandations</p>
-<div class="quiz-grid">
-<div class="quiz-card" onclick="setQuizBudget('low')"><span class="qc-icon">💵</span><h4>~100k-200k</h4><p>Budget d'entrée de gamme</p></div>
-<div class="quiz-card" onclick="setQuizBudget('mid')"><span class="qc-icon">💰</span><h4>~200k-350k</h4><p>Budget milieu de gamme</p></div>
-<div class="quiz-card" onclick="setQuizBudget('high')"><span class="qc-icon">💎</span><h4>~350k-500k+</h4><p>Budget premium</p></div>
-</div>
-<div class="quiz-result" id="quizResult"></div>
-</section>
+<section class="quiz-section" id="quiz"><p class="eyebrow">Le conseil Quantum</p><h2 class="experience-title">Votre quotidien, votre appareil.</h2><p class="quiz-sub">Deux questions. Une sélection qui a du sens.</p><div class="advice-form"><label for="quizNeed">Votre usage principal<select id="quizNeed" onchange="recommend()"><option value="work">Travailler & étudier</option><option value="create">Photo, création & projets</option><option value="play">Jouer & écouter</option><option value="travel">Bouger & voyager</option></select></label><label for="quizBudget">Votre budget maximum<select id="quizBudget" onchange="recommend()"><option value="100000">100 000 DZD</option><option value="200000">200 000 DZD</option><option value="350000">350 000 DZD</option><option value="550000" selected>550 000 DZD</option></select></label></div><div id="quizResult" class="quiz-result" aria-live="polite"></div></section>
 
-<section class="reviews-section" id="reviews">
-<h3 style="text-align:center;font-size:1.1rem;font-weight:700;">⭐ <span style="color:var(--accent);">AVIS</span> CLIENTS</h3>
-<p style="text-align:center;color:var(--text-muted);font-size:0.75rem;margin-bottom:1.2rem;">Ce que nos clients disent de Quantum</p>
-<div class="rv-grid" id="rvGrid"></div>
-</section>
+<section class="reviews-section" id="reviews"><div class="spotlight"><img src="assets/product-6.webp" alt="Casque audio circum-aural" loading="lazy" width="900" height="675"><div><p class="eyebrow">L’essentiel, bien pensé</p><h2 class="experience-title">Un peu moins de bruit.<br>Un peu plus de vous.</h2><p>Le confort d’un casque circum-aural, la réduction de bruit et votre musique. Découvrez QuantumPods Max.</p><button class="btn btn-accent" onclick="openDetail(6)">Découvrir l’audio →</button></div></div></section>
 
 <section class="aftersales-section" id="aftersales">
 <h3 style="text-align:center;font-size:1.1rem;font-weight:700;">🔧 <span style="color:var(--accent);">Service</span> Après-Vente</h3>
@@ -271,6 +244,7 @@ nav.open{opacity:1;transform:translateY(0);pointer-events:all;}
 </div>
 </section>
 
+</main>
 <footer><div class="logo"><span class="q">Q</span>uantum</div><p>Premium technology — livré à Alger 🇩🇿 © 2026</p></footer>
 
 <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
@@ -286,16 +260,20 @@ nav.open{opacity:1;transform:translateY(0);pointer-events:all;}
 
 <script>
 const products=[
-{id:1,name:'QuantumBook Pro 16"',tab:'laptops',price:495000,img:'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&h=400&fit=crop',specs:['M4 Pro','24GB','512GB'],tag:'new'},
-{id:2,name:'QuantumBook Air 13"',tab:'laptops',price:365000,img:'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=600&h=400&fit=crop',specs:['M4','16GB','256GB'],tag:null},
-{id:3,name:'QuantumPhone 15 Pro',tab:'phones',price:225000,img:'https://images.unsplash.com/photo-1511707171634-5f897ff02bb9?w=600&h=400&fit=crop',specs:['6.7" OLED','256GB','48MP'],tag:'best'},
-{id:4,name:'QuantumPhone 15',tab:'phones',price:165000,img:'https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=400&fit=crop',specs:['6.1" OLED','128GB','Dual Camera'],tag:null},
-{id:5,name:'QuantumPods Pro',tab:'audio',price:52000,img:'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=400&fit=crop',specs:['ANC','Spatial Audio','IPX4'],tag:'new'},
-{id:6,name:'QuantumPods Max',tab:'audio',price:115000,img:'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=600&h=400&fit=crop',specs:['Over-ear','Hi-Res','ANC'],tag:null},
+{id:1,name:'QuantumBook Pro 16"',tab:'laptops',price:495000,img:'assets/product-1.webp',specs:['M4 Pro','24GB','512GB'],tag:'new'},
+{id:2,name:'QuantumBook Air 13"',tab:'laptops',price:365000,img:'assets/product-2.webp',specs:['M4','16GB','256GB'],tag:null},
+{id:3,name:'QuantumPhone 15 Pro',tab:'phones',price:225000,img:'assets/product-3.webp',specs:['6.7" OLED','256GB','48MP'],tag:'best'},
+{id:4,name:'QuantumPhone 15',tab:'phones',price:165000,img:'assets/product-4.webp',specs:['6.1" OLED','128GB','Dual Camera'],tag:null},
+{id:5,name:'QuantumPods Pro',tab:'audio',price:52000,img:'assets/product-5.webp',specs:['ANC','Spatial Audio','IPX4'],tag:'new'},
+{id:6,name:'QuantumPods Max',tab:'audio',price:115000,img:'assets/product-6.webp',specs:['Over-ear','Hi-Res','ANC'],tag:null},
 ];
+const productMetadata=[{"id":1,"stock":10,"warranty":2},{"id":2,"stock":15,"warranty":1},{"id":3,"stock":8,"warranty":2},{"id":4,"stock":20,"warranty":1},{"id":5,"stock":25,"warranty":1},{"id":6,"stock":12,"warranty":1}];
+products.forEach(p=>Object.assign(p,productMetadata.find(meta=>meta.id===p.id)));
+const catalogueImageIds=['photo-1496181133206-80ce9b88a853','photo-1531297484001-80022131f5a1','photo-1511707171634-5f897ff02bb9','photo-1592750475338-74b7b21085ab','photo-1505740420928-5e560c06d30e','photo-1583394838336-acd977736f90'];
+try{const saved=JSON.parse(localStorage.getItem('qn_products')||'null');if(Array.isArray(saved)&&saved.length){products.splice(0,products.length,...saved.map(p=>({...p,img:catalogueImageIds[p.id-1]&&p.img?.includes(catalogueImageIds[p.id-1])?'assets/product-'+p.id+'.webp':p.img})));}}catch{}
 let cart=JSON.parse(localStorage.getItem('qn_cart')||'[]');let tab='all';
 function fmtDZD(n){return Math.round(n).toLocaleString('fr-DZ')+' DZD';}
-function setTab(t,btn){tab=t;document.querySelectorAll('.ps-tabs button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderProducts();}
+function setTab(t,btn){tab=t;document.querySelectorAll('.ps-tabs button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');renderProducts();}
 function renderProducts(){const grid=document.getElementById('productGrid');const f=tab==='all'?products:products.filter(p=>p.tab===tab);
 grid.innerHTML=f.map((p,i)=>'<div class="product-card" style="animation-delay:'+(i*0.08)+'s"><div class="pc-img" style="background-image:url('+p.img+')">'+(p.tag?'<span class="pc-tag '+(p.tag==='new'?'new':'best')+'">'+(p.tag==='new'?'NOUVEAU':'BEST SELLER')+'</span>':'')+'</div><div class="pc-body"><div class="pc-cat">'+p.tab+'</div><h3>'+p.name+'</h3><div class="pc-price">'+fmtDZD(p.price)+'</div><div class="pc-specs">'+p.specs.map(s=>'<span>'+s+'</span>').join('')+'</div><div class="pc-actions"><button class="pc-detail" onclick="openDetail('+p.id+')">Détails</button><button class="pc-buy" onclick="addToCart('+p.id+')">Acheter</button></div></div></div>').join('');}
 function openDetail(id){const p=products.find(x=>x.id===id);if(!p)return;document.getElementById('modalContent').innerHTML='<h2 style="font-size:1rem;margin-bottom:0.3rem;">'+p.name+'</h2><div style="font-size:1.3rem;font-weight:700;color:var(--accent);margin:0.3rem 0;">'+fmtDZD(p.price)+'</div><p style="font-size:0.72rem;color:var(--text-muted);line-height:1.6;">Spécifications: '+p.specs.join(', ')+'</p><button class="btn btn-accent" style="width:100%;margin-top:0.5rem;" onclick="addToCart('+p.id+');document.getElementById(\'checkoutModal\').classList.remove(\'open\')">Ajouter au Panier</button>';document.getElementById('checkoutModal').classList.add('open');}
@@ -313,9 +291,11 @@ const reviewData=[{name:'Amir K.',text:'Incroyable performance ! Le M4 Pro est u
 function renderReviews(){document.getElementById('rvGrid').innerHTML=reviewData.map(r=>'<div class="rv-card"><div class="rvc-stars">'+'★'.repeat(r.stars)+'☆'.repeat(5-r.stars)+'</div><div class="rvc-text">"'+r.text+'"</div><div class="rvc-author">— '+r.name+'</div></div>').join('');}
 let quizBudget='';
 function setQuizBudget(b){quizBudget=b;const ids=b==='low'?[2,4]:b==='mid'?[2,1]:[1,3];const items=ids.map(id=>products.find(p=>p.id===id)).filter(Boolean);const el=document.getElementById('quizResult');el.innerHTML=items.map(p=>'<div class="quiz-product"><img src="'+p.img+'" alt="'+p.name+'"><div class="qp-info"><h4>'+p.name+'</h4><span>'+fmtDZD(p.price)+'</span></div></div>').join('');el.classList.add('open');}
-renderProducts();renderReviews();updateCart();
+renderProducts();updateCart();
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){['cartSidebar','cartOverlay','checkoutModal','nav'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('open');});document.getElementById('navOverlay').classList.remove('open');document.getElementById('menuToggle').classList.remove('open');}});
 document.querySelectorAll('nav a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){e.preventDefault();const href=this.getAttribute('href');if(href&&href.length>1){const overlay=document.getElementById('transitionOverlay');overlay.classList.add('active');document.getElementById('nav').classList.remove('open');document.getElementById('navOverlay').classList.remove('open');document.getElementById('menuToggle').classList.remove('open');setTimeout(()=>document.getElementById(href.substring(1))?.scrollIntoView({behavior:'smooth'}),200);setTimeout(()=>overlay.classList.remove('active'),600);}});});
 </script>
+<script src="experience.js"></script>
+<script src="showroom.js"></script>
 </body>
 </html>
