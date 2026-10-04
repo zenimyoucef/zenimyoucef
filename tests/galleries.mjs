@@ -46,8 +46,8 @@ try {
   await expect(archive.locator('[data-status="experimental"]')).toHaveCount(7);
   await expect(archive.locator('[data-status="upcoming"]')).toHaveCount(2);
   const cards = archive.locator('[data-status="experimental"]');
-  assert.deepEqual(await cards.locator("h3").allTextContents(), ["Quantum", "Velora", "HZ Fashion", "Bistro Lumi\u00e8re", "PULSE", "Nomad", "Admin Pro"]);
-  const slugs = ["quantum", "velora", "hz-fashion", "bistro", "pulse", "nomad", "admin-demo"];
+  assert.deepEqual(await cards.locator("h3").allTextContents(), ["Velora","HZ Fashion","Bistro Lumière","Quantum","Nomad","PULSE","Admin Pro"]);
+  const slugs = ["velora", "hz-fashion", "bistro", "quantum", "nomad", "pulse", "admin-demo"];
   for (let index = 0; index < slugs.length; index++) {
     const card = cards.nth(index);
     await expect(card.locator(".project-media")).toHaveAttribute("href", "/zenimyoucef/" + slugs[index] + "/");

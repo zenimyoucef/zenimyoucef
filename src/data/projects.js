@@ -77,7 +77,7 @@ export const projects = [
   },
   {
     id: "quantum",
-    order: 1,
+    order: 4,
     summary: "Configure, compare and discover technology for Algeria.",
     layout: "featured",
     title: "Quantum",
@@ -90,7 +90,7 @@ export const projects = [
     longDescription:
       "A recommendation quiz, order systems and an admin dashboard explore the full product journey, beyond a storefront.",
     stack: ["HTML5", "CSS3", "JavaScript"],
-    image: "quantum-hero",
+    image: "quantum-showroom-hero",
     imageAlt:
       "Quantum opening launch hero with premium technology branding and product imagery",
     liveUrl: `${original}quantum/`,
@@ -98,7 +98,7 @@ export const projects = [
   },
   {
     id: "velora",
-    order: 2,
+    order: 1,
     crop: "portrait",
     summary: "Editorial fashion, a personal style quiz and an outfit builder.",
     title: "Velora",
@@ -119,7 +119,7 @@ export const projects = [
   },
   {
     id: "hz-fashion",
-    order: 3,
+    order: 2,
     summary: "A fashion campaign, curated collections and a personal shopping experience.",
     title: "HZ Fashion",
     category: "Fashion / Contemporary storefront",
@@ -135,7 +135,7 @@ export const projects = [
   },
   {
     id: "bistro",
-    order: 4,
+    order: 3,
     crop: "warm",
     summary: "Parisian dining, wine pairings and a reservation experience.",
     title: "Bistro Lumière",
@@ -156,7 +156,7 @@ export const projects = [
   },
   {
     id: "pulse",
-    order: 5,
+    order: 6,
     crop: "interface",
     summary: "Workout tracking and body metrics, with readable progress charts.",
     title: "PULSE",
@@ -177,7 +177,7 @@ export const projects = [
   },
   {
     id: "nomad",
-    order: 6,
+    order: 5,
     crop: "landscape",
     summary: "Destination stories, immersive photography and a trip planner.",
     layout: "featured",
