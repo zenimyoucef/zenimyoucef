@@ -220,30 +220,30 @@ section{padding:3rem 1.2rem;}
 .section-header h2{font-size:1.5rem;}
 }
 </style>
+<link rel="stylesheet" href="design.css">
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="journal.css">
 </head>
 <body>
 
 <div class="ambient"><div class="glow"></div></div>
 
 <nav id="navbar">
-  <a href="#hero" class="nav-logo">Nomad<span>.</span></a>
+  <a href="#hero" class="nav-logo">NOMAD</a>
   <div class="nav-center" id="navCenter">
     <a href="#destinations">Destinations</a>
-    <a href="#experiences">Experiences</a>
-    <a href="#stories">Stories</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#planner">Plan</a>
+    <a href="#stories">Journal</a>
+    <a href="#planner">Mon voyage</a>
   </div>
   <div class="nav-right">
-    <a href="#planner" class="btn-plan">🌍 Plan Trip</a>
     <button class="theme-btn" onclick="toggleTheme()">🌙</button>
-    <button class="mobile-toggle" onclick="document.getElementById('navCenter').classList.toggle('open')">☰</button>
+    <button class="mobile-toggle" aria-label="Ouvrir le menu" onclick="document.getElementById('navCenter').classList.toggle('open')">☰</button>
   </div>
 </nav>
 
 <section class="hero" id="hero">
   <div class="hero-slides" id="heroSlides">
-    <div class="hero-slide active"><img src="https://images.unsplash.com/photo-1488085061387-422e29b40080?w=1800&h=1100&fit=crop" alt=""></div>
+    <div class="hero-slide active"><img src="assets/patagonia.webp" alt=""></div>
     <div class="hero-slide"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1800&h=1100&fit=crop" alt=""></div>
     <div class="hero-slide"><img src="https://images.unsplash.com/photo-1500835556837-99ac94a94552?w=1800&h=1100&fit=crop" alt=""></div>
     <div class="hero-slide"><img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1800&h=1100&fit=crop" alt=""></div>
@@ -252,7 +252,8 @@ section{padding:3rem 1.2rem;}
   <div class="hero-content">
     <div class="hero-marker">Curated travel since 2024</div>
     <div class="sub">WANDER FURTHER</div>
-    <h1>Discover the <span class="accent">World</span></h1>
+    <h1>Go somewhere<br>you’ll remember.</h1>
+    <div class="field-location"><span>50.9427° S, 72.8857° W</span><span>— Torres del Paine, Patagonia</span></div>
     <p>Curated travel experiences for the modern explorer. Hidden gems, iconic landmarks — journeys that transform the way you see the world.</p>
     <div class="hero-cta">
       <a href="#destinations" class="btn btn-primary">🌍 Explore</a>
@@ -264,14 +265,7 @@ section{padding:3rem 1.2rem;}
   </div>
 </section>
 
-<section class="stats-section fu" style="padding:3.5rem 2rem;">
-  <div class="stats-inner">
-    <div class="stat-item"><div class="si-v counter" data-target="50">0</div><div class="si-l">Countries</div></div>
-    <div class="stat-item"><div class="si-v counter" data-target="200">0</div><div class="si-l">Experiences</div></div>
-    <div class="stat-item"><div class="si-v counter" data-target="12000">0</div><div class="si-l">Travelers</div></div>
-    <div class="stat-item"><div class="si-v">4.9</div><div class="si-l">★ Rating</div></div>
-  </div>
-</section>
+<section class="journal-intro"><small>Issue 08</small><div><span>A travel journal</span><p>Real places. Deeper stories.<br>A more thoughtful way to see the world.</p></div><small>Oct 2026</small></section>
 
 <section class="fs" id="destinations" style="max-width:100%;padding:5rem 2rem;">
   <div class="section-header">
@@ -349,7 +343,7 @@ section{padding:3rem 1.2rem;}
   <h2>Plan Your <span class="accent">Journey</span></h2>
   <p>Tell us your dream and we'll craft the perfect itinerary.</p></div>
   <div class="planner-grid">
-    <div class="planner-form">
+    <div class="saved-journeys" id="savedJourneys"></div><p class="planner-note">Save destinations as you explore. This planner creates a personal draft in your browser.</p><div class="planner-form">
       <h4>📋 Trip Request</h4>
       <div class="form-row">
         <div class="form-group"><label>Name</label><input type="text" id="plName" placeholder="Your name"></div>
@@ -407,7 +401,7 @@ renderDests();
 function filterDests(r,btn){cf=r;document.querySelectorAll('.dest-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');renderDests();}
 function openDest(n,l,p,i,b){document.getElementById('destModalContent').innerHTML='<button style="float:right;background:none;border:none;color:var(--text-muted);font-size:1rem;cursor:pointer" onclick="document.getElementById(\'destModal\').classList.remove(\'open\')">✕</button><div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem"><div style="background:url('+i+') center/cover;border-radius:8px;min-height:200px"></div><div><div style="font-size:.38rem;text-transform:uppercase;letter-spacing:3px;color:var(--teal);font-weight:500">📍 '+l+'</div><h3 style="font-family:\'Playfair Display\',serif;font-size:1.1rem;font-weight:600;margin:.3rem 0">'+n+'</h3><div style="font-size:1.3rem;font-weight:700;color:var(--teal)">'+p+'</div><button class="btn btn-primary btn-sm" style="margin-top:.5rem;font-size:.52rem;padding:.25rem 1rem" onclick="showToast(\'✈️\',\'Inquiry sent!\');document.getElementById(\'destModal\').classList.remove(\'open\')">✈️ Inquire</button></div></div>';document.getElementById('destModal').classList.add('open');}
 
-let si=0;const sl=document.querySelectorAll('.hero-slide');const hd=document.querySelectorAll('.hn-dot');setInterval(()=>{sl[si].classList.remove('active');hd[si].classList.remove('active');si=(si+1)%sl.length;sl[si].classList.add('active');hd[si].classList.add('active');},6000);
+
 
 function submitPlan(){const n=document.getElementById('plName').value.trim();const e=document.getElementById('plEmail').value.trim();if(!n||!e){showToast('⚠️','Please fill in name and email');return;}showToast('🌍','Trip request submitted! Ref: NMD-'+Math.floor(1000+Math.random()*9000));document.getElementById('plName').value='';document.getElementById('plEmail').value='';document.getElementById('plNotes').value='';}
 function subNL(){const e=document.getElementById('nlEmail').value.trim();if(!e||!e.includes('@')){showToast('⚠️','Invalid email');return;}showToast('📰','Welcome to Nomad!');document.getElementById('nlEmail').value='';}
@@ -424,5 +418,6 @@ function toggleTheme(){const h=document.documentElement;const b=document.querySe
 function navigateToSection(e,id){if(e){e.preventDefault();e.stopPropagation();}const overlay=document.getElementById('transitionOverlay');overlay.classList.add('active');document.getElementById('navCenter').classList.remove('open');setTimeout(()=>{document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});},200);setTimeout(()=>overlay.classList.remove('active'),700);}
 document.querySelectorAll('.nav-center a[href^="#"], .btn-plan').forEach(a=>{a.addEventListener('click',function(e){const href=this.getAttribute('href');if(href&&href.length>1){navigateToSection(e,href.substring(1));}});});
 </script>
+<dialog class="journey-dialog" id="journeyReader"><div class="reader-top"><span id="readerChapter"></span><button onclick="document.getElementById('journeyReader').close()" aria-label="Close field notes">Close ×</button></div><img class="reader-image" id="readerImage" alt="" width="1200" height="600"><div class="reader-copy"><div><small id="readerLocation"></small><h2 id="readerTitle"></h2></div><p id="readerText"></p></div><div class="reader-footer"><button id="nextChapter">Planning notes →</button><button id="saveJourney">Save to my journey</button></div></dialog><script src="experience.js"></script>
 </body>
 </html>

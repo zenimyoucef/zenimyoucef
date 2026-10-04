@@ -1,0 +1,23 @@
+:root{--bg:#f3efe6;--surface:#f7f3eb;--text:#191b17;--text-muted:#66675e;--border:#c9c5b9}
+body{background:var(--bg)}
+#navbar,#navbar.scrolled{height:clamp(90px,13.2svh,138px);padding:0 4vw;background:var(--bg);border:0;position:absolute;justify-content:space-between;gap:20px}
+.nav-logo{position:static;font:400 clamp(62px,11svh,128px)/.9 'Bodoni Moda','Times New Roman',serif;letter-spacing:-.06em;color:#121411!important;transform:none}
+#navCenter{gap:clamp(20px,4.2vw,70px);margin-left:auto;display:flex}
+#navCenter a{font:400 clamp(17px,1.5vw,25px) 'Bodoni Moda','Times New Roman',serif;letter-spacing:.7px;color:#171914;padding:14px 0;text-transform:none}
+#navCenter a[href='#stories']{order:-1}
+.nav-right{margin:0}.theme-btn{display:none}.mobile-toggle{display:none}
+#hero{height:82svh;min-height:560px;padding-top:0}
+.hero-slides,.hero-vignette{top:clamp(90px,13.2svh,138px)}
+.hero-slide img{filter:none;object-position:center top;animation:none!important}
+.hero-vignette{background:linear-gradient(0deg,#0e191641,transparent 55%)}
+#hero .hero-content{left:4vw;bottom:7.5svh;max-width:1000px}
+#hero h1{font:400 clamp(54px,6.3vw,105px)/.95 'Bodoni Moda','Times New Roman',serif;letter-spacing:-.045em;margin:0 0 3.8svh;color:#faf7ef}
+.field-location{display:flex;flex-direction:column;gap:13px;color:#faf7ef;font:12px/1.3 Georgia,serif;letter-spacing:3px;text-transform:uppercase}
+#hero .hero-cta{display:none}
+.journal-intro{min-height:18svh;grid-template-columns:1fr 2fr 1fr;padding:30px 4vw;gap:30px;border:0;position:relative}
+.journal-intro>small{display:flex;align-items:center;gap:30px;font:10px Georgia,serif;letter-spacing:3px;white-space:nowrap}
+.journal-intro>small:first-child::after,.journal-intro>small:last-child::before{content:'';height:1px;background:#92978c;flex:1}
+.journal-intro>div{text-align:center}.journal-intro>div>span{font:10px Georgia,serif;letter-spacing:4px;text-transform:uppercase;display:block;margin-bottom:17px}
+.journal-intro p{font:400 clamp(22px,2vw,31px)/1.22 'Bodoni Moda',Georgia,serif;color:#171914}
+.dest-card{border-radius:0}.section-header h2{font-family:'Bodoni Moda',Georgia,serif}.section-header p{font-size:14px;line-height:1.7}.fs,.section-bleed{scroll-margin-top:20px}
+@media(max-width:768px){#navbar,#navbar.scrolled{height:94px;padding:0 22px}.nav-logo{font-size:64px}.mobile-toggle{display:block;min-width:44px;min-height:44px;font-size:24px;color:#171914}#navCenter{display:none;position:absolute;top:94px;left:0;right:0;background:var(--bg);padding:22px;z-index:4;border-top:1px solid var(--border)}#navCenter.open{display:flex;flex-direction:column;gap:10px}#navCenter a{font-size:23px}#hero{height:82svh;min-height:550px}.hero-slides,.hero-vignette{top:94px}.hero-slide img{object-position:42% center}#hero .hero-content{left:6vw;right:5vw;bottom:45px}#hero h1{font-size:clamp(47px,10vw,73px);letter-spacing:-2px;line-height:.98;margin-bottom:28px}.field-location{font-size:9px;letter-spacing:1.7px;gap:9px}.journal-intro{min-height:150px;grid-template-columns:1fr 1fr;padding:28px 22px;gap:25px 15px}.journal-intro>div{grid-column:1/-1;grid-row:1}.journal-intro p{font-size:23px}.journal-intro>small{font-size:9px}.journal-intro>small:last-child{justify-content:end}.journal-intro>small::before,.journal-intro>small::after{display:none!important}}
