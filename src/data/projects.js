@@ -56,6 +56,25 @@ export const projects = [
     sourceUrl: null,
   },
   {
+    id: "mtd-homewear-dz",
+    title: "MTD Homewear DZ",
+    category: "E-commerce Catalogue · Client Project",
+    type: "Client Project / E-commerce Catalogue",
+    status: "live",
+    featured: false,
+    order: 3,
+    tone: "commerce",
+    summary: "Responsive homewear catalogue with WhatsApp ordering, wilaya-based delivery pricing, and product management.",
+    description: "Responsive homewear catalogue with WhatsApp ordering, wilaya-based delivery pricing, and product management.",
+    longDescription: "Responsive homewear catalogue with product browsing, category filters, favorites, delivery pricing by Algerian wilaya, and direct WhatsApp ordering. Deployed on Vercel.",
+    stack: ["Next.js", "Supabase", "TypeScript"],
+    image: "mtd-homewear-dz",
+    imageFile: "mtd-homewear-dz.png",
+    imageAlt: "MTD Homewear DZ homewear catalogue storefront",
+    liveUrl: "https://mtd-homewear-dz.vercel.app",
+    sourceUrl: null,
+  },
+  {
     id: "acendi",
     title: "ACENDI DZ",
     indexTitle: "ACENDI",
@@ -63,7 +82,7 @@ export const projects = [
     subtitle: "Institutional / An Arabic-first information space",
     status: "live",
     featured: false,
-    order: 3,
+    order: 4,
     tone: "institutional",
     summary: "An Arabic RTL information space for an economic organization. News, leadership, activities and partners, clearly structured.",
     layout: "secondary-feature",
@@ -221,7 +240,7 @@ export const projects = [
 ];
 
 export const upcomingProjects = [
-  { id: "next-live", title: "Upcoming live project", collection: "live", order: 4, description: "Coming soon. A new build will join the collection here." },
+  { id: "next-live", title: "Upcoming live project", collection: "live", order: 5, description: "Coming soon. A new build will join the collection here." },
   { id: "next-experiment", title: "Next experiment", collection: "playground", order: 8, description: "Another idea taking shape. A new field study will find its home here." },
   { id: "future-experiment", title: "An open page", collection: "playground", order: 9, description: "A little space for curiosity. More experiments will join this evolving collection." },
 ].map((project) => ({ ...project, status: "upcoming", featured: false }));

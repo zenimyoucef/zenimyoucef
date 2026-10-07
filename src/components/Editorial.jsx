@@ -54,10 +54,10 @@ export function ProjectImage({ project, featured = false }) {
       .join(", ");
   return (
     <picture>
-      <source type="image/avif" srcSet={sourceSet("avif")} sizes={sizes} />
+      {!project.imageFile && <source type="image/avif" srcSet={sourceSet("avif")} sizes={sizes} />}
       <img
-        src={`${base}images/${project.image}-1280.webp`}
-        srcSet={sourceSet("webp")}
+        src={`${base}images/${project.imageFile || `${project.image}-1280.webp`}`}
+        srcSet={project.imageFile ? undefined : sourceSet("webp")}
         sizes={sizes}
         alt={project.imageAlt}
         width="1440"
