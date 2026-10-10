@@ -1,4 +1,4 @@
-# Hey, I’m Youcef 👋
+# Hey, I’m Youcef 
 
 This is my web development portfolio: a few live projects, some experiments, and a slightly unreasonable amount of mountain scenery.
 
