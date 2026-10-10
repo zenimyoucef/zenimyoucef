@@ -19,4 +19,4 @@ There’s also a playground of experiments: Velora, HZ Fashion, Bistro Lumière,
 
 The portfolio uses **React, Vite, JavaScript, and CSS**, with locally hosted fonts and responsive images.
 
-Individual projects use other tools too, including **Next.js, TypeScript, and Supabase** for MTD.
+Individual projects use other tools too, including **Next.js, TypeScript, and Supabase** 
