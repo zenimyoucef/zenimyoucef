@@ -1,22 +1,47 @@
-# Hey, I’m Youcef 
+### `koenji@github:~$ whoami`
 
-This is my web development portfolio: a few live projects, some experiments, and a slightly unreasonable amount of mountain scenery.
+# Youcef Zenim
 
-The person in the hero is generated artwork, not me. Apparently even my portfolio has a stunt double.
+**Cybersecurity Enthusiast · SOC Learner**
 
-**[Visit my portfolio →](https://zenimyoucef.github.io/zenimyoucef/)**
+I'm Youcef. Online, I go by **Koenji**.
 
-## Projects
+I'm a self-taught cybersecurity enthusiast working toward my first role in IT and security. I'm particularly interested in how systems work, how attacks leave traces, and how security analysts turn those traces into answers.
 
-- **[AUREA Nails](https://aureanails.vercel.app/)** — A nail salon website with a manicure gallery and WhatsApp booking.
-- **[TKI TEC](https://tkitec.store/)** — A computer hardware catalogue with a PC builder and WhatsApp ordering.
-- **[MTD Homewear DZ](https://mtd-homewear-dz.vercel.app/)** — A homewear storefront with favourites and delivery pricing by wilaya.
-- **[ACENDI DZ](https://acendi-dz.vercel.app/ar)** — An institutional website with Arabic content, news, and events.
+## 01 / What I'm learning
 
-There’s also a playground of experiments: Velora, HZ Fashion, Bistro Lumière, Quantum, Nomad, PULSE, and Admin Pro.
+Currently exploring defensive security through hands-on practice:
 
-## Built with
+- **SOC & Monitoring:** Wazuh, Splunk
+- **Systems & Identity:** Linux, Windows, Active Directory
+- **Infrastructure:** Networking, Apache Guacamole
+- **Next Steps:** Log analysis, detection engineering, incident investigation
 
-The portfolio uses **React, Vite, JavaScript, and CSS**, with locally hosted fonts and responsive images.
+## 02 / Background
 
-Individual projects use other tools too, including **Next.js, TypeScript, and Supabase** 
+- **Education:** Higher Technician in Network Administration and Security
+- **Internship:** Algérie Télécom — Final-year project
+- **Currently preparing for:** CompTIA Security+ (SY0-701)
+
+## 03 / Beyond cybersecurity
+
+I also design and build websites and applications, from planning and architecture to working products.
+
+Some of my web development projects:
+
+- **[AUREA Nails](https://aureanails.vercel.app/)** — Nail salon website with a manicure gallery and WhatsApp booking.
+- **[TKI TEC](https://tkitec.store/)** — Computer hardware catalogue with a PC builder and WhatsApp ordering.
+- **[MTD Homewear DZ](https://mtd-homewear-dz.vercel.app/)** — Homewear storefront with favourites and delivery pricing.
+- **[ACENDI DZ](https://acendi-dz.vercel.app/ar)** — Institutional website featuring Arabic content, news, and events.
+
+**[Explore my web development portfolio →](https://zenimyoucef.github.io/zenimyoucef/)**
+
+## 04 / Connect
+
+Open to entry-level IT/security opportunities and freelance web projects.
+
+[LinkedIn](https://www.linkedin.com/in/zenim-youcef) · [Portfolio](https://zenimyoucef.github.io/zenimyoucef/)
+
+---
+
+`koenji@github:~$ learning --always`
