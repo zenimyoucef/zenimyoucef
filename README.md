@@ -20,7 +20,7 @@ Currently exploring defensive security through hands-on practice:
 ## 02 / Background
 
 - **Education:** Higher Technician in Network Administration and Security
-- **Internship:** Algérie Télécom — Final-year project
+- **Internship:** Algérie Télécom  Final-year project
 - **Currently preparing for:** CompTIA Security+ (SY0-701)
 
 ## 03 / Beyond cybersecurity
@@ -29,10 +29,10 @@ I also design and build websites and applications, from planning and architectur
 
 Some of my web development projects:
 
-- **[AUREA Nails](https://aureanails.vercel.app/)** — Nail salon website with a manicure gallery and WhatsApp booking.
-- **[TKI TEC](https://tkitec.store/)** — Computer hardware catalogue with a PC builder and WhatsApp ordering.
-- **[MTD Homewear DZ](https://mtd-homewear-dz.vercel.app/)** — Homewear storefront with favourites and delivery pricing.
-- **[ACENDI DZ](https://acendi-dz.vercel.app/ar)** — Institutional website featuring Arabic content, news, and events.
+- **[AUREA Nails](https://aureanails.vercel.app/)**  Nail salon website with a manicure gallery and WhatsApp booking.
+- **[TKI TEC](https://tkitec.store/)**  Computer hardware catalogue with a PC builder and WhatsApp ordering.
+- **[MTD Homewear DZ](https://mtd-homewear-dz.vercel.app/)**  Homewear storefront with favourites and delivery pricing.
+- **[ACENDI DZ](https://acendi-dz.vercel.app/ar)**  Institutional website featuring Arabic content, news, and events.
 
 **[Explore my web development portfolio →](https://zenimyoucef.github.io/zenimyoucef/)**
 
